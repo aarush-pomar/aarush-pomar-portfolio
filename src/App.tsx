@@ -5,6 +5,7 @@ import AdvocacyPage from './pages/AdvocacyPage'
 import ResearchPage from './pages/ResearchPage'
 import WritingPage from './pages/WritingPage'
 import ResumePage from './pages/ResumePage'
+import BarberingPage from './pages/BarberingPage'
 import MorePage from './pages/MorePage'
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path="/research" element={<ResearchPage />} />
         <Route path="/writing" element={<WritingPage />} />
         <Route path="/resume" element={<ResumePage />} />
+        <Route path="/barbering" element={<BarberingPage />} />
         <Route path="/more" element={<MorePage />} />
       </Routes>
     </div>

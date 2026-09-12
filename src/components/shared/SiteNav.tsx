@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Home, Megaphone, FlaskConical, PenLine, FileText, LayoutGrid, type LucideIcon } from 'lucide-react'
+import { Home, Megaphone, FlaskConical, PenLine, FileText, Scissors, LayoutGrid, type LucideIcon } from 'lucide-react'
 
 interface NavItem {
   label: string
@@ -14,6 +14,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: 'Research', to: '/research', icon: FlaskConical },
   { label: 'Writing', to: '/writing', icon: PenLine },
   { label: 'Resume', to: '/resume', icon: FileText },
+  { label: 'Barbering', to: '/barbering', icon: Scissors },
   { label: 'More', to: '/more', icon: LayoutGrid },
 ]
 

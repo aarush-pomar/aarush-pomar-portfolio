@@ -33,7 +33,7 @@ export default function AboutSection() {
 
         <div className="flex flex-col items-center gap-16 sm:gap-20 md:gap-24">
           <AnimatedText
-            text="I'm a senior at Minnetonka High School balancing academics, advocacy, and a freelance barbering business. As Regional Director at The Borgen Project, I've turned haircuts into real fundraising for global poverty reduction, and I'm currently researching the economic impact of ICE activity on immigrant communities in Minnesota. Let's build something meaningful together."
+            text="I'm a senior at Minnetonka High School, Regional Director at The Borgen Project, and founder of my own freelance barbering business. Across my work, I've become interested in how economics, identity, and opportunity shape people's lives. That interest now drives my research on ICE activity in Minnesota and caste within the South Asian diaspora."
             className="max-w-[560px] text-center font-medium leading-relaxed text-[#D7E2EA]"
             style={{ fontSize: 'clamp(1rem, 2vw, 1.35rem)' }}
           />

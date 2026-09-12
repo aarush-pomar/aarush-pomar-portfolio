@@ -1,6 +1,7 @@
 import PageLayout from '../components/shared/PageLayout'
 import PageHeader from '../components/shared/PageHeader'
 import FeatureCard from '../components/shared/FeatureCard'
+import PillLink from '../components/shared/PillLink'
 
 export default function WritingPage() {
   return (
@@ -8,21 +9,20 @@ export default function WritingPage() {
       <PageHeader title="Writing" />
 
       <div className="flex flex-col gap-8 pb-10 pt-4 sm:gap-10">
-        <FeatureCard number="01" category="Personal Essay -- Draft Coming Soon" title="Cutting Against the Grain">
+        <FeatureCard
+          number="01"
+          category="Published -- The Borgen Project"
+          title="The Most Powerful Anti-Poverty Tool? Competition Policy"
+          actions={<PillLink href="https://borgenproject.org/competition-policy/">Read Article</PillLink>}
+        >
           <p>
-            A personal essay on barbering, identity, and turning a skill my family once
-            questioned into a way to give back.
+            Published September 2026. Argues that well-designed competition policy is an
+            effective, underused tool for reducing poverty by lowering prices in essential
+            markets -- drawing on case studies from Georgia's pharmaceutical reforms, Egypt's
+            education market interventions, and Mexico's health procurement enforcement to
+            show how tackling monopolies and cartels can generate real household savings and
+            open up economic opportunity for low-income populations.
           </p>
-          <div className="mt-4 rounded-2xl border border-dashed border-[#D7E2EA]/25 bg-[#141414] px-6 py-10 text-center">
-            <p className="text-xs font-semibold uppercase tracking-widest text-[#D7E2EA]/40">Essay draft coming soon</p>
-          </div>
-        </FeatureCard>
-
-        <FeatureCard number="02" category="Personal Essay -- Draft Coming Soon" title="Lessons in Unfairness">
-          <p>A personal essay reflecting on an experience with unfair treatment at school and what it taught me about resilience.</p>
-          <div className="mt-4 rounded-2xl border border-dashed border-[#D7E2EA]/25 bg-[#141414] px-6 py-10 text-center">
-            <p className="text-xs font-semibold uppercase tracking-widest text-[#D7E2EA]/40">Essay draft coming soon</p>
-          </div>
         </FeatureCard>
       </div>
     </PageLayout>

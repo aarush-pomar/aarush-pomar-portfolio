@@ -10,6 +10,7 @@ const NAV_LINKS = [
   { label: 'Research', to: '/research' },
   { label: 'Writing', to: '/writing' },
   { label: 'Resume', to: '/resume' },
+  { label: 'Barbering', to: '/barbering' },
   { label: 'More', to: '/more' },
 ]
 

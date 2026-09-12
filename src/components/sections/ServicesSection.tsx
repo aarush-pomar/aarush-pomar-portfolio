@@ -29,7 +29,7 @@ const SERVICES = [
   {
     number: '05',
     name: 'Academics',
-    desc: '4.433 weighted GPA, 1540 SAT, and National Merit Commended Scholar.',
+    desc: '4.433 weighted GPA, 1540 SAT, and 19 AP/college-level courses.',
     to: '/resume',
   },
 ]

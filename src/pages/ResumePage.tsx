@@ -52,12 +52,18 @@ export default function ResumePage() {
             <p className="text-sm sm:text-base">
               University of Minnesota Talented Youth Mathematics Program (UMTYMP) -- September 2021 to Present
             </p>
+            <p className="text-sm sm:text-base">
+              Cornell University -- AEM 1300: Introduction to Macroeconomic Theory and Policy -- Summer 2026
+            </p>
           </div>
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest text-[#D7E2EA]/50">Academics</p>
             <p className="mt-1 text-sm sm:text-base">GPA: 4.433 Weighted / 3.800 Unweighted</p>
             <p className="text-sm sm:text-base">
               SAT: <span className="font-semibold text-[#BBCCD7]">1540</span> (750 Reading &amp; Writing, 790 Math)
+            </p>
+            <p className="text-sm sm:text-base">
+              19 AP/college-level courses (14 AP, 1 self-study AP, 3 years UMTYMP, 1 Cornell University course)
             </p>
           </div>
         </div>
@@ -74,18 +80,25 @@ export default function ResumePage() {
         >
           <EntryList
             entries={[
-              { title: 'Gold -- Presidential Volunteer Service Award', dates: 'Jun 2023 -- Sep 2023', bullets: ['Recognized for over 100 hours of impactful community service'] },
+              {
+                title: 'Cornell University -- AEM 1300: Introduction to Macroeconomic Theory and Policy',
+                org: 'Grade: A+',
+                dates: 'Summer 2026',
+                bullets: [
+                  'Completed Cornell\'s intensive three-week version of AEM 1300, covering the full standard-semester curriculum -- macroeconomic theory, policy, incentives, trade, opportunity cost, and real-world economic decision-making -- with no reduction in academic content',
+                ],
+              },
+              { title: 'The Borgen Project -- Chief Closer Award', dates: 'Junior (2025-2026)', bullets: ['Raised $1,000+ through proceeds from my barbering venture'] },
               { title: 'AP Scholar with Distinction', dates: 'Sophomore (2024-2025)', bullets: ['Earned for high performance across multiple AP exams'] },
-              { title: 'A-Roll Honors Student', dates: 'Freshman (2023) -- Current', bullets: ['Consistently maintained a GPA above 3.6 every semester'] },
-              { title: 'DECA State Finalist', dates: 'Sophomore (2024-2025)', bullets: ['Placed 5th across all of Minnesota DECA Business Competition'] },
-              { title: 'Academic Letter', dates: 'Freshman (2023) -- Current', bullets: ['Awarded for sustained academic excellence'] },
-              { title: 'National Merit Commended Scholar -- PSAT/NMSQT', dates: 'Junior (2025-2026)', bullets: ['Score: 1430 (670 Reading & Writing, 760 Math)'] },
-              { title: 'DECA', dates: 'Junior (2025-2026)', bullets: ['2nd Place -- Regional Competition, International Business Plan'] },
+              { title: 'Gold -- Presidential Volunteer Service Award', dates: 'Jun 2023 -- Sep 2023', bullets: ['Recognized for over 100 hours of impactful community service'] },
+              { title: 'HOSA -- Minnesota State Leadership Conference', dates: 'Junior (2025-2026)', bullets: ['2nd Place -- State Competition, ATC Environmental Health Test'] },
               { title: 'BPA -- Vice President', dates: 'Junior (2025-2026)', bullets: ['1st Place -- Regional Competition, Basic Office Systems and Procedures'] },
               { title: 'BPA', dates: 'Junior (2025-2026)', bullets: ['3rd Place -- Regional Competition, Financial Math and Analysis'] },
+              { title: 'DECA State Finalist', dates: 'Sophomore (2024-2025)', bullets: ['Placed 5th across all of Minnesota DECA Business Competition'] },
+              { title: 'DECA', dates: 'Junior (2025-2026)', bullets: ['2nd Place -- Regional Competition, International Business Plan'] },
+              { title: 'A-Roll Honors Student', dates: 'Freshman (2023) -- Current', bullets: ['Consistently maintained a GPA above 3.6 every semester'] },
               { title: 'National Honor Society (NHS)', dates: 'Junior (2025-2026)', bullets: ['Selected based on academic excellence, leadership, service, and character'] },
-              { title: 'HOSA -- Minnesota State Leadership Conference', dates: 'Junior (2025-2026)', bullets: ['2nd Place -- State Competition, ATC Environmental Health Test'] },
-              { title: 'The Borgen Project -- Chief Closer Award', dates: 'Junior (2025-2026)', bullets: ['Raised $1,000+ through proceeds from my barbering venture'] },
+              { title: 'Academic Letter', dates: 'Freshman (2023) -- Current', bullets: ['Awarded for sustained academic excellence'] },
             ]}
           />
         </FeatureCard>
@@ -100,9 +113,9 @@ export default function ResumePage() {
         >
           <EntryList
             entries={[
-              { title: 'Seasonal Services', org: 'Co-Founder & Lawn Care Worker', dates: 'Freshman (2023) -- Current, Summers | 3 hrs/wk, 8 wks/yr', bullets: ['Started a small local service with peers to provide lawn mowing, dog sitting, and other basic yard/household tasks', 'Developed responsibility, time management, and customer service skills through consistent summer work'] },
               { title: 'Freelance Barber', org: 'Self-Employed', dates: 'Sophomore (2024) -- Current, 10 hrs/wk, ongoing', bullets: ['Provide haircutting services to regular paying clients from the local community', 'Schedule appointments, manage payments, and ensure client satisfaction independently', 'Built a consistent client base through reliable service, precision, and referrals'] },
               { title: 'The Borgen Project', org: 'Regional Director', dates: 'Jul 7, 2026 -- Sep 21, 2026, Summer | 5 hrs/wk, 11 wks/yr', bullets: ['Completed a structured advocacy internship focused on global poverty reduction and policy education', 'Raised $1,000 for anti-poverty legislation through independent fundraising tied to freelance haircutting', 'Engaged in outreach to legislators and community members on global development policy'] },
+              { title: 'Seasonal Services', org: 'Co-Founder & Lawn Care Worker', dates: 'Freshman (2023) -- Current, Summers | 3 hrs/wk, 8 wks/yr', bullets: ['Started a small local service with peers to provide lawn mowing, dog sitting, and other basic yard/household tasks', 'Developed responsibility, time management, and customer service skills through consistent summer work'] },
               { title: 'Equality Labs', org: 'Student Ambassador', dates: 'Jul 2026 -- Sep 2026', bullets: ['Launch signature drives to ban caste-based discrimination in the South Asian diaspora in the United States', 'Fundraise to support Unlearning Caste Supremacy Trainings'] },
             ]}
           />

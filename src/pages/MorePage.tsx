@@ -8,8 +8,12 @@ import friendsSuitsLake from '../assets/photos/friends-suits-lake.jpg'
 import friendsSuitsField from '../assets/photos/friends-suits-field.jpg'
 import friendsNightLights from '../assets/photos/friends-night-lights.jpg'
 import clubGroupClassroom from '../assets/photos/club-group-classroom.jpg'
+import seniorPortraitField from '../assets/photos/senior-portrait-field.jpg'
+import seniorPortraitWalkingAway from '../assets/photos/senior-portrait-walking-away.jpg'
 
 const PHOTOS = [
+  { id: 'senior-portrait-field', caption: 'Senior photos, fall 2026', src: seniorPortraitField },
+  { id: 'senior-portrait-walking-away', caption: 'Senior photos, fall 2026', src: seniorPortraitWalkingAway },
   { id: 'umtymp-mom', caption: 'UMTYMP graduation, with my mom', src: umtympMom },
   { id: 'family-graduation', caption: "Whole family at my sister's Carlson commencement", src: familyGraduation },
   { id: 'sister-graduation', caption: 'With my sister at her U of M graduation', src: sisterGraduation },
@@ -41,10 +45,11 @@ export default function MorePage() {
             Interests
           </h2>
           <ul className="list-disc space-y-1 pl-5 text-sm text-[#D7E2EA]/80 sm:text-base">
-            <li>Barbering -- @pomar.blendz</li>
             <li>Tennis</li>
+            <li>Pickleball</li>
             <li>PC building and hardware</li>
             <li>Content creation and video editing</li>
+            <li>Gaming</li>
           </ul>
         </div>
       </div>

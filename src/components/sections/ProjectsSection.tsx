@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import PlaceholderImage from '../shared/PlaceholderImage'
@@ -67,6 +67,15 @@ const PROJECTS: Project[] = [
       { src: haircutFinishingTouches, label: 'Finishing touches' },
     ],
   },
+  {
+    number: '04',
+    category: 'Research',
+    name: 'Caste Awareness Study',
+    to: '/research',
+    col1Label1: 'Photo coming soon',
+    col1Label2: 'Photo coming soon',
+    col2Label: 'Photo coming soon',
+  },
 ]
 
 // Landscape boxes that always stretch edge-to-edge across the card, no matter
@@ -113,9 +122,34 @@ function PortraitPhotoRow({ photos }: { photos: ProjectPhoto[] }) {
   )
 }
 
+// How much empty scroll space follows each card before the next one starts
+// covering it. Cards have different heights (different photo counts, or the
+// placeholder layout for a project with no photos yet), but a fixed 85vh
+// container for all of them meant that leftover space -- and therefore how
+// much overlap happened between one card and the next -- varied wildly.
+// Sizing each container to its OWN card height plus this same constant
+// keeps that leftover space (and the overlap it produces) identical for
+// every pair, regardless of how tall any individual card is.
+const SLACK_PX = 200
+
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   const containerRef = useRef<HTMLDivElement>(null)
-  const targetScale = 1 - (PROJECTS.length - 1 - index) * 0.03
+  const cardRef = useRef<HTMLDivElement>(null)
+  const [containerHeight, setContainerHeight] = useState<number | null>(null)
+  // Every card recedes by the same amount as the next one scrolls over it,
+  // so each overlap (01->02, 02->03, ...) looks the same regardless of
+  // position in the stack.
+  const targetScale = 0.94
+
+  useEffect(() => {
+    const el = cardRef.current
+    if (!el) return
+    const measure = () => setContainerHeight(el.offsetHeight + SLACK_PX)
+    measure()
+    const observer = new ResizeObserver(measure)
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -125,8 +159,9 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   const scale = useTransform(scrollYProgress, [0, 1], [1, targetScale])
 
   return (
-    <div ref={containerRef} className="h-[85vh]">
+    <div ref={containerRef} style={{ height: containerHeight ?? '85vh' }}>
       <motion.div
+        ref={cardRef}
         className="sticky rounded-[40px] border-2 border-[#D7E2EA] bg-[#0C0C0C] p-4 sm:rounded-[50px] sm:p-6 md:rounded-[60px] md:p-8"
         style={{ scale, top: `calc(6rem + ${index * 28}px)` }}
       >

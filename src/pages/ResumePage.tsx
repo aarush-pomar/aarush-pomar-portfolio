@@ -1,10 +1,14 @@
 import PageLayout from '../components/shared/PageLayout'
 import PageHeader from '../components/shared/PageHeader'
-import PlaceholderImage from '../components/shared/PlaceholderImage'
 import FeatureCard from '../components/shared/FeatureCard'
 import umtympStage from '../assets/photos/award-umtymp-stage.jpg'
 import haircutDetailWork from '../assets/photos/haircut-detail-work.jpg'
 import minnetonkaForumGroup from '../assets/photos/minnetonka-forum-group.jpg'
+import seniorHeadshot from '../assets/photos/senior-headshot.jpg'
+import seniorPortraitProfile from '../assets/photos/senior-portrait-profile.jpg'
+import seniorPortraitBridge from '../assets/photos/senior-portrait-bridge.jpg'
+import seniorPortraitWalking from '../assets/photos/senior-portrait-walking.jpg'
+import seniorPortraitCreek from '../assets/photos/senior-portrait-creek.jpg'
 
 interface Entry {
   title: string
@@ -44,7 +48,11 @@ export default function ResumePage() {
       <PageHeader title="Resume" subtitle="Minnetonka High School -- Class of 2026" />
 
       <section className="grid gap-8 pb-10 pt-4 md:grid-cols-[220px_1fr]">
-        <PlaceholderImage label="Headshot" className="aspect-square w-full" />
+        <img
+          src={seniorHeadshot}
+          alt="Aarush Pomar"
+          className="aspect-square w-full rounded-2xl object-cover object-top"
+        />
         <div className="flex flex-col justify-center gap-4">
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest text-[#D7E2EA]/50">Education</p>
@@ -121,7 +129,13 @@ export default function ResumePage() {
           />
         </FeatureCard>
 
-        <FeatureCard number="03" category="Research Experience" title="In Process">
+        <FeatureCard
+          number="03"
+          category="Research Experience"
+          title="In Process"
+          imageLabel="Research photo"
+          imageSrc={seniorPortraitProfile}
+        >
           <EntryList
             entries={[
               {
@@ -133,7 +147,13 @@ export default function ResumePage() {
           />
         </FeatureCard>
 
-        <FeatureCard number="04" category="Volunteer Experience" title="Giving Back">
+        <FeatureCard
+          number="04"
+          category="Volunteer Experience"
+          title="Giving Back"
+          imageLabel="Volunteer photo"
+          imageSrc={seniorPortraitBridge}
+        >
           <EntryList
             entries={[
               { title: 'Smithsonian', org: 'Digital Transcriptor', dates: 'Jun 19, 2023 -- Sep 21, 2023, 90 hrs', bullets: ['Transcribed historical documents to support public accessibility and digital archiving'] },
@@ -162,7 +182,13 @@ export default function ResumePage() {
           />
         </FeatureCard>
 
-        <FeatureCard number="06" category="Extracurricular Activities" title="Outside the Classroom">
+        <FeatureCard
+          number="06"
+          category="Extracurricular Activities"
+          title="Outside the Classroom"
+          imageLabel="Extracurricular photo"
+          imageSrc={seniorPortraitWalking}
+        >
           <EntryList
             entries={[
               { title: 'High School Tennis Team', org: 'JV Athlete', dates: 'Mar 20, 2024 -- May 15, 2024', bullets: ['Competed in matches and attended regular practices during the spring season'] },
@@ -173,7 +199,13 @@ export default function ResumePage() {
           />
         </FeatureCard>
 
-        <FeatureCard number="07" category="Skills" title="Technical & Languages">
+        <FeatureCard
+          number="07"
+          category="Skills"
+          title="Technical & Languages"
+          imageLabel="Skills photo"
+          imageSrc={seniorPortraitCreek}
+        >
           <div className="grid gap-6 sm:grid-cols-2">
             <div>
               <p className="text-xs font-semibold uppercase tracking-widest text-[#D7E2EA]/50">Technical</p>

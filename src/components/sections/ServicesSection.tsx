@@ -1,29 +1,35 @@
 import { Link } from 'react-router-dom'
 import FadeIn from '../shared/FadeIn'
 
-const SERVICES = [
+const SERVICES: { number: string; name: string; desc: string | string[]; to: string }[] = [
   {
     number: '01',
     name: 'Advocacy',
-    desc: 'Regional Director at The Borgen Project, mobilizing my community around global poverty reduction -- funded in part by my own barbering venture.',
+    desc: 'Regional Director at The Borgen Project, using my own barbering business to fundraise and advocate for global poverty reduction.',
     to: '/advocacy',
   },
   {
     number: '02',
     name: 'Research',
-    desc: 'Studying the economic fallout of ICE activity on immigrant communities in Minnesota, mentored by Prof. Miguel Quiñones at the University of Minnesota.',
+    desc: 'Conducting two independent research projects: one on the economic effects of ICE activity in Minnesota, and another on caste awareness and identity within the South Asian diaspora.',
     to: '/research',
   },
   {
     number: '03',
     name: 'Barbering',
-    desc: 'Freelance barber -- @pomar.blendz -- turning a personal skill into a small business and, eventually, a way to give back.',
-    to: '/more',
+    desc: 'Built my own freelance barbering business, @pomar.blendz, from a personal skill into something much bigger.',
+    to: '/barbering',
   },
   {
     number: '04',
     name: 'Leadership',
-    desc: 'President of NHS and Econ Club, Vice President of BPA, and Co-President of the Minnetonka Forum.',
+    desc: [
+      'President -- National Honor Society',
+      'Founder & President -- Econ Club',
+      'Vice President -- Business Professionals of America',
+      'Co-President -- Minnetonka Forum',
+      'Officer -- Desi Student Union',
+    ],
     to: '/resume',
   },
   {
@@ -64,12 +70,23 @@ export default function ServicesSection() {
                 >
                   {service.name}
                 </h3>
-                <p
-                  className="max-w-2xl font-light leading-relaxed text-[#0C0C0C] opacity-60"
-                  style={{ fontSize: 'clamp(0.85rem, 1.6vw, 1.25rem)' }}
-                >
-                  {service.desc}
-                </p>
+                {Array.isArray(service.desc) ? (
+                  <ul
+                    className="max-w-2xl font-light leading-relaxed text-[#0C0C0C] opacity-60"
+                    style={{ fontSize: 'clamp(0.85rem, 1.6vw, 1.25rem)' }}
+                  >
+                    {service.desc.map((line) => (
+                      <li key={line}>{line}</li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p
+                    className="max-w-2xl font-light leading-relaxed text-[#0C0C0C] opacity-60"
+                    style={{ fontSize: 'clamp(0.85rem, 1.6vw, 1.25rem)' }}
+                  >
+                    {service.desc}
+                  </p>
+                )}
               </div>
             </Link>
           </FadeIn>

@@ -1,34 +1,52 @@
+import { useState } from 'react'
+import type { ReactNode } from 'react'
 import PageLayout from '../components/shared/PageLayout'
 import PageHeader from '../components/shared/PageHeader'
 import FeatureCard from '../components/shared/FeatureCard'
+import Lightbox, { EnlargeHint } from '../components/shared/Lightbox'
 import umtympStage from '../assets/photos/award-umtymp-stage.jpg'
 import haircutDetailWork from '../assets/photos/haircut-detail-work.jpg'
 import minnetonkaForumGroup from '../assets/photos/minnetonka-forum-group.jpg'
-import seniorHeadshot from '../assets/photos/senior-headshot.jpg'
-import seniorPortraitProfile from '../assets/photos/senior-portrait-profile.jpg'
-import seniorPortraitBridge from '../assets/photos/senior-portrait-bridge.jpg'
-import seniorPortraitWalking from '../assets/photos/senior-portrait-walking.jpg'
+import presidentialAwardMedal from '../assets/photos/presidential-volunteer-service-award-medal.jpg'
+import conferenceGroupSuits from '../assets/photos/conference-group-suits.jpg'
+import conferenceGroupWinter from '../assets/photos/conference-group-winter.jpg'
+import seasonalServicesGraphic from '../assets/photos/seasonal-services-graphic.webp'
+import seniorPortraitScissors from '../assets/photos/senior-portrait-scissors.jpg'
+import seniorPortraitScissorsSquare from '../assets/photos/senior-portrait-scissors-square.jpg'
+import seniorHeadshot from '../assets/photos/senior-headshot-vertical.jpg'
+import iceProtestUsBankStadium from '../assets/photos/ice-protest-us-bank-stadium.png'
+import casteHierarchyIllustration from '../assets/photos/caste-hierarchy-illustration.webp'
+import smithsonianLogo from '../assets/photos/smithsonian-collections-digitization.webp'
+import feedMyStarvingChildrenLogo from '../assets/photos/feed-my-starving-children.jpg'
+import humanityAllianceLogo from '../assets/photos/the-humanity-alliance.webp'
+import econClubFirstMeeting from '../assets/photos/econ-club-first-meeting.jpg'
+import tennisBTeamSingles from '../assets/photos/tennis-b-team-singles-champion.jpg'
+import hosaSlcGroup from '../assets/photos/hosa-slc-group.webp'
 import seniorPortraitCreek from '../assets/photos/senior-portrait-creek.jpg'
 
 interface Entry {
-  title: string
+  title: ReactNode
   org?: string
-  dates: string
+  dates?: string
+  description?: string
   bullets?: string[]
+  /** Nudges the title down ~0.5pt so a very long title doesn't crowd its neighbors. */
+  compactTitle?: boolean
 }
 
 function EntryList({ entries }: { entries: Entry[] }) {
   return (
     <div className="flex flex-col gap-5">
-      {entries.map((entry) => (
-        <div key={entry.title + entry.dates}>
+      {entries.map((entry, i) => (
+        <div key={i}>
           <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-            <p className="font-semibold text-[#D7E2EA]">
+            <p className={`font-semibold text-[#D7E2EA] ${entry.compactTitle ? 'text-[15.3px] sm:text-[15.3px]' : ''}`}>
               {entry.title}
               {entry.org && <span className="font-normal text-[#D7E2EA]/70"> -- {entry.org}</span>}
             </p>
-            <p className="text-xs text-[#D7E2EA]/50">{entry.dates}</p>
+            {entry.dates && <p className="text-xs text-[#D7E2EA]/50">{entry.dates}</p>}
           </div>
+          {entry.description && <p className="mt-1.5 text-sm text-[#D7E2EA]/80">{entry.description}</p>}
           {entry.bullets && (
             <ul className="mt-1 list-disc space-y-1 pl-5 text-sm text-[#D7E2EA]/80">
               {entry.bullets.map((b) => (
@@ -42,35 +60,57 @@ function EntryList({ entries }: { entries: Entry[] }) {
   )
 }
 
+// On desktop the photo is absolutely positioned so it adds no height of its
+// own: the row is exactly as tall as the text beside it, and the photo runs
+// from the top of the first line to the bottom of the last.
+function Headshot() {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <div className="relative mx-auto aspect-[2/3] w-full max-w-[240px] md:mx-0 md:aspect-auto md:max-w-none md:self-stretch">
+      <button
+        type="button"
+        onClick={() => setOpen(true)}
+        aria-label="Enlarge photo: Aarush Pomar"
+        className="group absolute inset-0 block cursor-zoom-in overflow-hidden rounded-2xl"
+      >
+        <img
+          src={seniorHeadshot}
+          alt="Aarush Pomar"
+          className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+        />
+        <EnlargeHint />
+      </button>
+      {open && <Lightbox src={seniorHeadshot} alt="Aarush Pomar" onClose={() => setOpen(false)} />}
+    </div>
+  )
+}
+
 export default function ResumePage() {
   return (
     <PageLayout>
       <PageHeader title="Resume" subtitle="Minnetonka High School -- Class of 2026" />
 
-      <section className="grid gap-8 pb-10 pt-4 md:grid-cols-[220px_1fr]">
-        <img
-          src={seniorHeadshot}
-          alt="Aarush Pomar"
-          className="aspect-square w-full rounded-2xl object-cover object-top"
-        />
-        <div className="flex flex-col justify-center gap-4">
+      <section className="grid gap-8 pb-10 pt-4 md:grid-cols-[216px_1fr]">
+        <Headshot />
+        <div className="flex flex-col justify-center gap-6">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-[#D7E2EA]/50">Education</p>
-            <p className="mt-1 text-sm sm:text-base">Minnetonka High School -- September 2023 to Present</p>
-            <p className="text-sm sm:text-base">
+            <p className="text-xs font-semibold uppercase tracking-widest text-[#D7E2EA]/50 sm:text-sm">Education</p>
+            <p className="mt-1 text-base leading-relaxed sm:text-lg">Minnetonka High School -- September 2023 to Present</p>
+            <p className="text-base leading-relaxed sm:text-lg">
               University of Minnesota Talented Youth Mathematics Program (UMTYMP) -- September 2021 to Present
             </p>
-            <p className="text-sm sm:text-base">
+            <p className="text-base leading-relaxed sm:text-lg">
               Cornell University -- AEM 1300: Introduction to Macroeconomic Theory and Policy -- Summer 2026
             </p>
           </div>
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-[#D7E2EA]/50">Academics</p>
-            <p className="mt-1 text-sm sm:text-base">GPA: 4.433 Weighted / 3.800 Unweighted</p>
-            <p className="text-sm sm:text-base">
+            <p className="text-xs font-semibold uppercase tracking-widest text-[#D7E2EA]/50 sm:text-sm">Academics</p>
+            <p className="mt-1 text-base leading-relaxed sm:text-lg">GPA: 4.433 Weighted / 3.800 Unweighted</p>
+            <p className="text-base leading-relaxed sm:text-lg">
               SAT: <span className="font-semibold text-[#BBCCD7]">1540</span> (750 Reading &amp; Writing, 790 Math)
             </p>
-            <p className="text-sm sm:text-base">
+            <p className="text-base leading-relaxed sm:text-lg">
               19 AP/college-level courses (14 AP, 1 self-study AP, 3 years UMTYMP, 1 Cornell University course)
             </p>
           </div>
@@ -85,12 +125,24 @@ export default function ResumePage() {
           imageLabel="Awards photo"
           imageSrc={umtympStage}
           imageCaption="UMTYMP Class of 2026"
+          fitPhotosToText
+          extraImages={[
+            {
+              src: presidentialAwardMedal,
+              label: 'Gold Presidential Volunteer Service Award medal',
+              caption: 'Gold Presidential Volunteer Service Award',
+              aspectRatio: 508 / 491,
+            },
+            { src: conferenceGroupSuits, label: 'DECA State group photo', caption: 'DECA State', aspectRatio: 576 / 563 },
+            { src: conferenceGroupWinter, label: 'BPA chapter photo', caption: 'Our BPA chapter', aspectRatio: 796 / 608 },
+          ]}
         >
           <EntryList
             entries={[
               {
                 title: 'Cornell University -- AEM 1300: Introduction to Macroeconomic Theory and Policy',
                 org: 'Grade: A+',
+                compactTitle: true,
                 dates: 'Summer 2026',
                 bullets: [
                   'Completed Cornell\'s intensive three-week version of AEM 1300, covering the full standard-semester curriculum -- macroeconomic theory, policy, incentives, trade, opportunity cost, and real-world economic decision-making -- with no reduction in academic content',
@@ -118,6 +170,20 @@ export default function ResumePage() {
           imageLabel="Barbering photo"
           imageSrc={haircutDetailWork}
           imageCaption="Freelance barbering -- @pomar.blendz"
+          photoLayout="row"
+          extraImages={[
+            {
+              src: seasonalServicesGraphic,
+              label: 'Seasonal Services graphic',
+              caption: 'Seasonal Services -- lawn care & yard work',
+            },
+            {
+              src: seniorPortraitScissorsSquare,
+              fullSrc: seniorPortraitScissors,
+              label: 'Barbering tools portrait',
+              caption: 'Tools of the trade',
+            },
+          ]}
         >
           <EntryList
             entries={[
@@ -125,6 +191,7 @@ export default function ResumePage() {
               { title: 'The Borgen Project', org: 'Regional Director', dates: 'Jul 7, 2026 -- Sep 21, 2026, Summer | 5 hrs/wk, 11 wks/yr', bullets: ['Completed a structured advocacy internship focused on global poverty reduction and policy education', 'Raised $1,000 for anti-poverty legislation through independent fundraising tied to freelance haircutting', 'Engaged in outreach to legislators and community members on global development policy'] },
               { title: 'Seasonal Services', org: 'Co-Founder & Lawn Care Worker', dates: 'Freshman (2023) -- Current, Summers | 3 hrs/wk, 8 wks/yr', bullets: ['Started a small local service with peers to provide lawn mowing, dog sitting, and other basic yard/household tasks', 'Developed responsibility, time management, and customer service skills through consistent summer work'] },
               { title: 'Equality Labs', org: 'Student Ambassador', dates: 'Jul 2026 -- Sep 2026', bullets: ['Launch signature drives to ban caste-based discrimination in the South Asian diaspora in the United States', 'Fundraise to support Unlearning Caste Supremacy Trainings'] },
+              { title: 'The Remedy Project', org: 'Student Ambassador', dates: 'Sep 2026 -- Current', bullets: ['Raise awareness around prison justice and the rights of incarcerated people', 'Raised $1,000+ to support The Remedy Project\'s advocacy work'] },
             ]}
           />
         </FeatureCard>
@@ -133,15 +200,53 @@ export default function ResumePage() {
           number="03"
           category="Research Experience"
           title="In Process"
-          imageLabel="Research photo"
-          imageSrc={seniorPortraitProfile}
+          imageLabel="Immigration enforcement protest, Minneapolis"
+          imageSrc={iceProtestUsBankStadium}
+          imageCaption="ICE protest in Minneapolis"
+          imageAspectRatio={455 / 468}
+          extraImages={[
+            {
+              src: casteHierarchyIllustration,
+              label: 'Illustration depicting the Indian caste hierarchy',
+              caption: 'The Indian caste hierarchy',
+              aspectRatio: 1266 / 1240,
+            },
+          ]}
         >
           <EntryList
             entries={[
               {
-                title: 'Economic Fallout and Forced Financial Survival Strategies of Immigrants in the Wake of ICE Activity in Minnesota',
+                title: (
+                  <>
+                    Economic Fallout and Forced Financial Survival Strategies
+                    <br />
+                    of Immigrants in the Wake of ICE Activity in Minnesota
+                  </>
+                ),
                 dates: 'In Process',
-                bullets: ['To be submitted to Journal of International Migration and Integration (JIMI)', 'Mentor: Professor Miguel Quiñones, University of Minnesota Twin Cities'],
+                description:
+                  'Examines how heightened immigration-enforcement activity in Minnesota created economic disruption -- reduced customer traffic, labor shortages, and financial strain -- for small businesses in affected Minneapolis communities, even beyond those directly targeted. Combines existing economic data with original interviews from small-business owners in the communities most affected.',
+                bullets: [
+                  'Reviewing existing economic assessments, city data, and public reporting on Operation Metro Surge',
+                  'To be submitted to Journal of International Migration and Integration (JIMI)',
+                  'Mentor: Professor Miguel Quiñones, University of Minnesota Twin Cities',
+                ],
+              },
+              {
+                title: (
+                  <>
+                    Caste Awareness and Identity Across Generations
+                    <br />
+                    in Minnesota's South Asian Diaspora
+                  </>
+                ),
+                dates: 'In Process',
+                description:
+                  'Explores how knowledge, discussion, and awareness of caste differ between first-generation South Asian immigrants and second- or third-generation South Asian Americans in Minnesota -- including how caste is inferred through surnames or religion, and whether caste identity is fading across generations or persisting in subtler forms.',
+                bullets: [
+                  'Developing a research question and literature review with guidance from Dr. Zubin DeVitre',
+                  'Mentor: Dr. Zubin DeVitre, University of Wisconsin–Madison',
+                ],
               },
             ]}
           />
@@ -151,14 +256,28 @@ export default function ResumePage() {
           number="04"
           category="Volunteer Experience"
           title="Giving Back"
-          imageLabel="Volunteer photo"
-          imageSrc={seniorPortraitBridge}
+          imageLabel="Smithsonian Collections Digitization logo"
+          imageSrc={smithsonianLogo}
+          imageCaption="Smithsonian -- Digital Transcriptor"
+          photoLayout="row"
+          extraImages={[
+            {
+              src: feedMyStarvingChildrenLogo,
+              label: 'Feed My Starving Children logo',
+              caption: 'Feed My Starving Children -- Food Packager',
+            },
+            {
+              src: humanityAllianceLogo,
+              label: 'The Humanity Alliance logo',
+              caption: 'The Humanity Alliance -- Volunteer Cook',
+            },
+          ]}
         >
           <EntryList
             entries={[
               { title: 'Smithsonian', org: 'Digital Transcriptor', dates: 'Jun 19, 2023 -- Sep 21, 2023, 90 hrs', bullets: ['Transcribed historical documents to support public accessibility and digital archiving'] },
               { title: 'Feed My Starving Children', org: 'Food Packager', dates: 'Jun 25, 2023 -- Aug 13, 2023, 15 hrs', bullets: ['Packed meals for international hunger relief efforts in a team-based environment'] },
-              { title: 'Humanitarian Alliance', org: 'Volunteer Cook', dates: 'Aug 21, 2023 -- Aug 27, 2023, 5 hrs', bullets: ['Cooked and served meals to individuals facing food insecurity'] },
+              { title: 'The Humanity Alliance', org: 'Volunteer Cook', dates: 'Aug 21, 2023 -- Aug 27, 2023, 5 hrs', bullets: ['Cooked and served meals to individuals facing food insecurity'] },
             ]}
           />
         </FeatureCard>
@@ -170,6 +289,16 @@ export default function ResumePage() {
           imageLabel="Minnetonka Forum photo"
           imageSrc={minnetonkaForumGroup}
           imageCaption="Minnetonka Forum team"
+          imageAspectRatio={828 / 797}
+          extraImages={[
+            {
+              src: econClubFirstMeeting,
+              label: 'First Econ Club meeting',
+              caption: 'First Econ Club meeting ever',
+              // Same shape as the Forum photo above it; clicking opens the full wide photo.
+              aspectRatio: 828 / 797,
+            },
+          ]}
         >
           <EntryList
             entries={[
@@ -186,15 +315,28 @@ export default function ResumePage() {
           number="06"
           category="Extracurricular Activities"
           title="Outside the Classroom"
-          imageLabel="Extracurricular photo"
-          imageSrc={seniorPortraitWalking}
+          imageLabel="Minnetonka B Team singles champion"
+          imageSrc={tennisBTeamSingles}
+          imageCaption="Minnetonka B Team singles champion"
+          imageAspectRatio={828 / 853}
+          fitPhotosToText
+          extraImages={[
+            {
+              // Same square-ish shape as the tennis photo; clicking it still
+              // opens the whole wide group shot.
+              src: hosaSlcGroup,
+              label: 'HOSA State Leadership Conference',
+              caption: 'HOSA SLC',
+              aspectRatio: 828 / 853,
+            },
+          ]}
         >
           <EntryList
             entries={[
-              { title: 'High School Tennis Team', org: 'JV Athlete', dates: 'Mar 20, 2024 -- May 15, 2024', bullets: ['Competed in matches and attended regular practices during the spring season'] },
-              { title: 'HOSA', org: 'Member', dates: 'Sophomore (2024) -- Current', bullets: ['Engaged in healthcare-related discussions and events'] },
-              { title: 'DECA', org: 'Member', dates: 'Freshman (2023) -- Current', bullets: ['Competed in business and marketing events; placed Top 5 at state competition'] },
-              { title: 'Content Creator', org: 'TikTok / Video Editing', dates: 'Sophomore (2024) -- Current', bullets: ['Produced short-form video content using CapCut', 'Built an audience of 1.1K followers through consistent engagement and content strategy'] },
+              { title: 'High School Tennis Team', org: 'JV Athlete', dates: 'Mar 20, 2024 -- May 15, 2024', description: 'Competed in singles for the Minnetonka B Team, balancing daily practices and matches with a full academic schedule.', bullets: ['Competed in matches and attended regular practices during the spring season', 'Won the Minnetonka B Team singles championship'] },
+              { title: 'HOSA', org: 'Member', dates: 'Sophomore (2024) -- Current', description: 'Member of the healthcare-focused student organization, competing in health-science events and attending state-level leadership programming.', bullets: ['Engaged in healthcare-related discussions and events', 'Placed 2nd at the Minnesota State Leadership Conference (SLC), ATC Environmental Health Test'] },
+              { title: 'DECA', org: 'Member', dates: 'Freshman (2023) -- Current', description: 'Competes in business and marketing events, building presentation, financial-analysis, and business-plan skills.', bullets: ['Placed 5th at the Minnesota DECA State Competition (Sophomore year)', 'Placed 2nd at Regionals in International Business Plan (Junior year)'] },
+              { title: 'Content Creator', org: 'TikTok / Video Editing', dates: 'Sophomore (2024) -- Current', description: 'Creates and edits short-form videos for TikTok, focused on growing an engaged audience.', bullets: ['Produced short-form video content using CapCut', 'Built an audience of 1.1K followers through consistent engagement and content strategy'] },
             ]}
           />
         </FeatureCard>

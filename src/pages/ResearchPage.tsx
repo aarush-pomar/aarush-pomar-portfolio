@@ -638,6 +638,7 @@ export default function ResearchPage() {
 
         {/* ============ Project 02: Caste ============ */}
         <FeatureCard
+          id="caste-research"
           number="02"
           category="Research -- Mentor: Dr. Zubin DeVitre, University of Wisconsin–Madison"
           title="Caste Awareness and Identity Across Generations in Minnesota's South Asian Diaspora"

@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import FadeIn from '../shared/FadeIn'
 import Magnet from '../shared/Magnet'
 import FitText from '../shared/FitText'
@@ -63,6 +64,25 @@ export default function HeroSection() {
             a student, barber, and advocate turning everyday skills into impact
           </p>
         </FadeIn>
+      </div>
+
+      {/* Centering is on the plain wrapper, not the motion.div -- framer-motion's
+          inline transform would overwrite a Tailwind -translate-x-1/2. */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-6 z-20 flex justify-center sm:bottom-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.2, duration: 0.6 }}
+        >
+          <div className="flex flex-col items-center gap-2 text-[#D7E2EA]/60">
+            <span className="text-xs font-medium uppercase tracking-widest">Scroll</span>
+            <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5, ease: 'easeInOut' }}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 5v14M19 12l-7 7-7-7" />
+              </svg>
+            </motion.div>
+          </div>
+        </motion.div>
       </div>
     </section>
   )

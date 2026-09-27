@@ -3,12 +3,14 @@ import type { ReactNode } from 'react'
 import * as THREE from 'three'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, Html, Sphere } from '@react-three/drei'
-import { ImageOff, X } from 'lucide-react'
+import { X } from 'lucide-react'
 
 export interface GalaxyPhoto {
   id: string
-  src: string | null
+  src: string
   caption: string
+  /** CSS object-position for the cropped floating card (default keeps heads, which sit high in most shots). */
+  focus?: string
 }
 
 /* =========================
@@ -131,7 +133,6 @@ function FloatingCard({
   const groupRef = useRef<THREE.Group>(null)
   const [hovered, setHovered] = useState(false)
   const { setSelected } = usePhotos()
-  const isPlaceholder = !photo.src
 
   useFrame(({ camera }) => {
     if (groupRef.current) groupRef.current.lookAt(camera.position)
@@ -141,32 +142,38 @@ function FloatingCard({
     <group ref={groupRef} position={[position.x, position.y, position.z]}>
       {/* pointerEvents="auto" makes the card itself the click/hover target --
           no separate invisible mesh to keep in sync, so the hit area always
-          matches exactly what's visible. */}
-      <Html transform distanceFactor={10} position={[0, 0, 0.01]} pointerEvents="auto" occlude={false}>
+          matches exactly what's visible. The photo fills the whole card
+          (cropped with object-cover); the full uncropped photo opens in the
+          modal on click. */}
+      {/* The div below is rendered at 2x the size it appears on screen (and
+          distanceFactor is halved to compensate) -- drei's Html "transform"
+          mode rasterizes this DOM content through a CSS 3D matrix, and that
+          resampling step is what was reading as blurry. Feeding it more
+          source pixels than it needs makes the downscale sharper, the same
+          way rendering a canvas at 2x and scaling down looks crisper. */}
+      <Html transform distanceFactor={5} position={[0, 0, 0.01]} pointerEvents="auto" occlude={false}>
         <div
-          onClick={() => !isPlaceholder && setSelected(photo)}
-          onMouseEnter={() => !isPlaceholder && setHovered(true)}
+          onClick={() => setSelected(photo)}
+          onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
-          className="flex h-52 w-40 select-none flex-col overflow-hidden rounded-2xl border p-2"
+          className="relative h-[26rem] w-80 cursor-pointer select-none overflow-hidden rounded-[2rem]"
           style={{
-            cursor: isPlaceholder ? 'default' : 'pointer',
-            backgroundColor: '#141414',
-            borderColor: hovered ? 'rgba(215,226,234,0.6)' : 'rgba(215,226,234,0.15)',
-            boxShadow: hovered ? '0 20px 40px rgba(215,226,234,0.15)' : '0 10px 24px rgba(0,0,0,0.6)',
-            transition: 'box-shadow 0.15s ease, border-color 0.15s ease',
+            boxShadow: hovered
+              ? '0 0 0 4px rgba(215,226,234,0.7), 0 40px 80px rgba(215,226,234,0.15)'
+              : '0 20px 48px rgba(0,0,0,0.6)',
+            transition: 'box-shadow 0.15s ease',
           }}
         >
-          {isPlaceholder ? (
-            <div className="flex h-40 w-full flex-col items-center justify-center gap-1 rounded-lg border border-dashed border-[#D7E2EA]/30 text-[#D7E2EA]/40">
-              <ImageOff className="h-6 w-6" strokeWidth={1.5} />
-            </div>
-          ) : (
-            <div className="flex h-40 w-full items-center justify-center overflow-hidden rounded-lg bg-black">
-              <img src={photo.src ?? undefined} alt={photo.caption} className="h-full w-full object-contain" loading="lazy" draggable={false} />
-            </div>
-          )}
-          <div className="mt-1 text-center">
-            <p className="truncate text-xs font-medium text-[#D7E2EA]">{photo.caption}</p>
+          <img
+            src={photo.src}
+            alt={photo.caption}
+            className="absolute inset-0 h-full w-full object-cover"
+            style={{ objectPosition: photo.focus ?? 'center 30%' }}
+            loading="lazy"
+            draggable={false}
+          />
+          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent px-4 pb-4 pt-16">
+            <p className="truncate text-center text-[1.5rem] font-medium text-[#D7E2EA]">{photo.caption}</p>
           </div>
         </div>
       </Html>
@@ -182,7 +189,7 @@ function PhotoModal() {
   const { selected, setSelected } = usePhotos()
   const cardRef = useRef<HTMLDivElement>(null)
 
-  if (!selected || !selected.src) return null
+  if (!selected) return null
 
   const handleMouseMove: React.MouseEventHandler<HTMLDivElement> = (e) => {
     if (!cardRef.current) return
@@ -206,7 +213,7 @@ function PhotoModal() {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm" onClick={handleBackdropClick}>
-      <div className="relative mx-4 w-full max-w-md">
+      <div className="relative mx-4 w-fit">
         <button onClick={handleClose} className="absolute -top-12 right-0 z-10 text-[#D7E2EA] transition-colors hover:text-white" aria-label="Close">
           <X className="h-8 w-8" />
         </button>
@@ -214,15 +221,18 @@ function PhotoModal() {
         <div style={{ perspective: '1000px' }} className="w-full">
           <div
             ref={cardRef}
-            className="relative w-full rounded-3xl border border-[#D7E2EA]/15 p-4 transition-transform duration-500 ease-out"
+            className="relative w-fit rounded-3xl border border-[#D7E2EA]/15 p-3 transition-transform duration-500 ease-out"
             style={{ backgroundColor: '#141414', transformStyle: 'preserve-3d' }}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
           >
-            <div className="relative mb-4 flex w-full items-center justify-center overflow-hidden rounded-2xl bg-black" style={{ aspectRatio: '3 / 4' }}>
-              <img src={selected.src} alt={selected.caption} className="h-full w-full object-contain" loading="lazy" />
-            </div>
-            <h3 className="text-center text-lg font-semibold text-[#D7E2EA]">{selected.caption}</h3>
+            <img
+              src={selected.src}
+              alt={selected.caption}
+              className="block h-auto w-auto rounded-2xl"
+              style={{ maxHeight: '72vh', maxWidth: 'min(86vw, 56rem)' }}
+            />
+            <h3 className="mt-3 text-center text-lg font-semibold text-[#D7E2EA]">{selected.caption}</h3>
           </div>
         </div>
       </div>
@@ -282,7 +292,7 @@ export default function ImageGalaxy3D({ photos }: { photos: GalaxyPhoto[] }) {
         <StarfieldBackground />
 
         <Canvas
-          camera={{ position: [0, 0, 14], fov: 60 }}
+          camera={{ position: [0, 0, 40], fov: 60 }}
           className="absolute inset-0 z-10"
           dpr={[1, 1.5]}
           onCreated={({ gl }) => {
@@ -300,7 +310,7 @@ export default function ImageGalaxy3D({ photos }: { photos: GalaxyPhoto[] }) {
                 enableZoom
                 enableRotate
                 minDistance={6}
-                maxDistance={30}
+                maxDistance={40}
                 rotateSpeed={0.5}
                 zoomSpeed={1}
                 target={[0, 0, 0]}

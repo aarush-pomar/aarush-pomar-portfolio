@@ -191,26 +191,30 @@ export default function VerticalImageStack({ images }: VerticalImageStackProps) 
         ))}
       </div>
 
-      <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 sm:bottom-12"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1, duration: 0.6 }}
-      >
-        <div className="flex flex-col items-center gap-2 text-[#D7E2EA]/60">
-          <motion.div animate={{ y: [0, -8, 0] }} transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5, ease: 'easeInOut' }}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12 5v14M5 12l7-7 7 7" />
-            </svg>
-          </motion.div>
-          <span className="text-xs font-medium uppercase tracking-widest">Scroll or drag</span>
-          <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5, ease: 'easeInOut' }}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12 5v14M19 12l-7 7-7-7" />
-            </svg>
-          </motion.div>
-        </div>
-      </motion.div>
+      {/* Centering lives on this plain wrapper, not the motion.div: framer-motion
+          writes its own inline transform for the fade-in, which would overwrite
+          a Tailwind -translate-x-1/2 and shove the hint off-center. */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-8 flex justify-center sm:bottom-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1, duration: 0.6 }}
+        >
+          <div className="flex flex-col items-center gap-2 text-[#D7E2EA]/60">
+            <motion.div animate={{ y: [0, -8, 0] }} transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5, ease: 'easeInOut' }}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 5v14M5 12l7-7 7 7" />
+              </svg>
+            </motion.div>
+            <span className="text-xs font-medium uppercase tracking-widest">Scroll or drag</span>
+            <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5, ease: 'easeInOut' }}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 5v14M19 12l-7 7-7-7" />
+              </svg>
+            </motion.div>
+          </div>
+        </motion.div>
+      </div>
 
       <div className="absolute left-4 top-1/2 -translate-y-1/2 sm:left-8">
         <div className="flex flex-col items-center">

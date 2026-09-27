@@ -3,6 +3,9 @@ import PageHeader from '../components/shared/PageHeader'
 import FeatureCard from '../components/shared/FeatureCard'
 import PillLink from '../components/shared/PillLink'
 import borgenCheck from '../assets/photos/borgen-check.jpg'
+import borgenProjectStudents from '../assets/photos/borgen-project-students.jpg'
+import remedyProjectLogo from '../assets/photos/remedy-project-logo.jpg'
+import equalityLabsCasteEquity from '../assets/photos/equality-labs-caste-equity.jpg'
 
 export default function AdvocacyPage() {
   return (
@@ -15,6 +18,7 @@ export default function AdvocacyPage() {
           category="Nonprofit -- Regional Director"
           title="The Borgen Project"
           imageLabel="Borgen Project photo"
+          imageSrc={borgenProjectStudents}
           actions={<PillLink href="https://borgenproject.org/">Website</PillLink>}
         >
           <p>
@@ -26,7 +30,19 @@ export default function AdvocacyPage() {
           <ul className="list-disc space-y-1 pl-5">
             <li>Raise awareness about global poverty and mobilize my community to contact Congress in support of life-saving foreign policy legislation</li>
             <li>Fundraise and lobby my members of Congress to support the International Affairs Budget</li>
-            <li>Received the Chief Closer Award</li>
+            <li>
+              Published a policy article for The Borgen Project on how competition policy can lower
+              prices and reduce poverty:{' '}
+              <a
+                href="https://borgenproject.org/competition-policy/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#D7E2EA] underline decoration-[#D7E2EA]/30 underline-offset-4 transition-colors hover:text-[#BBCCD7]"
+              >
+                &ldquo;The Most Powerful Anti-Poverty Tool? Competition Policy&rdquo;
+              </a>
+            </li>
+            <li>Received the Chief Closer Award (raised over $1,000)</li>
           </ul>
         </FeatureCard>
 
@@ -57,6 +73,8 @@ export default function AdvocacyPage() {
           category="Aspiring Student Ambassador"
           title="Equality Labs"
           imageLabel="Equality Labs photo"
+          imageSrc={equalityLabsCasteEquity}
+          actions={<PillLink href="https://www.equalitylabs.org/">Website</PillLink>}
         >
           <ul className="list-disc space-y-1 pl-5">
             <li>An organization working to bring awareness to and end caste-based discrimination in the South Asian diaspora in the United States</li>
@@ -68,15 +86,21 @@ export default function AdvocacyPage() {
 
         <FeatureCard
           number="04"
-          category="In Progress"
-          title="MN Financial Empowerment Initiative"
-          imageLabel="MNFEI photo"
+          category="Student Ambassador"
+          title="The Remedy Project"
+          imageLabel="Remedy Project photo"
+          imageSrc={remedyProjectLogo}
+          actions={<PillLink href="https://www.theremedyproj.org/">Website</PillLink>}
         >
           <p>
-            Currently building a collaboration with MNFEI -- alongside my research mentor -- to
-            help design surveys and collect data for immigrant communities affected by ICE
-            activity in Minnesota.
+            The Remedy Project is a national network of students and justice-system-impacted
+            people advocating for the civil and human rights of incarcerated people in the
+            United States.
           </p>
+          <ul className="list-disc space-y-1 pl-5">
+            <li>Serve as a Student Ambassador, raising awareness around prison justice and incarcerated people's rights</li>
+            <li>Raised $1,000+ to support The Remedy Project's advocacy work</li>
+          </ul>
         </FeatureCard>
       </div>
     </PageLayout>

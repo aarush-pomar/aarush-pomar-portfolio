@@ -9,11 +9,19 @@ import haircutDetailWork from '../../assets/photos/haircut-detail-work.jpg'
 import haircutFinishingTouches from '../../assets/photos/haircut-finishing-touches.jpg'
 import haircutCurlyHighlights from '../../assets/photos/haircut-curly-highlights.jpg'
 import borgenCheck from '../../assets/photos/borgen-check.jpg'
-import borgenProjectGlobe from '../../assets/photos/borgen-project-globe.jpg'
+import borgenProjectGlobe from '../../assets/photos/borgen-project-globe-hq.webp'
+import borgenProjectClinic from '../../assets/photos/borgen-project-clinic.webp'
+import casteVillageGroup from '../../assets/photos/caste-village-group.jpg'
+import castePaintedFigures from '../../assets/photos/caste-painted-figures-hq.webp'
+import casteVarnaDiagram from '../../assets/photos/caste-varna-diagram-hq.webp'
 
 interface ProjectPhoto {
   src: string
   label: string
+  // Width / height of the photo. When every photo in a row has one, the row
+  // gives each photo a width in proportion to it, so all share one height and
+  // each shows whole -- no black bars, no cropping -- while still filling the card.
+  aspect?: number
 }
 
 interface Project {
@@ -41,8 +49,9 @@ const PROJECTS: Project[] = [
     name: 'The Borgen Project',
     to: '/advocacy',
     photos: [
-      { src: borgenCheck, label: '$1,000 check, funded by haircuts' },
-      { src: borgenProjectGlobe, label: 'The Borgen Project' },
+      { src: borgenProjectGlobe, label: 'The Borgen Project', aspect: 1535 / 1023 },
+      { src: borgenCheck, label: '$1,000 check, funded by haircuts', aspect: 2430 / 2723 },
+      { src: borgenProjectClinic, label: 'Health worker vaccinating a child in a community clinic', aspect: 1535 / 1023 },
     ],
   },
   {
@@ -60,21 +69,23 @@ const PROJECTS: Project[] = [
     number: '03',
     category: 'Small Business',
     name: 'Barbering -- @pomar.blendz',
-    to: '/more',
+    to: '/barbering',
     photos: [
-      { src: haircutDetailWork, label: 'Tools of the trade' },
-      { src: haircutCurlyHighlights, label: 'Curly highlights' },
-      { src: haircutFinishingTouches, label: 'Finishing touches' },
+      { src: haircutCurlyHighlights, label: 'Curly highlights', aspect: 828 / 1067 },
+      { src: haircutDetailWork, label: 'Tools of the trade', aspect: 1086 / 724 },
+      { src: haircutFinishingTouches, label: 'Finishing touches', aspect: 1094 / 1136 },
     ],
   },
   {
     number: '04',
     category: 'Research',
     name: 'Caste Awareness Study',
-    to: '/research',
-    col1Label1: 'Photo coming soon',
-    col1Label2: 'Photo coming soon',
-    col2Label: 'Photo coming soon',
+    to: '/research#caste-research',
+    photos: [
+      { src: casteVillageGroup, label: 'Villagers gathered in rural India', aspect: 1815 / 1345 },
+      { src: castePaintedFigures, label: 'Painted figures of different castes and trades', aspect: 1774 / 887 },
+      { src: casteVarnaDiagram, label: 'The traditional caste hierarchy', aspect: 1448 / 1086 },
+    ],
   },
 ]
 
@@ -84,6 +95,22 @@ const PROJECTS: Project[] = [
 const PHOTO_BOX_ASPECT_RATIO = '3 / 2'
 
 function PhotoGrid({ photos }: { photos: ProjectPhoto[] }) {
+  if (photos.every((photo) => photo.aspect)) {
+    return (
+      <div className="flex items-start gap-3 sm:gap-4">
+        {photos.map((photo) => (
+          <div
+            key={photo.src}
+            className="min-w-0 overflow-hidden rounded-[24px] sm:rounded-[32px]"
+            style={{ flex: `${photo.aspect} 1 0`, aspectRatio: photo.aspect }}
+          >
+            <img src={photo.src} alt={photo.label} className="h-full w-full object-cover" loading="lazy" />
+          </div>
+        ))}
+      </div>
+    )
+  }
+
   return (
     <div className="flex gap-3 sm:gap-4">
       {photos.map((photo) => (

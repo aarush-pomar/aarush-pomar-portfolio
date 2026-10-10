@@ -3,6 +3,14 @@ import { useLayoutEffect, useRef, useState } from 'react'
 interface FitTextProps {
   text: string
   className?: string
+  /** Caps how large the computed font-size can get, in px. Without this, a
+   *  short string filling the same container width as a long one (e.g. a
+   *  4-letter page title vs. a 16-letter one, both meant to render at a
+   *  similar "page heading" size) would blow up far past any reasonable
+   *  size -- the fill-to-width math has no sense of what's "too big" on its
+   *  own. Long text that would naturally come out smaller than this is
+   *  unaffected; this only ever makes the result smaller, never bigger. */
+  maxFontSize?: number
 }
 
 const REF_SIZE = 100
@@ -14,7 +22,7 @@ const REF_SIZE = 100
  * quirks with custom web-font weights), so it never overflows regardless
  * of which font/OS actually ends up rendering.
  */
-export default function FitText({ text, className }: FitTextProps) {
+export default function FitText({ text, className, maxFontSize }: FitTextProps) {
   const spanRef = useRef<HTMLSpanElement>(null)
   const [fontSize, setFontSize] = useState<number | null>(null)
 
@@ -56,7 +64,7 @@ export default function FitText({ text, className }: FitTextProps) {
       if (measuredAtRef <= 0) return
       const widthPerPx = measuredAtRef / REF_SIZE
       const computed = (targetWidth - fixedExtra) / widthPerPx
-      setFontSize(computed)
+      setFontSize(maxFontSize ? Math.min(computed, maxFontSize) : computed)
     }
 
     fit()
@@ -74,7 +82,7 @@ export default function FitText({ text, className }: FitTextProps) {
       window.removeEventListener('orientationchange', fit)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [text])
+  }, [text, maxFontSize])
 
   return (
     <span

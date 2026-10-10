@@ -4,7 +4,7 @@ import PlaceholderImage from './PlaceholderImage'
 import Lightbox, { EnlargeHint } from './Lightbox'
 
 interface FeatureCardProps {
-  number: string
+  number?: string
   category: string
   title: string
   children: ReactNode
@@ -31,6 +31,34 @@ interface FeatureCardProps {
    * Photos keep their own proportions (no cropping); on phones it does nothing.
    */
   fitPhotosToText?: boolean
+  /**
+   * Overrides the default cap on how wide fitPhotosToText will grow the
+   * photo column (normally capped at 240px / 30% of the card, tuned for a
+   * narrow side-thumbnail look). Set this when a card actually wants the
+   * photo to grow large enough to fill the full height next to a long text
+   * block, rather than staying a small thumbnail.
+   */
+  maxPhotoColumnWidth?: number
+  /**
+   * Side layout only: measures the text column's real rendered pixel height
+   * and sets the photo to that exact height via an inline style (not a CSS
+   * percentage/stretch), with a fixed column width and object-cover. An
+   * explicit pixel value can't be ambiguous the way `height: 100%` through a
+   * CSS Grid stretch context can be across browsers -- it's the same number
+   * everywhere. Below the md breakpoint it falls back to a fixed aspect
+   * ratio instead. Trade-off on desktop: the photo gets cropped to fit
+   * rather than staying at its native aspect ratio.
+   */
+  stretchPhoto?: boolean
+  /**
+   * stretchPhoto only: stops re-measuring and keeps the photo at whatever
+   * height it last had. Use this when `children` contains something that
+   * can grow after the initial render (like an expandable donor list) and
+   * the photo should NOT follow that growth -- flip this to true exactly
+   * when that growth starts (e.g. pass your "expanded" state directly) so
+   * the last measurement, taken before the growth, sticks.
+   */
+  stretchFrozen?: boolean
   actions?: ReactNode
   className?: string
   /** Anchor id so a link elsewhere (e.g. "/research#caste-research") can jump straight to this card. */
@@ -45,6 +73,7 @@ function CardPhoto({
   fullSrc,
   alwaysSquare,
   aspectRatio,
+  stretchHeight,
 }: {
   src?: string
   label: string
@@ -59,8 +88,13 @@ function CardPhoto({
   // Width / height of the photo itself: shows it uncropped (e.g. group photos,
   // where a square crop would cut people off at the edges).
   aspectRatio?: number
+  // Explicit measured pixel height (desktop only) -- see FeatureCard's
+  // `stretchPhoto` prop. null/undefined means "no measurement yet, or below
+  // md" -- falls back to aspect-square so it still has SOME size.
+  stretchHeight?: number | null
 }) {
   const [lightboxOpen, setLightboxOpen] = useState(false)
+  const hasStretchHeight = stretchHeight != null
 
   return (
     <div className="flex flex-col gap-2">
@@ -70,11 +104,14 @@ function CardPhoto({
           onClick={() => setLightboxOpen(true)}
           aria-label={`Enlarge photo: ${label}`}
           className="group relative block w-full cursor-zoom-in overflow-hidden rounded-2xl"
+          style={hasStretchHeight ? { height: stretchHeight } : undefined}
         >
           <img
             src={src}
             alt={label}
-            className={`aspect-square w-full object-cover transition-transform duration-500 group-hover:scale-105 ${alwaysSquare ? '' : 'sm:aspect-[4/3] md:aspect-square'}`}
+            className={`w-full object-cover transition-transform duration-500 group-hover:scale-105 ${
+              hasStretchHeight ? 'h-full' : `aspect-square ${alwaysSquare ? '' : 'sm:aspect-[4/3] md:aspect-square'}`
+            }`}
             style={objectPosition || aspectRatio ? { objectPosition, aspectRatio } : undefined}
             loading="lazy"
           />
@@ -102,6 +139,9 @@ export default function FeatureCard({
   photoLayout = 'side',
   photoColumnWidth = 260,
   fitPhotosToText = false,
+  maxPhotoColumnWidth,
+  stretchPhoto = false,
+  stretchFrozen = false,
   actions,
   className,
   id,
@@ -113,7 +153,33 @@ export default function FeatureCard({
   // Refs (not effect-local vars) so they survive the effect re-running after each width change.
   const appliedWidthRef = useRef<number | null>(null)
   const fitPassesRef = useRef(0)
-  const fitEnabled = fitPhotosToText && !photoRow && !!imageLabel
+  const fitEnabled = fitPhotosToText && !photoRow && !!imageLabel && !stretchPhoto
+  const stretchEnabled = stretchPhoto && !photoRow && !!imageLabel
+  const [stretchHeight, setStretchHeight] = useState<number | null>(null)
+
+  useLayoutEffect(() => {
+    // While frozen, skip re-measuring entirely -- stretchHeight just keeps
+    // whatever value it last had, so the photo doesn't follow `children`
+    // growing (e.g. an expanded donor list) after that point.
+    if (!stretchEnabled || stretchFrozen) return
+    const text = textRef.current
+    if (!text) return
+
+    const desktop = window.matchMedia('(min-width: 768px)')
+
+    const measure = () => {
+      setStretchHeight(desktop.matches ? text.offsetHeight : null)
+    }
+
+    measure()
+    const observer = new ResizeObserver(measure)
+    observer.observe(text)
+    desktop.addEventListener('change', measure)
+    return () => {
+      observer.disconnect()
+      desktop.removeEventListener('change', measure)
+    }
+  }, [stretchEnabled, stretchFrozen])
 
   // Photo heights are width / aspect (default square, aspect 1), so total
   // photo height = width * inverseAspectSum + the fixed bits (gaps + captions).
@@ -140,10 +206,12 @@ export default function FeatureCard({
         const button = el.querySelector('button')
         return sum + (button ? el.offsetHeight - button.offsetHeight : 0)
       }, 24 * (photos.length - 1))
-      // Capped at ~30% of the card: a wider photo column narrows the text,
-      // which makes it taller, which asks for an even wider column -- without
-      // a cap that feedback runs away on narrow windows.
-      const maxWidth = Math.min(240, Math.round((column.parentElement?.offsetWidth ?? 0) * 0.3))
+      // Capped at ~30% of the card by default: a wider photo column narrows
+      // the text, which makes it taller, which asks for an even wider column
+      // -- without a cap that feedback runs away on narrow windows. A caller
+      // that explicitly wants a bigger photo (maxPhotoColumnWidth) opts out
+      // of that default cap and trusts its own number instead.
+      const maxWidth = maxPhotoColumnWidth ?? Math.min(240, Math.round((column.parentElement?.offsetWidth ?? 0) * 0.3))
       const next = Math.min(maxWidth, Math.max(140, Math.round((text.offsetHeight - fixed) / inverseAspectSum)))
       // Changing the column width re-wraps the text a little, so this runs a
       // few passes to settle. Once it settles the pass count resets; if it
@@ -167,7 +235,7 @@ export default function FeatureCard({
       observer.disconnect()
       desktop.removeEventListener('change', fit)
     }
-  }, [fitEnabled, inverseAspectSum, fittedWidth])
+  }, [fitEnabled, inverseAspectSum, fittedWidth, maxPhotoColumnWidth])
 
   return (
     <div
@@ -175,9 +243,11 @@ export default function FeatureCard({
       className={`scroll-mt-24 rounded-[32px] border-2 border-[#D7E2EA] bg-[#0C0C0C] p-5 sm:rounded-[40px] sm:p-7 md:rounded-[48px] md:p-8 ${className ?? ''}`}
     >
       <div className="flex flex-wrap items-center gap-4 pb-6 sm:gap-6">
-        <span className="font-black text-[#D7E2EA]" style={{ fontSize: 'clamp(2.25rem, 7vw, 5.5rem)' }}>
-          {number}
-        </span>
+        {number && (
+          <span className="font-black text-[#D7E2EA]" style={{ fontSize: 'clamp(2.25rem, 7vw, 5.5rem)' }}>
+            {number}
+          </span>
+        )}
         <div className="flex flex-1 flex-col gap-1">
           <span className="text-xs font-medium uppercase tracking-widest text-[#D7E2EA] opacity-60 sm:text-sm">
             {category}
@@ -191,7 +261,11 @@ export default function FeatureCard({
 
       <div
         className={imageLabel && !photoRow ? 'grid gap-6 md:grid-cols-[1fr_var(--photo-w)] md:gap-10' : ''}
-        style={{ '--photo-w': `${fittedWidth ?? photoColumnWidth}px` } as React.CSSProperties}
+        style={
+          {
+            '--photo-w': `${stretchPhoto ? (maxPhotoColumnWidth ?? photoColumnWidth) : (fittedWidth ?? photoColumnWidth)}px`,
+          } as React.CSSProperties
+        }
       >
         <div className="text-sm leading-relaxed text-[#D7E2EA]/85 sm:text-base">
           <div ref={textRef} className="space-y-3">
@@ -206,6 +280,7 @@ export default function FeatureCard({
               caption={imageCaption}
               aspectRatio={imageAspectRatio}
               alwaysSquare={photoRow}
+              stretchHeight={stretchEnabled ? stretchHeight : undefined}
             />
             {extraImages?.map((extra) => (
               <CardPhoto

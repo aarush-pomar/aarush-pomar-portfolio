@@ -1,11 +1,10 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import ScrollToTop from './components/shared/ScrollToTop'
 import HomePage from './pages/HomePage'
 import AdvocacyPage from './pages/AdvocacyPage'
 import ResearchPage from './pages/ResearchPage'
-import WritingPage from './pages/WritingPage'
 import ResumePage from './pages/ResumePage'
-import BarberingPage from './pages/BarberingPage'
+import EntrepreneurshipPage from './pages/EntrepreneurshipPage'
 import MorePage from './pages/MorePage'
 
 function App() {
@@ -16,10 +15,12 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/advocacy" element={<AdvocacyPage />} />
         <Route path="/research" element={<ResearchPage />} />
-        <Route path="/writing" element={<WritingPage />} />
         <Route path="/resume" element={<ResumePage />} />
-        <Route path="/barbering" element={<BarberingPage />} />
+        <Route path="/entrepreneurship" element={<EntrepreneurshipPage />} />
         <Route path="/more" element={<MorePage />} />
+        {/* Former pages, kept as redirects so old links still resolve */}
+        <Route path="/writing" element={<Navigate to="/advocacy#competition-policy" replace />} />
+        <Route path="/barbering" element={<Navigate to="/entrepreneurship" replace />} />
       </Routes>
     </div>
   )

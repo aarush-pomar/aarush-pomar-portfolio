@@ -2,16 +2,16 @@ import { useEffect, useRef, useState } from 'react'
 import awardUmtympMom from '../../assets/photos/award-umtymp-mom.jpg'
 import familyGraduation from '../../assets/photos/family-graduation.jpg'
 import sisterGraduation from '../../assets/photos/sister-graduation.jpg'
-import haircutClassicFade from '../../assets/photos/haircut-classic-fade.jpg'
-import haircutFinishingTouches from '../../assets/photos/haircut-finishing-touches.jpg'
+import econClubFirstMeeting from '../../assets/photos/econ-club-first-meeting.jpg'
+import minnetonkaForumGroup from '../../assets/photos/minnetonka-forum-group.jpg'
 import friendsSuitsLake from '../../assets/photos/friends-suits-lake.jpg'
 import friendsSuitsField from '../../assets/photos/friends-suits-field.jpg'
-import haircutGroupGarage from '../../assets/photos/haircut-group-garage.jpg'
+import tennisBTeamSingles from '../../assets/photos/tennis-b-team-singles-champion.jpg'
 import borgenCheck from '../../assets/photos/borgen-check.jpg'
 import friendsNightLights from '../../assets/photos/friends-night-lights.jpg'
 import haircutStudioChair from '../../assets/photos/haircut-studio-chair.jpg'
-import haircutSharpLineup from '../../assets/photos/haircut-sharp-lineup.jpg'
-import haircutCurlyHighlights from '../../assets/photos/haircut-curly-highlights.jpg'
+import conferenceGroupSuits from '../../assets/photos/conference-group-suits.jpg'
+import hosaSlcGroup from '../../assets/photos/hosa-slc-group.webp'
 import minnsectShowStage from '../../assets/photos/minnsect-show-stage.jpg'
 import haircutBackTaper from '../../assets/photos/haircut-back-taper.jpg'
 import formalCoupleBackyard from '../../assets/photos/formal-couple-backyard.jpg'
@@ -36,28 +36,28 @@ interface MarqueePhoto {
 // (haircuts, prom, friends/concerts, family, academics) never appears twice
 // in a row within either row.
 const ROW1: MarqueePhoto[] = [
-  { src: haircutFinishingTouches, label: 'Finishing touches, haircut' },
+  { src: econClubFirstMeeting, label: 'First Econ Club meeting ever' },
   { src: familyGraduation, label: "Family at my sister's graduation" },
-  { src: haircutClassicFade, label: 'Modern mullet haircut' },
+  { src: minnetonkaForumGroup, label: 'Minnetonka Forum team' },
   { src: friendsSuitsLake, label: 'Prom night at Excelsior Commons' },
   { src: friendsNightLights, label: 'VANTAGE Health Sciences crew' },
   { src: santaMonicaSunset, label: 'Sunset at Santa Monica Pier', objectPosition: '20% center' },
   { src: borgenCheck, label: '$1,000 check for The Borgen Project' },
   { src: awardUmtympMom, label: 'UMTYMP graduation, with my mom' },
   { src: sisterGraduation, label: 'With my sister, U of M graduation' },
-  { src: haircutGroupGarage, label: 'Mobile barbering' },
+  { src: tennisBTeamSingles, label: 'Minnetonka B Team singles champion' },
   { src: friendsSuitsField, label: 'Prom dance at Veterans Field' },
 ]
 
 const ROW2: MarqueePhoto[] = [
   { src: friendsCarouselFair, label: 'Friends at the fair' },
-  { src: haircutSharpLineup, label: 'Sharp lineup haircut' },
+  { src: conferenceGroupSuits, label: 'DECA State' },
   { src: dadGhirardelli, label: 'With my dad, San Francisco' },
   { src: haircutStudioChair, label: 'Between classes, haircut' },
   { src: formalCoupleBackyard, label: 'Formal night' },
   { src: friendsHifiLake, label: 'HiFi on the Lake' },
   { src: minnsectShowStage, label: 'The Great Minnsect Show' },
-  { src: haircutCurlyHighlights, label: 'Curly highlights haircut' },
+  { src: hosaSlcGroup, label: 'HOSA State Leadership Conference' },
   { src: friendsConcertSunglasses, label: 'Summer concert' },
   { src: haircutBackTaper, label: 'Fresh taper' },
 ]

@@ -1,0 +1,214 @@
+import { useLayoutEffect, useRef, useState } from 'react'
+import FadeIn from '../shared/FadeIn'
+import seniorHeadshot from '../../assets/photos/senior-headshot-vertical.jpg'
+import signatureWhite from '../../assets/signature-white.jpg'
+
+// The photo's real aspect ratio (width / height) -- used to size the photo
+// column by WIDTH so its natural height lands on the text column's height,
+// without ever cropping or stretching the photo itself.
+const PHOTO_ASPECT = 2 / 3
+const MIN_TEXT_WIDTH = 280
+const MAX_TEXT_WIDTH = 680
+const MIN_PHOTO_WIDTH = 260
+const MAX_PHOTO_WIDTH = 680
+const COLUMN_GAP = 64 // matches md:gap-16
+
+const DEFAULT_SIZES = { photoWidth: 420, textWidth: 480 }
+
+export default function HomeIntroSection() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const textRef = useRef<HTMLDivElement>(null)
+  const [sizes, setSizes] = useState(DEFAULT_SIZES)
+
+  // Solves for the photo width whose natural (uncropped) height exactly
+  // matches the text column's height -- at every desktop width, not just
+  // wide ones. A real-DOM, multi-pass "measure the visible text, resize the
+  // photo, see what changed" approach can't guarantee an exact match: it
+  // either has to protect a fixed text width (so the photo falls short
+  // whenever there isn't enough room left over) or let both sides react to
+  // each other (which can compound instead of settling). Instead, this
+  // measures an OFFSCREEN clone of the text at many candidate widths --
+  // same technique as FitText's hidden-clone measurement elsewhere in this
+  // codebase -- and binary-searches for the text width where "space left
+  // over for the photo" and "photo width the resulting text height calls
+  // for" are equal. The real, visible elements are then set directly to
+  // that answer in one shot: no visible multi-pass reflow, no flicker, and
+  // the two columns' bottoms land together by construction.
+  useLayoutEffect(() => {
+    const container = containerRef.current
+    const text = textRef.current
+    if (!container || !text) return
+
+    const desktop = window.matchMedia('(min-width: 768px)')
+
+    const measureHeightAtWidth = (width: number) => {
+      const clone = text.cloneNode(true) as HTMLElement
+      clone.style.position = 'fixed'
+      clone.style.top = '-9999px'
+      clone.style.left = '0'
+      clone.style.visibility = 'hidden'
+      clone.style.transform = 'none'
+      clone.style.opacity = '1'
+      clone.style.width = `${width}px`
+      clone.style.height = 'auto'
+      document.body.appendChild(clone)
+      const height = clone.getBoundingClientRect().height
+      document.body.removeChild(clone)
+      return height
+    }
+
+    const solve = () => {
+      if (!desktop.matches) {
+        setSizes(DEFAULT_SIZES)
+        return
+      }
+
+      const containerWidth = container.clientWidth
+      // The text column is never asked to go narrower than MIN_TEXT_WIDTH --
+      // `hi` is the only bound that responds to the container, and is
+      // clamped to stay >= lo so the range is never inverted.
+      let lo = MIN_TEXT_WIDTH
+      let hi = Math.max(lo, Math.min(MAX_TEXT_WIDTH, containerWidth - MIN_PHOTO_WIDTH - COLUMN_GAP))
+
+      // g(textWidth) = (space left for the photo) - (photo width its ideal
+      // height calls for). Positive means there's more room than the photo
+      // needs at this text width (text too narrow / photo would be
+      // undersized for its space); negative means the opposite.
+      const gOf = (textWidth: number) => {
+        const height = measureHeightAtWidth(textWidth)
+        const idealPhoto = Math.min(MAX_PHOTO_WIDTH, Math.max(MIN_PHOTO_WIDTH, height * PHOTO_ASPECT))
+        const availablePhoto = containerWidth - COLUMN_GAP - textWidth
+        return availablePhoto - idealPhoto
+      }
+
+      let gLo = gOf(lo)
+      let gHi = gOf(hi)
+      let bestTextWidth = Math.abs(gLo) <= Math.abs(gHi) ? lo : hi
+
+      if ((gLo > 0) !== (gHi > 0)) {
+        // Signs differ -> an exact crossing exists in range; bisect for it.
+        for (let i = 0; i < 16 && hi - lo > 0.5; i++) {
+          const mid = (lo + hi) / 2
+          const gMid = gOf(mid)
+          bestTextWidth = mid
+          if (Math.abs(gMid) < 0.5) break
+          if ((gMid > 0) === (gLo > 0)) {
+            lo = mid
+            gLo = gMid
+          } else {
+            hi = mid
+            gHi = gMid
+          }
+        }
+      }
+      // Otherwise no exact crossing fits inside the bounds (e.g. a very
+      // narrow or very wide container, or simply more text than this
+      // container can show beside a height-matched photo at all) --
+      // bestTextWidth already holds whichever endpoint gets closest.
+
+      const finalHeight = measureHeightAtWidth(bestTextWidth)
+      // Hard ceiling: never exceed the space actually left over, even when
+      // the height-matching ideal would ask for more than that (no exact
+      // solution existed in range). Overflowing the row is worse than an
+      // imperfect height match.
+      const availableForPhoto = Math.max(MIN_PHOTO_WIDTH, containerWidth - COLUMN_GAP - bestTextWidth)
+      const finalPhotoWidth = Math.min(
+        MAX_PHOTO_WIDTH,
+        availableForPhoto,
+        Math.max(MIN_PHOTO_WIDTH, Math.round(finalHeight * PHOTO_ASPECT)),
+      )
+      setSizes({ photoWidth: Math.round(finalPhotoWidth), textWidth: Math.round(bestTextWidth) })
+    }
+
+    solve()
+    const resizeObserver = new ResizeObserver(solve)
+    resizeObserver.observe(container)
+    desktop.addEventListener('change', solve)
+    document.fonts?.ready.then(solve)
+
+    return () => {
+      resizeObserver.disconnect()
+      desktop.removeEventListener('change', solve)
+    }
+  }, [])
+
+  return (
+    <section className="px-5 py-8 sm:px-8 md:px-10 md:py-9">
+      <div
+        ref={containerRef}
+        className="mx-auto grid max-w-7xl gap-10 md:grid-cols-[var(--photo-w)_var(--text-w)] md:items-start md:justify-center md:gap-16"
+        style={{ '--photo-w': `${sizes.photoWidth}px`, '--text-w': `${sizes.textWidth}px` } as React.CSSProperties}
+      >
+        <FadeIn x={-30} y={0} className="mx-auto w-full max-w-md md:mx-0 md:w-full md:max-w-none">
+          <img
+            src={seniorHeadshot}
+            alt="Aarush Pomar"
+            className="aspect-[2/3] w-full rounded-2xl object-cover object-top"
+          />
+        </FadeIn>
+
+        <FadeIn
+          ref={textRef}
+          delay={0.1}
+          className="flex flex-col gap-3 text-sm leading-normal text-[#D7E2EA]/85 md:w-[var(--text-w)] md:text-base"
+        >
+          <p>Hi, I&rsquo;m Aarush.</p>
+
+          <p>
+            I&rsquo;m a senior at Minnetonka High School with an interest in economics and
+            mathematics. I want to understand why financial security is so uneven, and how the
+            decisions made by governments and businesses affect people&rsquo;s everyday lives.
+          </p>
+
+          <p>
+            As a Regional Director at{' '}
+            <a
+              href="https://borgenproject.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#D7E2EA] underline decoration-[#D7E2EA]/30 underline-offset-4 transition-colors hover:text-[#BBCCD7]"
+            >
+              The Borgen Project
+            </a>
+            , I help build support for legislation addressing global poverty. I&rsquo;ve also used
+            proceeds from my own business to support that work. Running a business has given me a
+            lot of opportunities to listen -- to clients, friends, and people whose experiences
+            are different from mine.
+          </p>
+
+          <p>
+            Some of those conversations have led to questions I&rsquo;m now exploring through
+            research: How do immigration-enforcement concerns affect local businesses in
+            Minnesota? How do different generations of South Asian Americans understand and talk
+            about caste?
+          </p>
+
+          <p>
+            At school, I founded Econ Club to give students a place to explore economics together.
+            Outside of school, I enjoy playing pickleball, going to the gym, and building PCs.
+          </p>
+
+          <p>Thanks for stopping by. If something here interests you, I&rsquo;d love to hear from you.</p>
+
+          {/* The source image is white strokes on a solid black square. A
+              plain mix-blend-mode on the <img> doesn't reliably knock out
+              that black here -- framer-motion's inline `transform` on the
+              FadeIn wrapper creates its own stacking context, so the blend
+              has no real page background behind it to blend against and
+              falls back to showing the raw black box. Filling this wrapper
+              with the exact same page background color gives the blend a
+              same-colored backdrop to cancel against regardless of that
+              isolation, so it reads as seamless either way. */}
+          <div className="-ml-2 w-48 bg-[#0C0C0C] sm:w-56">
+            <img
+              src={signatureWhite}
+              alt="Aarush Pomar&rsquo;s signature"
+              className="block w-full"
+              style={{ mixBlendMode: 'screen' }}
+            />
+          </div>
+        </FadeIn>
+      </div>
+    </section>
+  )
+}

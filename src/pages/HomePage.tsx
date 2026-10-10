@@ -1,17 +1,18 @@
+import { useRef } from 'react'
+import SiteNav from '../components/shared/SiteNav'
 import HeroSection from '../components/sections/HeroSection'
 import MarqueeSection from '../components/sections/MarqueeSection'
-import AboutSection from '../components/sections/AboutSection'
-import ServicesSection from '../components/sections/ServicesSection'
-import ProjectsSection from '../components/sections/ProjectsSection'
+import HomeIntroSection from '../components/sections/HomeIntroSection'
 
 export default function HomePage() {
+  const navRef = useRef<HTMLElement>(null)
+
   return (
     <>
-      <HeroSection />
+      <SiteNav ref={navRef} />
+      <HeroSection navRef={navRef} />
       <MarqueeSection />
-      <AboutSection />
-      <ServicesSection />
-      <ProjectsSection />
+      <HomeIntroSection />
     </>
   )
 }

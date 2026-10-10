@@ -27,7 +27,7 @@ export default function HeroSection({ navRef }: HeroSectionProps) {
         </FadeIn>
       </div>
 
-      <div className="absolute left-1/2 top-1/2 z-10 w-[320px] -translate-x-1/2 -translate-y-1/2 sm:top-auto sm:bottom-0 sm:w-[420px] sm:translate-y-0 md:w-[500px] lg:w-[600px]">
+      <div className="absolute left-1/2 top-1/2 z-10 w-[220px] -translate-x-1/2 -translate-y-1/2 sm:top-auto sm:bottom-0 sm:w-[280px] sm:translate-y-0 md:w-[340px] lg:w-[400px]">
         <FadeIn delay={0.6} y={30}>
           <Magnet
             strength={2.2}

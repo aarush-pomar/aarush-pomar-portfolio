@@ -95,10 +95,10 @@ const ENTRIES: ResearchEntry[] = [
 
 export default function ResearchPage() {
   return (
-    <div className="min-h-screen bg-white font-bitter text-[#1a1a1a]">
+    <div className="min-h-screen bg-white text-[#1a1a1a]">
       <SiteNav />
 
-      <main className="mx-auto max-w-4xl px-6 py-12 sm:py-16">
+      <main className="mx-auto max-w-4xl px-6 py-12 font-bitter sm:py-16">
         <header className="pb-12 text-center">
           <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Research</h1>
           <p className="mt-3 text-base italic text-[#1a1a1a]/60 sm:text-lg">

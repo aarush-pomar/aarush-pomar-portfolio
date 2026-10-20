@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import SiteNav from '../components/shared/SiteNav'
 import type { ReactNode } from 'react'
 
@@ -5,7 +6,24 @@ interface Entry {
   title: ReactNode
   org?: string
   dates?: string
-  bullets?: string[]
+  intro?: ReactNode
+  bullets?: ReactNode[]
+}
+
+// Inline hyperlink used throughout entry titles/bullets -- underlined,
+// uncolored so it still reads as plain resume text (and prints cleanly)
+// rather than looking like a themed site link.
+function RLink({ href, children }: { href: string; children: ReactNode }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      className="underline decoration-[#0C0C0C]/40 underline-offset-2 transition-colors hover:decoration-[#0C0C0C]"
+    >
+      {children}
+    </a>
+  )
 }
 
 function Section({ title, children }: { title: string; children: ReactNode }) {
@@ -31,10 +49,11 @@ function EntryList({ entries }: { entries: Entry[] }) {
             </p>
             {entry.dates && <p className="whitespace-nowrap text-sm text-[#0C0C0C]/60">{entry.dates}</p>}
           </div>
+          {entry.intro && <p className="mt-1 text-sm text-[#0C0C0C]/85">{entry.intro}</p>}
           {entry.bullets && (
             <ul className="mt-1 list-disc space-y-0.5 pl-5 text-sm text-[#0C0C0C]/85">
-              {entry.bullets.map((b) => (
-                <li key={b}>{b}</li>
+              {entry.bullets.map((b, j) => (
+                <li key={j}>{b}</li>
               ))}
             </ul>
           )}
@@ -44,123 +63,411 @@ function EntryList({ entries }: { entries: Entry[] }) {
   )
 }
 
-export default function ResumePage() {
-  return (
-    <div className="min-h-screen bg-white text-[#0C0C0C]">
-      <div className="print:hidden">
-        <SiteNav />
-      </div>
-
-      <main className="mx-auto max-w-3xl px-6 py-12 print:max-w-none print:px-0 print:py-0">
-        <header className="flex flex-wrap items-start justify-between gap-4 border-b-2 border-[#0C0C0C] pb-4">
-          <div>
-            <h1 className="text-3xl font-bold uppercase tracking-tight">Aarush Pomar</h1>
-            <p className="mt-1 text-sm text-[#0C0C0C]/70">Minnetonka High School -- Class of 2027</p>
-          </div>
-          <button
-            type="button"
-            onClick={() => window.print()}
-            className="print:hidden rounded-full border-2 border-[#0C0C0C] px-5 py-2 text-xs font-medium uppercase tracking-widest text-[#0C0C0C] transition-colors hover:bg-[#0C0C0C]/5"
-          >
-            Print / Save as PDF
-          </button>
-        </header>
-
+// Split across pages the way a printed multi-page resume naturally would --
+// each page prints on its own sheet (see the `print:[break-after:page]`
+// below) and the on-screen view shows one page at a time via the tabs.
+const PAGES: { label: string; content: ReactNode }[] = [
+  {
+    label: 'Page 1',
+    content: (
+      <>
         <Section title="Education">
-          <div className="space-y-1.5 text-sm leading-relaxed">
-            <p>Minnetonka High School -- September 2023 to Present (expected graduation June 2027)</p>
-            <p>University of Minnesota Talented Youth Mathematics Program (UMTYMP) -- September 2021 to May 2026</p>
-            <p>Cornell University -- AEM 1300: Introduction to Macroeconomic Theory and Policy -- Summer 2026 -- Grade: A+</p>
+          <div className="space-y-4 text-sm leading-relaxed">
+            <div>
+              <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-0.5">
+                <p className="font-semibold text-[#0C0C0C]">
+                  <RLink href="https://www.minnetonkaschools.org/schools/high-school/mhs">Minnetonka High School (MHS)</RLink>
+                  <span className="font-normal text-[#0C0C0C]/70">, Minnetonka, MN</span>
+                </p>
+                <p className="whitespace-nowrap text-sm text-[#0C0C0C]/60">Expected 06/2027</p>
+              </div>
+              <p className="mt-1">Weighted GPA: 4.414; ACT: 35</p>
+              <p>(5) AP exams with 5/5: Human Geography (9th gr.), APUSH (10th gr.), Statistics (self-study), Psychology, Biology</p>
+            </div>
+
+            <div>
+              <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-0.5">
+                <p className="font-semibold text-[#0C0C0C]">University of Minnesota</p>
+                <p className="whitespace-nowrap text-sm text-[#0C0C0C]/60">09/2021 -- 06/2026</p>
+              </div>
+              <p className="mt-1">
+                <RLink href="https://cse.umn.edu/mathcep/university-minnesota-talented-youth-mathematics-program-umtymp">
+                  Talented Youth Mathematics Program (UMTYMP)
+                </RLink>
+              </p>
+              <ul className="mt-0.5 list-disc space-y-0.5 pl-5">
+                <li>
+                  Completed UMTYMP <RLink href="https://cse.umn.edu/mathcep/course-listing">Calculus I&ndash;III</RLink>; earned 12 university
+                  credits
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-0.5">
+                <p className="font-semibold text-[#0C0C0C]">Cornell University</p>
+                <p className="whitespace-nowrap text-sm text-[#0C0C0C]/60">07/2026</p>
+              </div>
+              <p className="mt-1">Precollege Summer Program</p>
+              <ul className="mt-0.5 list-disc space-y-0.5 pl-5">
+                <li>
+                  <RLink href="https://classes.cornell.edu/browse/roster/SU26/class/AEM/1300">
+                    AEM 1300: Introduction to Macroeconomic Theory and Policy
+                  </RLink>{' '}
+                  -- A+; 3 university credits
+                </li>
+                <li>
+                  Professor: <RLink href="https://economics.cornell.edu/arnab-k-basu">Arnab K. Basu</RLink>
+                </li>
+              </ul>
+            </div>
           </div>
-        </Section>
-
-        <Section title="Academics">
-          <div className="space-y-1.5 text-sm leading-relaxed">
-            <p>GPA: 4.433 Weighted / 3.800 Unweighted</p>
-            <p>SAT: 1540 (750 Reading &amp; Writing, 790 Math)</p>
-            <p>ACT: 35 Composite (36 Math, 35 English, 34 Reading, 32 Science)</p>
-            <p>19 AP/college-level courses (14 AP, 1 self-study AP, 3 years UMTYMP, 1 Cornell University course)</p>
-          </div>
-        </Section>
-
-        <Section title="Honors / Awards">
-          <EntryList
-            entries={[
-              { title: 'The Borgen Project -- Chief Closer Award', dates: 'Junior (2025-2026)', bullets: ['Raised $1,000+ through proceeds from my barbering venture'] },
-              { title: 'AP Scholar with Distinction', dates: 'Sophomore (2024-2025)', bullets: ['Earned for high performance across multiple AP exams'] },
-              { title: 'Gold -- Presidential Volunteer Service Award', dates: 'Jun 2023 -- Sep 2023', bullets: ['Recognized for over 100 hours of impactful community service'] },
-              { title: 'HOSA -- Minnesota State Leadership Conference', dates: 'Junior (2025-2026)', bullets: ['2nd Place -- State Competition, ATC Environmental Health Test'] },
-              { title: 'BPA -- Vice President', dates: 'Junior (2025-2026)', bullets: ['1st Place -- Regional Competition, Basic Office Systems and Procedures'] },
-              { title: 'BPA', dates: 'Junior (2025-2026)', bullets: ['3rd Place -- Regional Competition, Financial Math and Analysis'] },
-              { title: 'DECA State Finalist', dates: 'Sophomore (2024-2025)', bullets: ['Placed 5th across all of Minnesota DECA Business Competition'] },
-              { title: 'DECA', dates: 'Junior (2025-2026)', bullets: ['2nd Place -- Regional Competition, International Business Plan'] },
-              { title: 'A-Roll Honors Student', dates: 'Freshman (2023) -- Present', bullets: ['Consistently maintained a GPA above 3.6 every semester'] },
-              { title: 'National Honor Society (NHS)', dates: 'Junior (2025-2026)', bullets: ['Selected based on academic excellence, leadership, service, and character'] },
-              { title: 'Academic Letter', dates: 'Freshman (2023) -- Present', bullets: ['Awarded for sustained academic excellence'] },
-            ]}
-          />
-        </Section>
-
-        <Section title="Leadership & Activities">
-          <EntryList
-            entries={[
-              { title: 'National Honor Society (NHS)', org: 'President', dates: 'Junior (2025) -- Present', bullets: ['Directs chapter initiatives focused on service, leadership, and academic excellence', 'Proposed and is coordinating an NHS blood drive'] },
-              { title: 'Econ Club', org: 'Founder & President', dates: 'Junior (2025) -- Present', bullets: ['Grew the club to approximately 40 members', 'Leads preparation for the National Economics Challenge by organizing study sessions'] },
-              { title: 'Business Professionals of America (BPA)', org: 'Vice President', dates: 'Junior (2025) -- Present', bullets: ['Helps coordinate meetings, member engagement, and chapter activities'] },
-              { title: 'Minnetonka Forum', org: 'Co-President', dates: 'Sophomore (2024) -- Present', bullets: ['Co-led the planning and execution of a school-wide event attended by 60-70 students', 'Coordinated with a team to invite and host 3-4 CEOs for a panel on resilience'] },
-              { title: 'Virtual Enterprise -- Minne-sorta-Nice', org: 'Chief Financial Officer (CFO)', dates: 'Senior (2026) -- Present' },
-              { title: 'Desi Student Union', org: 'Member', dates: 'Freshman (2023) -- Present', bullets: ['Officer since Senior year (2026) -- Present', 'Helps organize cultural events and activities that promote South Asian heritage and community engagement'] },
-              { title: 'High School Tennis Team', org: 'JV Athlete, Minnetonka B Team', dates: 'Mar 2024 -- May 2024', bullets: ['Won the Minnetonka B Team singles championship'] },
-              { title: 'HOSA', org: 'Member', dates: 'Sophomore (2024) -- Present', bullets: ['Placed 2nd at the Minnesota State Leadership Conference, ATC Environmental Health Test'] },
-              { title: 'DECA', org: 'Member', dates: 'Freshman (2023) -- Present', bullets: ['Placed 5th at the Minnesota DECA State Competition (Sophomore year)', 'Placed 2nd at Regionals in International Business Plan (Junior year)'] },
-              { title: 'Content Creator', org: 'TikTok / Video Editing', dates: 'Sophomore (2024) -- Present', bullets: ['Produces short-form video content using CapCut, with an audience of 1.1K followers'] },
-            ]}
-          />
         </Section>
 
         <Section title="Research Experience">
           <EntryList
             entries={[
               {
-                title: 'Economic Fallout and Financial Adaptation in the Wake of ICE Activity in Minnesota',
-                dates: 'Ongoing',
+                title: (
+                  <>
+                    Pomar, A. &ldquo;Economic Fallout and Financial Adaptation in the Wake of ICE Activity in Minnesota&rdquo; (In
+                    Process)
+                  </>
+                ),
                 bullets: [
-                  'Mentor: Professor Miguel Quiñones, University of Minnesota Twin Cities',
-                  'Status: research design and evidence review -- no original findings yet',
+                  <>
+                    Mentor: <RLink href="https://fsos.umn.edu/people/graduates/miguel-quinones">Professor Miguel Qui&ntilde;ones</RLink>,
+                    University of Minnesota Twin Cities
+                  </>,
                 ],
               },
               {
-                title: "Caste Awareness and Identity Across Generations in Minnesota's South Asian Diaspora",
-                dates: 'Ongoing',
+                title: (
+                  <>
+                    Pomar, A. &ldquo;Caste Awareness and Identity Across Generations in Minnesota&rsquo;s South Asian Diaspora&rdquo; (In
+                    Process)
+                  </>
+                ),
                 bullets: [
-                  'Mentor: Dr. Zubin DeVitre, University of Wisconsin–Madison',
-                  'Status: literature review and study development',
+                  <>
+                    Mentor:{' '}
+                    <RLink href="https://counselingpsych.education.wisc.edu/fac-staff/devitre-zubin/">Dr. Zubin DeVitre</RLink>, University
+                    of Wisconsin&ndash;Madison
+                  </>,
                 ],
               },
             ]}
           />
         </Section>
 
+        <Section title="Leadership Experience">
+          <EntryList
+            entries={[
+              {
+                title: <RLink href="https://minne-sortanice.com/">Minne-Sorta-Nice</RLink>,
+                org: 'MHS Virtual Enterprise -- Chief Financial Officer',
+                dates: '09/2026 -- Present',
+                intro: (
+                  <>
+                    Unpaid leadership position in a student-run company through the MHS{' '}
+                    <RLink href="https://veinternational.org/for-schools/">Virtual Enterprise</RLink> course.
+                  </>
+                ),
+                bullets: [
+                  'Manage budgeting, financial records, and company financial strategy',
+                  'Analyze financial statements, projections, and business performance',
+                  'Work with executive team on pricing and strategic decisions',
+                ],
+              },
+              {
+                title: (
+                  <RLink href="https://docs.google.com/document/d/199KlgIQp-x69IFVnZp48lWV0Z60h8XHKuD_T2dJtKTs/edit">Econ Club</RLink>
+                ),
+                org: 'President & Founder',
+                dates: '01/2025 -- Present',
+                bullets: [
+                  'Founded and lead a club of 80+ active members focused on economic literacy',
+                  'Teach economic concepts through weekly meetings, Jeopardy, and game theory activities',
+                  <>
+                    Plan participation in <RLink href="https://economics.northwestern.edu/undergraduate/student-orgs/net/">Northwestern Economics Tournament (NET)</RLink>
+                  </>,
+                  <>
+                    Lead{' '}
+                    <RLink href="https://www.councilforeconed.org/programs/for-students/national-economic-challenge/">
+                      National Economics Challenge
+                    </RLink>{' '}
+                    preparation through study sessions and questions
+                  </>,
+                ],
+              },
+              {
+                title: <RLink href="https://bpa.org/">Business Professionals of America (BPA)</RLink>,
+                org: 'Vice President',
+                dates: '09/2025 -- Present',
+                bullets: [
+                  'Help lead chapter meetings and activities for 110+ members',
+                  'Organize workshops and competitive event preparation',
+                  'Coordinate fundraisers for chapter activities and competitions',
+                  'Help with social media posts and share chapter updates',
+                ],
+              },
+              {
+                title: <RLink href="https://www.nationalhonorsociety.org/">National Honor Society (NHS)</RLink>,
+                org: 'President',
+                dates: '10/2025 -- Present',
+                bullets: [
+                  'Lead monthly chapter meetings for NHS members',
+                  <>
+                    Proposed MHS NHS&rsquo;s first blood drive; plan with officers and the{' '}
+                    <RLink href="https://www.redcrossblood.org/">American Red Cross</RLink>
+                  </>,
+                  'Coordinate group service projects and community volunteering opportunities',
+                  'Support members in completing 15 service hours and two required group projects',
+                ],
+              },
+              {
+                title: <RLink href="https://www.instagram.com/p/DV6aCQJlgz9/?img_index=1">Minnetonka Forum</RLink>,
+                org: 'Co-President',
+                dates: '11/2024 -- Present',
+                bullets: [
+                  'Co-lead an annual themed forum connecting 100+ students with CEOs',
+                  <>
+                    Work with the <RLink href="https://www.linkedin.com/in/jeffrey-erickson-13452b1b/">MHS principal</RLink>, our faculty
+                    advisor, on event approval and scheduling
+                  </>,
+                  'Secured approval to excuse participating students from first and second periods',
+                  'Coordinate speaker outreach, panel questions, event logistics, and student Q&A',
+                ],
+              },
+            ]}
+          />
+        </Section>
+      </>
+    ),
+  },
+  {
+    label: 'Page 2',
+    content: (
+      <>
         <Section title="Work Experience">
           <EntryList
             entries={[
-              { title: 'Freelance Barber', org: 'Self-Employed', dates: 'Sophomore (2024) -- Present, ~10 hrs/wk', bullets: ['Provide haircutting services to regular paying clients from the local community', 'Schedule appointments, manage payments, and ensure client satisfaction independently', 'Built a consistent client base through reliable service, precision, and referrals'] },
-              { title: 'The Borgen Project', org: 'Regional Director', dates: 'Jul 2026 -- Sep 2026, 5 hrs/wk', bullets: ['Completed a structured advocacy internship focused on global poverty reduction and policy education', 'Raised $1,000 for anti-poverty legislation through independent fundraising tied to freelance haircutting', 'Engaged in outreach to legislators and community members on global development policy'] },
-              { title: 'Seasonal Services', org: 'Co-Founder & Lawn Care Worker', dates: 'Freshman (2023) -- Present, Summers, ~3 hrs/wk', bullets: ['Started a small local service with peers to provide lawn mowing, dog sitting, and other basic yard/household tasks'] },
-              { title: 'Equality Labs', org: 'Student Ambassador', dates: 'Jul 2026 -- Sep 2026', bullets: ['Launched signature drives to ban caste-based discrimination in the South Asian diaspora in the United States', 'Fundraised to support Unlearning Caste Supremacy Trainings'] },
-              { title: 'The Remedy Project', org: 'Student Ambassador', dates: 'Sep 2026 -- Present', bullets: ['Raises awareness around prison justice and the rights of incarcerated people', 'Raised $1,000+ to support The Remedy Project\'s advocacy work'] },
+              {
+                title: <RLink href="https://borgenproject.org/">The Borgen Project</RLink>,
+                org: 'Regional Director',
+                dates: '07/2026 -- Present',
+                bullets: [
+                  <>
+                    Raised <RLink href="https://www.zeffy.com/en-US/donation-form/aarush-pomars-fundraising-page">$1,475</RLink> for The
+                    Borgen Project&rsquo;s global poverty advocacy
+                  </>,
+                  'Mobilized 50+ people to contact Congress about global poverty reduction',
+                  <>
+                    Urged Senators <RLink href="https://www.klobuchar.senate.gov/public/">Amy Klobuchar</RLink> and{' '}
+                    <RLink href="https://www.smith.senate.gov/">Tina Smith</RLink> and <RLink href="https://morrison.house.gov/">Rep. Kelly Morrison</RLink> to support the{' '}
+                    <RLink href="https://borgenproject.org/legislation/">Global Fragility Reauthorization Act (H.R. 3005/S. 2678)</RLink>
+                  </>,
+                  <>
+                    Published{' '}
+                    <RLink href="https://borgenproject.org/competition-policy/">
+                      &ldquo;The Most Powerful Anti-Poverty Tool? Competition Policy&rdquo;
+                    </RLink>{' '}
+                    with Borgen&rsquo;s editorial approval (September 2026)
+                  </>,
+                  <>
+                    Contacted <RLink href="https://www.lucyrehm.com/">Lucy Rehm</RLink>,{' '}
+                    <RLink href="https://www.senate.mn/members/member_bio.html?mem_id=1244">Julia Coleman</RLink>,{' '}
+                    <RLink href="https://www.chanhassenmn.gov/government/city-council">Elise Ryan, and the Chanhassen City Council</RLink>
+                  </>,
+                ],
+              },
+              {
+                title: <RLink href="/entrepreneurship">pomar.blendz</RLink>,
+                org: 'Founder & Freelance Barber',
+                dates: '10/2024 -- Present',
+                bullets: [
+                  'Provide haircutting services to a recurring clientele of 150+ people',
+                  'Manage appointments, client communication, and payments',
+                  <>
+                    Create <RLink href="https://www.instagram.com/pomar.blendz/">Instagram</RLink> content averaging{' '}
+                    <RLink href="https://www.instagram.com/pomar.blendz/reels/">6.5K views per reel</RLink>
+                  </>,
+                  <>
+                    Donate all profits to <RLink href="https://borgenproject.org/">The Borgen Project</RLink> and{' '}
+                    <RLink href="https://www.theremedyproj.org/">The Remedy Project</RLink>
+                  </>,
+                ],
+              },
+              {
+                title: <RLink href="/entrepreneurship">Seasonal Services</RLink>,
+                org: 'Co-Founder',
+                dates: '06/2023 -- Present',
+                bullets: [
+                  'Provide lawn mowing, dog sitting, and other yard and household services',
+                  'Partner with one co-founder to organize and complete jobs for local residents',
+                ],
+              },
             ]}
           />
         </Section>
 
-        <Section title="Community Service">
+        <Section title="Volunteer Experience">
           <EntryList
             entries={[
-              { title: 'Smithsonian', org: 'Digital Transcriptor', dates: 'Jun 2023 -- Sep 2023, 90 hrs', bullets: ['Transcribed historical documents to support public accessibility and digital archiving'] },
-              { title: 'Feed My Starving Children', org: 'Food Packager', dates: 'Jun 2023 -- Aug 2023, 15 hrs', bullets: ['Packed meals for international hunger relief efforts in a team-based environment'] },
-              { title: 'The Humanity Alliance', org: 'Volunteer Cook', dates: 'Aug 2023, 5 hrs', bullets: ['Cooked and served meals to individuals facing food insecurity'] },
+              {
+                title: <RLink href="https://www.theremedyproj.org/">The Remedy Project</RLink>,
+                org: 'Student Ambassador',
+                dates: '09/2025 -- Present',
+                bullets: [
+                  'Support decarceration advocacy and the rights of incarcerated people',
+                  <>
+                    Advocate for repeal of the <RLink href="https://www.congress.gov/bill/104th-congress/senate-bill/866">Prison Litigation Reform Act</RLink>
+                  </>,
+                  'Donated $1,000 in barbering profits to The Remedy Project',
+                ],
+              },
+              {
+                title: <RLink href="https://www.equalitylabs.org/">Equality Labs</RLink>,
+                org: 'Advocate',
+                dates: '08/2025 -- Present',
+                bullets: [
+                  <>
+                    Conduct <RLink href="https://www.equalitylabs.org/campaigns/">awareness campaigns</RLink> to oppose caste
+                    discrimination
+                  </>,
+                ],
+              },
+              {
+                title: <RLink href="https://www.humanityalliance.org/">The Humanity Alliance</RLink>,
+                org: 'Volunteer Cook',
+                dates: '08/2023 -- Present',
+                bullets: [
+                  <>
+                    Prepare meals with fellow volunteers to support{' '}
+                    <RLink href="https://findfoodcarvercounty.org/get-involved/">local families facing food insecurity</RLink>
+                  </>,
+                ],
+              },
+              {
+                title: <RLink href="https://www.si.edu/">Smithsonian</RLink>,
+                org: 'Digital Transcriptor',
+                dates: '06/2023 -- Present',
+                bullets: [
+                  <>
+                    <RLink href="https://transcription.si.edu/">Transcribe historical documents</RLink> to support public accessibility
+                    and digital archiving
+                  </>,
+                ],
+              },
+              {
+                title: <RLink href="https://borgenproject.org/feed-my-starving-children/">Feed My Starving Children</RLink>,
+                org: 'Food Packager',
+                dates: '06/2023 -- Present',
+                bullets: ['Pack nutritious meals for distribution to children facing hunger worldwide'],
+              },
             ]}
           />
+        </Section>
+
+        <Section title="Extracurricular Activities">
+          <ul className="list-disc space-y-1 pl-5 text-sm leading-relaxed text-[#0C0C0C]/85">
+            <li>
+              <RLink href="https://www.instagram.com/mtkadsu/">Desi Student Union</RLink> -- Officer{' '}
+              <span className="text-[#0C0C0C]/60">(09/2023 -- Present)</span>
+            </li>
+            <li>
+              <RLink href="https://www.minnetonkaschools.org/activities/mhs-athletics/sports/boys-tennis">MHS Tennis Team</RLink> --
+              Junior Varsity Athlete <span className="text-[#0C0C0C]/60">(03/2024 -- 05/2024)</span>
+            </li>
+            <li>
+              <RLink href="https://www.instagram.com/minnetonkahosa/">MHS HOSA</RLink> (
+              <RLink href="https://hosa.org/">Future Health Professionals</RLink>) -- Member{' '}
+              <span className="text-[#0C0C0C]/60">(09/2024 -- Present)</span>
+            </li>
+            <li>
+              <RLink href="https://www.minnetonkaschools.org/activities/hs-activities/clubs/deca">MHS DECA</RLink> -- Member{' '}
+              <span className="text-[#0C0C0C]/60">(09/2023 -- Present)</span>
+            </li>
+            <li>
+              <RLink href="https://www.tiktok.com/@movievault_231">TikTok -- Content Creator</RLink> (1.1K Followers){' '}
+              <span className="text-[#0C0C0C]/60">(03/2024 -- Present)</span>
+            </li>
+          </ul>
+        </Section>
+      </>
+    ),
+  },
+  {
+    label: 'Page 3',
+    content: (
+      <>
+        <Section title="Honors / Awards">
+          <div className="space-y-4">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-wide text-[#0C0C0C]/60">Academic</p>
+              <ul className="mt-1 list-disc space-y-1 pl-5 text-sm leading-relaxed text-[#0C0C0C]/85">
+                <li>
+                  <RLink href="https://kommodo.ai/i/fPmu8QeZrkREZMSCWR4q">National Merit Commended Scholar</RLink>, PSAT/NMSQT{' '}
+                  <span className="text-[#0C0C0C]/60">(09/2026)</span>
+                </li>
+                <li>
+                  DECA -- 2nd Place, Regional Competition,{' '}
+                  <RLink href="https://www.deca.org/compete/international-business-plan">International Business Plan</RLink>{' '}
+                  <span className="text-[#0C0C0C]/60">(01/2025)</span>
+                </li>
+                <li>
+                  BPA -- 1st Place, Regional Competition,{' '}
+                  <RLink href="https://drive.google.com/file/d/1a2TAuYx21WN8v5M1w3Wvlq5ayuKm9kM9/view">Basic Office Systems and Procedures</RLink>{' '}
+                  <span className="text-[#0C0C0C]/60">(01/2026)</span>
+                </li>
+                <li>
+                  BPA -- 3rd Place, Regional Competition,{' '}
+                  <RLink href="https://drive.google.com/file/d/1LmJ1ZCr8WGttxPJZFv8l0hmN6nzHGRkL/view">Financial Math and Analysis</RLink>{' '}
+                  <span className="text-[#0C0C0C]/60">(01/2026)</span>
+                </li>
+                <li>
+                  <RLink href="https://docs.google.com/document/d/1rPHTz7q5wpcMxiIqNuYt5M5IhbsQDmOBcWWh8_sgxtE/edit">
+                    National Honor Society (NHS)
+                  </RLink>{' '}
+                  <span className="text-[#0C0C0C]/60">(10/2025)</span>
+                </li>
+                <li>
+                  HOSA -- 2nd Place, Minnesota State Leadership Conference,{' '}
+                  <RLink href="https://minnesotahosa.org/production/state-leadership-conference/">State Competition</RLink>,{' '}
+                  <RLink href="https://hosa.org/wp-content/uploads/2025/04/24-25-HOSA-ATC-April-22.docx-1.pdf">
+                    ATC Environmental Health Test
+                  </RLink>{' '}
+                  <span className="text-[#0C0C0C]/60">(03/2025)</span>
+                </li>
+                <li>
+                  <RLink href="https://drive.google.com/file/d/1tH-H5o4TurfEAOjxOh-SDdyKDpXZ7_l6/view">AP Scholar with Distinction</RLink>{' '}
+                  <span className="text-[#0C0C0C]/60">(07/2026)</span>
+                </li>
+                <li>
+                  DECA -- State Finalist, Placed 5th <span className="text-[#0C0C0C]/60">(03/2024)</span>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-wide text-[#0C0C0C]/60">Community Service</p>
+              <ul className="mt-1 list-disc space-y-1 pl-5 text-sm leading-relaxed text-[#0C0C0C]/85">
+                <li>
+                  The Borgen Project --{' '}
+                  <RLink href="https://drive.google.com/file/d/1y_WS5OJnAew4dfPPE43HS-nf-UK39BzU/view">Chief Closer Award</RLink>{' '}
+                  <span className="text-[#0C0C0C]/60">(06/2026)</span>
+                </li>
+                <li>
+                  The Remedy Project --{' '}
+                  <RLink href="https://drive.google.com/file/d/1pt4jLtxbXIal8hQqp4gfO1fApBAnd_SP/view">Ally of the Incarcerated Award</RLink>{' '}
+                  <span className="text-[#0C0C0C]/60">(09/2026)</span>
+                </li>
+                <li>
+                  PVSA Gold <span className="text-[#0C0C0C]/60">(09/2023)</span>
+                </li>
+              </ul>
+            </div>
+          </div>
         </Section>
 
         <Section title="Skills">
@@ -168,10 +475,7 @@ export default function ResumePage() {
             <div>
               <p className="font-semibold text-[#0C0C0C]">Technical</p>
               <ul className="mt-1 list-disc space-y-0.5 pl-5">
-                <li>CapCut (Proficient)</li>
-                <li>Canva (Proficient)</li>
                 <li>Java (Intermediate)</li>
-                <li>PC Building &amp; Hardware Setup (Proficient)</li>
               </ul>
             </div>
             <div>
@@ -184,6 +488,91 @@ export default function ResumePage() {
             </div>
           </div>
         </Section>
+      </>
+    ),
+  },
+]
+
+export default function ResumePage() {
+  const [activePage, setActivePage] = useState(0)
+
+  return (
+    <div className="min-h-screen bg-white text-[#0C0C0C]">
+      <div className="print:hidden">
+        <SiteNav />
+      </div>
+
+      <main className="mx-auto max-w-3xl px-6 py-12 print:max-w-none print:px-0 print:py-0">
+        <header className="flex flex-wrap items-start justify-between gap-4 border-b-2 border-[#0C0C0C] pb-4">
+          <div>
+            <h1 className="text-3xl font-bold uppercase tracking-tight">Aarush Pomar</h1>
+            <p className="mt-1 text-sm text-[#0C0C0C]/70">Chanhassen, MN</p>
+            <p className="mt-0.5 text-sm text-[#0C0C0C]/70">
+              <RLink href="mailto:pomaraarush@gmail.com">pomaraarush@gmail.com</RLink> |{' '}
+              <RLink href="https://aarush-pomar-personal-website-steel.vercel.app/">aarush-pomar-personal-website-steel.vercel.app</RLink>
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={() => window.print()}
+            className="print:hidden rounded-full border-2 border-[#0C0C0C] px-5 py-2 text-xs font-medium uppercase tracking-widest text-[#0C0C0C] transition-colors hover:bg-[#0C0C0C]/5"
+          >
+            Print / Save as PDF
+          </button>
+        </header>
+
+        <div className="print:hidden mb-10 mt-5 flex flex-wrap items-center gap-4">
+          <div className="inline-flex gap-1 rounded-full border-2 border-[#0C0C0C]/12 bg-[#0C0C0C]/[0.03] p-1">
+            {PAGES.map((p, i) => (
+              <button
+                key={p.label}
+                type="button"
+                onClick={() => setActivePage(i)}
+                className={`rounded-full px-5 py-2 text-xs font-semibold uppercase tracking-widest transition-colors ${
+                  i === activePage
+                    ? 'bg-[#0C0C0C] text-white shadow-sm'
+                    : 'text-[#0C0C0C]/55 hover:text-[#0C0C0C]'
+                }`}
+              >
+                {p.label}
+              </button>
+            ))}
+          </div>
+          <span className="text-xs uppercase tracking-widest text-[#0C0C0C]/40">
+            Page {activePage + 1} of {PAGES.length}
+          </span>
+        </div>
+
+        {PAGES.map((p, i) => (
+          <div
+            key={p.label}
+            className={`${i === activePage ? '' : 'hidden'} print:block print:[break-after:page] print:last:[break-after:auto]`}
+          >
+            {p.content}
+          </div>
+        ))}
+
+        <div className="print:hidden mt-10 flex items-center justify-between border-t-2 border-[#0C0C0C]/15 pt-6">
+          <button
+            type="button"
+            disabled={activePage === 0}
+            onClick={() => setActivePage((n) => Math.max(0, n - 1))}
+            className="rounded-full border-2 border-[#0C0C0C] px-5 py-2.5 text-sm font-semibold uppercase tracking-widest text-[#0C0C0C] transition-colors hover:bg-[#0C0C0C] hover:text-white disabled:cursor-not-allowed disabled:border-[#0C0C0C]/25 disabled:text-[#0C0C0C]/35 disabled:hover:bg-transparent disabled:hover:text-[#0C0C0C]/35"
+          >
+            &larr; Previous
+          </button>
+          <span className="text-sm font-semibold uppercase tracking-widest text-[#0C0C0C]">
+            {activePage + 1} <span className="text-[#0C0C0C]/50">of {PAGES.length}</span>
+          </span>
+          <button
+            type="button"
+            disabled={activePage === PAGES.length - 1}
+            onClick={() => setActivePage((n) => Math.min(PAGES.length - 1, n + 1))}
+            className="rounded-full border-2 border-[#0C0C0C] bg-[#0C0C0C] px-5 py-2.5 text-sm font-semibold uppercase tracking-widest text-white transition-colors hover:bg-[#0C0C0C]/85 disabled:cursor-not-allowed disabled:border-[#0C0C0C]/25 disabled:bg-transparent disabled:text-[#0C0C0C]/35"
+          >
+            Next &rarr;
+          </button>
+        </div>
       </main>
     </div>
   )

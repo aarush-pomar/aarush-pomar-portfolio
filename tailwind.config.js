@@ -5,6 +5,9 @@ export default {
     extend: {
       fontFamily: {
         kanit: ['Kanit', 'sans-serif'],
+        bitter: ['Bitter', 'Georgia', 'serif'],
+        lato: ['Lato', 'Helvetica', 'Arial', 'sans-serif'],
+        newscycle: ['"News Cycle"', 'Helvetica', 'Arial', 'sans-serif'],
       },
     },
   },

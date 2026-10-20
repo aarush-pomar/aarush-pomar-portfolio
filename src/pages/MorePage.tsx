@@ -44,11 +44,11 @@ export default function MorePage() {
 
         <FavoriteReadsSection books={FAVORITE_READS} />
 
-        <div className="rounded-[32px] border-2 border-[#D7E2EA] bg-[#0C0C0C] p-5 sm:rounded-[40px] sm:p-7 md:rounded-[48px] md:p-8">
+        <div className="rounded-[32px] border-2 border-[#D7E2EA]/18 bg-[#131313] p-5 sm:rounded-[40px] sm:p-7 md:rounded-[48px] md:p-8">
           <h2 className="hero-heading pb-6 text-xl font-black uppercase tracking-tight sm:text-2xl md:text-3xl">
             Interests
           </h2>
-          <ul className="list-disc space-y-1 pl-5 text-sm text-[#D7E2EA]/80 sm:text-base">
+          <ul className="list-disc space-y-1 pl-5 text-base text-[#D7E2EA] sm:text-lg">
             <li>Tennis</li>
             <li>Pickleball</li>
             <li>PC building and hardware</li>

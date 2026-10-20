@@ -137,7 +137,7 @@ export default function FeatureCard({
   imageAspectRatio,
   extraImages,
   photoLayout = 'side',
-  photoColumnWidth = 260,
+  photoColumnWidth = 230,
   fitPhotosToText = false,
   maxPhotoColumnWidth,
   stretchPhoto = false,
@@ -172,6 +172,10 @@ export default function FeatureCard({
     }
 
     measure()
+    // The web font (Kanit) can finish loading after this first measurement,
+    // reflowing the text to its final metrics -- re-measure once it's ready
+    // so the photo doesn't lock in a height based on the fallback font.
+    document.fonts?.ready.then(measure)
     const observer = new ResizeObserver(measure)
     observer.observe(text)
     desktop.addEventListener('change', measure)
@@ -211,7 +215,7 @@ export default function FeatureCard({
       // -- without a cap that feedback runs away on narrow windows. A caller
       // that explicitly wants a bigger photo (maxPhotoColumnWidth) opts out
       // of that default cap and trusts its own number instead.
-      const maxWidth = maxPhotoColumnWidth ?? Math.min(240, Math.round((column.parentElement?.offsetWidth ?? 0) * 0.3))
+      const maxWidth = maxPhotoColumnWidth ?? Math.min(210, Math.round((column.parentElement?.offsetWidth ?? 0) * 0.27))
       const next = Math.min(maxWidth, Math.max(140, Math.round((text.offsetHeight - fixed) / inverseAspectSum)))
       // Changing the column width re-wraps the text a little, so this runs a
       // few passes to settle. Once it settles the pass count resets; if it
@@ -240,19 +244,19 @@ export default function FeatureCard({
   return (
     <div
       id={id}
-      className={`scroll-mt-24 rounded-[32px] border-2 border-[#D7E2EA] bg-[#0C0C0C] p-5 sm:rounded-[40px] sm:p-7 md:rounded-[48px] md:p-8 ${className ?? ''}`}
+      className={`scroll-mt-24 rounded-[20px] border-2 border-[#D7E2EA]/18 bg-[#131313] p-3.5 sm:rounded-[24px] sm:p-5 md:rounded-[28px] md:p-6 ${className ?? ''}`}
     >
-      <div className="flex flex-wrap items-center gap-4 pb-6 sm:gap-6">
+      <div className="flex flex-wrap items-center gap-3 pb-3.5 sm:gap-4 sm:pb-4">
         {number && (
-          <span className="font-black text-[#D7E2EA]" style={{ fontSize: 'clamp(2.25rem, 7vw, 5.5rem)' }}>
+          <span className="font-black text-[#D7E2EA]" style={{ fontSize: 'clamp(2rem, 6vw, 4.75rem)' }}>
             {number}
           </span>
         )}
         <div className="flex flex-1 flex-col gap-1">
-          <span className="text-xs font-medium uppercase tracking-widest text-[#D7E2EA] opacity-60 sm:text-sm">
+          <span className="text-xs font-medium uppercase tracking-widest text-[#D7E2EA] opacity-70">
             {category}
           </span>
-          <h3 className="hero-heading text-xl font-black uppercase tracking-tight sm:text-2xl md:text-3xl">
+          <h3 className="hero-heading text-base font-black uppercase tracking-tight sm:text-lg md:text-xl">
             {title}
           </h3>
         </div>
@@ -260,14 +264,14 @@ export default function FeatureCard({
       </div>
 
       <div
-        className={imageLabel && !photoRow ? 'grid gap-6 md:grid-cols-[1fr_var(--photo-w)] md:gap-10' : ''}
+        className={imageLabel && !photoRow ? 'grid gap-4 md:grid-cols-[1fr_var(--photo-w)] md:gap-7' : ''}
         style={
           {
             '--photo-w': `${stretchPhoto ? (maxPhotoColumnWidth ?? photoColumnWidth) : (fittedWidth ?? photoColumnWidth)}px`,
           } as React.CSSProperties
         }
       >
-        <div className="text-sm leading-relaxed text-[#D7E2EA]/85 sm:text-base">
+        <div className="text-sm leading-relaxed text-[#D7E2EA]">
           <div ref={textRef} className="space-y-3">
             {children}
           </div>

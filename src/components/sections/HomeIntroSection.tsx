@@ -150,7 +150,7 @@ export default function HomeIntroSection() {
         <FadeIn
           ref={textRef}
           delay={0.1}
-          className="flex flex-col gap-3 text-sm leading-normal text-[#D7E2EA]/85 md:w-[var(--text-w)] md:text-base"
+          className="flex flex-col gap-3 text-base leading-relaxed text-[#D7E2EA] md:w-[var(--text-w)] md:text-lg"
         >
           <p>Hi, I&rsquo;m Aarush.</p>
 

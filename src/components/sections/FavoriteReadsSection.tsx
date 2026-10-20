@@ -4,7 +4,7 @@ export default function FavoriteReadsSection({ books }: { books: FavoriteRead[] 
   if (books.length === 0) return null
 
   return (
-    <div className="rounded-[32px] border-2 border-[#D7E2EA] bg-[#0C0C0C] p-5 sm:rounded-[40px] sm:p-7 md:rounded-[48px] md:p-8">
+    <div className="rounded-[32px] border-2 border-[#D7E2EA]/18 bg-[#131313] p-5 sm:rounded-[40px] sm:p-7 md:rounded-[48px] md:p-8">
       <h2 className="hero-heading pb-6 text-xl font-black uppercase tracking-tight sm:text-2xl md:text-3xl">
         Favorite Reads: Aarush&rsquo;s Book Notes
       </h2>
@@ -19,10 +19,10 @@ export default function FavoriteReadsSection({ books }: { books: FavoriteRead[] 
                 loading="lazy"
               />
             </div>
-            <blockquote className="mt-4 text-center text-sm italic text-[#BBCCD7] sm:text-base">
+            <blockquote className="mt-4 text-center text-base italic text-[#BBCCD7] sm:text-lg">
               &ldquo;{book.quote}&rdquo;
             </blockquote>
-            <figcaption className="mt-3 text-left text-sm leading-relaxed text-[#D7E2EA]/80">
+            <figcaption className="mt-3 text-left text-base leading-relaxed text-[#D7E2EA] sm:text-lg">
               {book.note}
             </figcaption>
           </figure>

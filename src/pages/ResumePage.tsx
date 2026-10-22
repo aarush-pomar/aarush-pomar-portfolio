@@ -176,7 +176,7 @@ const PAGES: { label: string; content: ReactNode }[] = [
                 bullets: [
                   'Manage budgeting, financial records, and company financial strategy',
                   'Analyze financial statements, projections, and business performance',
-                  'Work with executive team on pricing and strategic decisions',
+                  'October Employee of the Month',
                 ],
               },
               {

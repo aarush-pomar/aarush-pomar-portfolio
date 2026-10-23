@@ -61,17 +61,36 @@ export default function EntrepreneurshipPage() {
       <div className="flex flex-col gap-8 pb-10 pt-4 sm:gap-10">
         <FeatureCard
           category="Freelance Business -- @pomar.blendz"
-          title="From a Skill to a Business"
+          title="From Clippers to Clients"
           actions={<PillLink href="https://www.instagram.com/pomar.blendz/">Instagram</PillLink>}
         >
           <p>
-            I started cutting hair for friends and have since given 500+ haircuts, building a
-            client base of 150+ people -- mostly local high school and college students. I handle
-            the appointments, payments, and haircuts myself, and many clients come back regularly.
+            I started cutting hair for friends. Since then, I&rsquo;ve given 500+ haircuts and
+            built a client base of 150+ people, mostly local high school and college students. I
+            run every part of the business, from booking appointments and buying supplies to
+            cutting hair and collecting payments.
           </p>
           <p>
-            I&rsquo;ve also used earnings from the business to support causes I care about,
-            including The Borgen Project. You can read more about that fundraising on my{' '}
+            I donate all profits from pomar.blendz to{' '}
+            <a
+              href="https://borgenproject.org/"
+              target="_blank"
+              rel="noreferrer"
+              className="text-[#D7E2EA] underline decoration-[#D7E2EA]/30 underline-offset-4 transition-colors hover:text-[#BBCCD7]"
+            >
+              The Borgen Project
+            </a>{' '}
+            and{' '}
+            <a
+              href="https://www.theremedyproj.org/"
+              target="_blank"
+              rel="noreferrer"
+              className="text-[#D7E2EA] underline decoration-[#D7E2EA]/30 underline-offset-4 transition-colors hover:text-[#BBCCD7]"
+            >
+              The Remedy Project
+            </a>
+            , supporting efforts to reduce global poverty and advocate for incarcerated people.
+            Learn more on my{' '}
             <Link
               to="/advocacy"
               className="text-[#D7E2EA] underline decoration-[#D7E2EA]/30 underline-offset-4 transition-colors hover:text-[#BBCCD7]"

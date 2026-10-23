@@ -124,40 +124,49 @@ const PAGES: { label: string; content: ReactNode }[] = [
           </div>
         </Section>
 
-        <Section title="Research Experience">
-          <EntryList
-            entries={[
-              {
-                title: (
-                  <>
-                    Pomar, A. &ldquo;Economic Fallout and Financial Adaptation in the Wake of ICE Activity in Minnesota&rdquo; (In
-                    Process)
-                  </>
-                ),
-                bullets: [
-                  <>
-                    Mentor: <RLink href="https://fsos.umn.edu/people/graduates/miguel-quinones">Professor Miguel Qui&ntilde;ones</RLink>,
-                    University of Minnesota Twin Cities
-                  </>,
-                ],
-              },
-              {
-                title: (
-                  <>
-                    Pomar, A. &ldquo;Caste Awareness and Identity Across Generations in Minnesota&rsquo;s South Asian Diaspora&rdquo; (In
-                    Process)
-                  </>
-                ),
-                bullets: [
-                  <>
-                    Mentor:{' '}
-                    <RLink href="https://counselingpsych.education.wisc.edu/fac-staff/devitre-zubin/">Dr. Zubin DeVitre</RLink>, University
-                    of Wisconsin&ndash;Madison
-                  </>,
-                ],
-              },
-            ]}
-          />
+        <Section title="Publications">
+          <div className="flex flex-col gap-4 text-sm leading-relaxed text-[#0C0C0C]/85">
+            <div>
+              <p>
+                Pomar, A.{' '}
+                <span className="font-semibold italic">
+                  &ldquo;Economic Fallout and Financial Adaptation in the Wake of ICE Activity in Minnesota&rdquo;
+                </span>{' '}
+                (In Process). Mentor:{' '}
+                <RLink href="https://fsos.umn.edu/people/graduates/miguel-quinones">Professor Miguel Qui&ntilde;ones</RLink>, University
+                of Minnesota Twin Cities.
+              </p>
+              <p className="mt-1">
+                To be submitted to: <span className="italic">Journal on Migration and Human Security</span> (Center for Migration
+                Studies)
+              </p>
+            </div>
+            <div>
+              <p>
+                Pomar, A.{' '}
+                <span className="font-semibold italic">
+                  &ldquo;Caste Awareness and Identity Across Generations in Minnesota&rsquo;s South Asian Diaspora&rdquo;
+                </span>{' '}
+                (In Process). Mentor:{' '}
+                <RLink href="https://counselingpsych.education.wisc.edu/fac-staff/devitre-zubin/">Dr. Zubin DeVitre</RLink>, University
+                of Wisconsin&ndash;Madison.
+              </p>
+              <p className="mt-1">
+                To be submitted to: <span className="italic">CASTE: A Global Journal on Social Exclusion</span> (Brandeis University)
+              </p>
+            </div>
+            <div>
+              <p>
+                Pomar, A.{' '}
+                <RLink href="https://borgenproject.org/competition-policy/">
+                  <span className="font-semibold italic">&ldquo;The Most Powerful Anti-Poverty Tool? Competition Policy.&rdquo;</span>
+                </RLink>
+              </p>
+              <p className="mt-1">
+                Published in: <span className="italic">The Borgen Project</span>, September 2026.
+              </p>
+            </div>
+          </div>
         </Section>
 
         <Section title="Leadership Experience">
@@ -167,91 +176,13 @@ const PAGES: { label: string; content: ReactNode }[] = [
                 title: <RLink href="https://minne-sortanice.com/">Minne-Sorta-Nice</RLink>,
                 org: 'MHS Virtual Enterprise -- Chief Financial Officer',
                 dates: '09/2026 -- Present',
-                intro: (
+                bullets: [
                   <>
-                    Unpaid leadership position in a student-run company through the MHS{' '}
+                    Unpaid leadership position in a student-run company through MHS{' '}
                     <RLink href="https://veinternational.org/for-schools/">Virtual Enterprise</RLink> course.
-                  </>
-                ),
-                bullets: [
-                  'Manage budgeting, financial records, and company financial strategy',
-                  'Analyze financial statements, projections, and business performance',
-                  'October Employee of the Month',
-                ],
-              },
-              {
-                title: (
-                  <RLink href="https://docs.google.com/document/d/199KlgIQp-x69IFVnZp48lWV0Z60h8XHKuD_T2dJtKTs/edit">Econ Club</RLink>
-                ),
-                org: 'President & Founder',
-                dates: '01/2025 -- Present',
-                bullets: [
-                  'Founded and lead a club of 80+ active members focused on economic literacy',
-                  'Teach economic concepts through weekly meetings, Jeopardy, and game theory activities',
-                  <>
-                    Plan participation in <RLink href="https://economics.northwestern.edu/undergraduate/student-orgs/net/">Northwestern Economics Tournament (NET)</RLink>
-                  </>,
-                  <>
-                    Lead{' '}
-                    <RLink href="https://www.councilforeconed.org/programs/for-students/national-economic-challenge/">
-                      National Economics Challenge
-                    </RLink>{' '}
-                    preparation through study sessions and questions
                   </>,
                 ],
               },
-              {
-                title: <RLink href="https://bpa.org/">Business Professionals of America (BPA)</RLink>,
-                org: 'Vice President',
-                dates: '09/2025 -- Present',
-                bullets: [
-                  'Help lead chapter meetings and activities for 110+ members',
-                  'Organize workshops and competitive event preparation',
-                  'Coordinate fundraisers for chapter activities and competitions',
-                  'Help with social media posts and share chapter updates',
-                ],
-              },
-              {
-                title: <RLink href="https://www.nationalhonorsociety.org/">National Honor Society (NHS)</RLink>,
-                org: 'President',
-                dates: '10/2025 -- Present',
-                bullets: [
-                  'Lead monthly chapter meetings for NHS members',
-                  <>
-                    Proposed MHS NHS&rsquo;s first blood drive; plan with officers and the{' '}
-                    <RLink href="https://www.redcrossblood.org/">American Red Cross</RLink>
-                  </>,
-                  'Coordinate group service projects and community volunteering opportunities',
-                  'Support members in completing 15 service hours and two required group projects',
-                ],
-              },
-              {
-                title: <RLink href="https://www.instagram.com/p/DV6aCQJlgz9/?img_index=1">Minnetonka Forum</RLink>,
-                org: 'Co-President',
-                dates: '11/2024 -- Present',
-                bullets: [
-                  'Co-lead an annual themed forum connecting 100+ students with CEOs',
-                  <>
-                    Work with the <RLink href="https://www.linkedin.com/in/jeffrey-erickson-13452b1b/">MHS principal</RLink>, our faculty
-                    advisor, on event approval and scheduling
-                  </>,
-                  'Secured approval to excuse participating students from first and second periods',
-                  'Coordinate speaker outreach, panel questions, event logistics, and student Q&A',
-                ],
-              },
-            ]}
-          />
-        </Section>
-      </>
-    ),
-  },
-  {
-    label: 'Page 2',
-    content: (
-      <>
-        <Section title="Work Experience">
-          <EntryList
-            entries={[
               {
                 title: <RLink href="https://borgenproject.org/">The Borgen Project</RLink>,
                 org: 'Regional Director',
@@ -268,13 +199,6 @@ const PAGES: { label: string; content: ReactNode }[] = [
                     <RLink href="https://borgenproject.org/legislation/">Global Fragility Reauthorization Act (H.R. 3005/S. 2678)</RLink>
                   </>,
                   <>
-                    Published{' '}
-                    <RLink href="https://borgenproject.org/competition-policy/">
-                      &ldquo;The Most Powerful Anti-Poverty Tool? Competition Policy&rdquo;
-                    </RLink>{' '}
-                    with Borgen&rsquo;s editorial approval (September 2026)
-                  </>,
-                  <>
                     Contacted <RLink href="https://www.lucyrehm.com/">Lucy Rehm</RLink>,{' '}
                     <RLink href="https://www.senate.mn/members/member_bio.html?mem_id=1244">Julia Coleman</RLink>,{' '}
                     <RLink href="https://www.chanhassenmn.gov/government/city-council">Elise Ryan, and the Chanhassen City Council</RLink>
@@ -282,15 +206,83 @@ const PAGES: { label: string; content: ReactNode }[] = [
                 ],
               },
               {
+                title: <RLink href="https://www.nationalhonorsociety.org/">National Honor Society (NHS)</RLink>,
+                org: 'President',
+                dates: '10/2025 -- Present',
+                bullets: [
+                  'Lead monthly chapter meetings for 250+ members',
+                  <>
+                    Proposed MHS NHS&rsquo;s first blood drive; plan with officers and the{' '}
+                    <RLink href="https://www.redcrossblood.org/">American Red Cross</RLink>
+                  </>,
+                ],
+              },
+              {
+                title: <RLink href="https://bpa.org/">Business Professionals of America (BPA)</RLink>,
+                org: 'Vice President',
+                dates: '09/2025 -- Present',
+                bullets: ['Help lead chapter meetings and activities for 110+ members'],
+              },
+              {
+                title: (
+                  <RLink href="https://docs.google.com/document/d/199KlgIQp-x69IFVnZp48lWV0Z60h8XHKuD_T2dJtKTs/edit">Econ Club</RLink>
+                ),
+                org: 'President & Founder',
+                dates: '01/2025 -- Present',
+                bullets: [
+                  'Founded and lead a club of 65+ active members focused on economic literacy',
+                  <>
+                    Lead{' '}
+                    <RLink href="https://www.councilforeconed.org/programs/for-students/national-economic-challenge/">
+                      National Economics Challenge
+                    </RLink>{' '}
+                    prep; plan for{' '}
+                    <RLink href="https://economics.northwestern.edu/undergraduate/student-orgs/net/">
+                      Northwestern Economics Tournament (NET)
+                    </RLink>{' '}
+                    entry
+                  </>,
+                ],
+              },
+              {
+                title: <RLink href="https://www.instagram.com/p/DV6aCQJlgz9/?img_index=1">Minnetonka Forum</RLink>,
+                org: 'Co-President',
+                dates: '11/2024 -- Present',
+                bullets: [
+                  'Co-lead an annual themed forum connecting 100+ students with CEOs',
+                  <>
+                    Work with the <RLink href="https://www.linkedin.com/in/jeffrey-erickson-13452b1b/">MHS principal</RLink>, our faculty
+                    advisor, on event approval and scheduling
+                  </>,
+                ],
+              },
+              {
+                title: <RLink href="https://www.instagram.com/mtkadsu/">Desi Student Union</RLink>,
+                org: 'Officer',
+                dates: '09/2023 -- Present',
+              },
+            ]}
+          />
+        </Section>
+      </>
+    ),
+  },
+  {
+    label: 'Page 2',
+    content: (
+      <>
+        <Section title="Work Experience">
+          <EntryList
+            entries={[
+              {
                 title: <RLink href="/entrepreneurship">pomar.blendz</RLink>,
                 org: 'Founder & Freelance Barber',
                 dates: '10/2024 -- Present',
                 bullets: [
                   'Provide haircutting services to a recurring clientele of 150+ people',
-                  'Manage appointments, client communication, and payments',
                   <>
                     Create <RLink href="https://www.instagram.com/pomar.blendz/">Instagram</RLink> content averaging{' '}
-                    <RLink href="https://www.instagram.com/pomar.blendz/reels/">6.5K views per reel</RLink>
+                    <RLink href="https://www.instagram.com/pomar.blendz/reels/">7.5K views per reel</RLink>
                   </>,
                   <>
                     Donate all profits to <RLink href="https://borgenproject.org/">The Borgen Project</RLink> and{' '}
@@ -319,11 +311,9 @@ const PAGES: { label: string; content: ReactNode }[] = [
                 org: 'Student Ambassador',
                 dates: '09/2025 -- Present',
                 bullets: [
-                  'Support decarceration advocacy and the rights of incarcerated people',
                   <>
                     Advocate for repeal of the <RLink href="https://www.congress.gov/bill/104th-congress/senate-bill/866">Prison Litigation Reform Act</RLink>
                   </>,
-                  'Donated $1,000 in barbering profits to The Remedy Project',
                 ],
               },
               {
@@ -372,35 +362,25 @@ const PAGES: { label: string; content: ReactNode }[] = [
         <Section title="Extracurricular Activities">
           <ul className="list-disc space-y-1 pl-5 text-sm leading-relaxed text-[#0C0C0C]/85">
             <li>
-              <RLink href="https://www.instagram.com/mtkadsu/">Desi Student Union</RLink> -- Officer{' '}
-              <span className="text-[#0C0C0C]/60">(09/2023 -- Present)</span>
-            </li>
-            <li>
-              <RLink href="https://www.minnetonkaschools.org/activities/mhs-athletics/sports/boys-tennis">MHS Tennis Team</RLink> --
-              Junior Varsity Athlete <span className="text-[#0C0C0C]/60">(03/2024 -- 05/2024)</span>
-            </li>
-            <li>
               <RLink href="https://www.instagram.com/minnetonkahosa/">MHS HOSA</RLink> (
               <RLink href="https://hosa.org/">Future Health Professionals</RLink>) -- Member{' '}
               <span className="text-[#0C0C0C]/60">(09/2024 -- Present)</span>
+            </li>
+            <li>
+              <RLink href="https://www.tiktok.com/@movievault_231">TikTok -- Content Creator</RLink> (1.1K Followers){' '}
+              <span className="text-[#0C0C0C]/60">(03/2024 -- Present)</span>
             </li>
             <li>
               <RLink href="https://www.minnetonkaschools.org/activities/hs-activities/clubs/deca">MHS DECA</RLink> -- Member{' '}
               <span className="text-[#0C0C0C]/60">(09/2023 -- Present)</span>
             </li>
             <li>
-              <RLink href="https://www.tiktok.com/@movievault_231">TikTok -- Content Creator</RLink> (1.1K Followers){' '}
-              <span className="text-[#0C0C0C]/60">(03/2024 -- Present)</span>
+              <RLink href="https://www.minnetonkaschools.org/activities/mhs-athletics/sports/boys-tennis">MHS Tennis Team</RLink> --
+              Junior Varsity Athlete <span className="text-[#0C0C0C]/60">(03/2024 -- 05/2024)</span>
             </li>
           </ul>
         </Section>
-      </>
-    ),
-  },
-  {
-    label: 'Page 3',
-    content: (
-      <>
+
         <Section title="Honors / Awards">
           <div className="space-y-4">
             <div>
@@ -411,9 +391,8 @@ const PAGES: { label: string; content: ReactNode }[] = [
                   <span className="text-[#0C0C0C]/60">(09/2026)</span>
                 </li>
                 <li>
-                  DECA -- 2nd Place, Regional Competition,{' '}
-                  <RLink href="https://www.deca.org/compete/international-business-plan">International Business Plan</RLink>{' '}
-                  <span className="text-[#0C0C0C]/60">(01/2025)</span>
+                  <RLink href="https://drive.google.com/file/d/1tH-H5o4TurfEAOjxOh-SDdyKDpXZ7_l6/view">AP Scholar with Distinction</RLink>{' '}
+                  <span className="text-[#0C0C0C]/60">(07/2026)</span>
                 </li>
                 <li>
                   BPA -- 1st Place, Regional Competition,{' '}
@@ -440,8 +419,9 @@ const PAGES: { label: string; content: ReactNode }[] = [
                   <span className="text-[#0C0C0C]/60">(03/2025)</span>
                 </li>
                 <li>
-                  <RLink href="https://drive.google.com/file/d/1tH-H5o4TurfEAOjxOh-SDdyKDpXZ7_l6/view">AP Scholar with Distinction</RLink>{' '}
-                  <span className="text-[#0C0C0C]/60">(07/2026)</span>
+                  DECA -- 2nd Place, Regional Competition,{' '}
+                  <RLink href="https://www.deca.org/compete/international-business-plan">International Business Plan</RLink>{' '}
+                  <span className="text-[#0C0C0C]/60">(01/2025)</span>
                 </li>
                 <li>
                   DECA -- State Finalist, Placed 5th <span className="text-[#0C0C0C]/60">(03/2024)</span>
@@ -453,14 +433,14 @@ const PAGES: { label: string; content: ReactNode }[] = [
               <p className="text-xs font-semibold uppercase tracking-wide text-[#0C0C0C]/60">Community Service</p>
               <ul className="mt-1 list-disc space-y-1 pl-5 text-sm leading-relaxed text-[#0C0C0C]/85">
                 <li>
-                  The Borgen Project --{' '}
-                  <RLink href="https://drive.google.com/file/d/1y_WS5OJnAew4dfPPE43HS-nf-UK39BzU/view">Chief Closer Award</RLink>{' '}
-                  <span className="text-[#0C0C0C]/60">(06/2026)</span>
-                </li>
-                <li>
                   The Remedy Project --{' '}
                   <RLink href="https://drive.google.com/file/d/1pt4jLtxbXIal8hQqp4gfO1fApBAnd_SP/view">Ally of the Incarcerated Award</RLink>{' '}
                   <span className="text-[#0C0C0C]/60">(09/2026)</span>
+                </li>
+                <li>
+                  The Borgen Project --{' '}
+                  <RLink href="https://drive.google.com/file/d/1y_WS5OJnAew4dfPPE43HS-nf-UK39BzU/view">Chief Closer Award</RLink>{' '}
+                  <span className="text-[#0C0C0C]/60">(06/2026)</span>
                 </li>
                 <li>
                   PVSA Gold <span className="text-[#0C0C0C]/60">(09/2023)</span>

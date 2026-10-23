@@ -489,16 +489,17 @@ export default function ResumePage() {
             <p className="mt-1 text-sm text-[#0C0C0C]/70">Chanhassen, MN</p>
             <p className="mt-0.5 text-sm text-[#0C0C0C]/70">
               <RLink href="mailto:pomaraarush@gmail.com">pomaraarush@gmail.com</RLink> |{' '}
-              <RLink href="https://aarush-pomar-personal-website-steel.vercel.app/">aarush-pomar-personal-website-steel.vercel.app</RLink>
+              <RLink href="tel:+19525000822">(952) 500-0822</RLink>
             </p>
           </div>
-          <button
-            type="button"
-            onClick={() => window.print()}
+          <a
+            href="/Aarush-Pomar-Resume.pdf"
+            target="_blank"
+            rel="noreferrer"
             className="print:hidden rounded-full border-2 border-[#0C0C0C] px-5 py-2 text-xs font-medium uppercase tracking-widest text-[#0C0C0C] transition-colors hover:bg-[#0C0C0C]/5"
           >
             Print / Save as PDF
-          </button>
+          </a>
         </header>
 
         <div className="print:hidden mb-10 mt-5 flex flex-wrap items-center gap-4">

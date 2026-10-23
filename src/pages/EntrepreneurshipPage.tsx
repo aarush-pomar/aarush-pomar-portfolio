@@ -109,14 +109,14 @@ export default function EntrepreneurshipPage() {
 
         <FeatureCard category="Neighborhood Business -- Co-Founder & Service Worker" title="Seasonal Services">
           <p>
-            I co-founded Seasonal Services with another student in my neighborhood in June 2023.
-            We help neighbors with jobs like mowing lawns, raking leaves, shoveling snow, painting
-            rooms, and looking after dogs.
+            In June 2023, I co-founded Seasonal Services with another student in my neighborhood.
+            We help neighbors with work around their homes throughout the year, including lawn
+            mowing, leaf raking, snow shoveling, interior painting, and dog care.
           </p>
           <p>
-            Alongside doing the work, I organize appointments, coordinate who handles each job,
-            collect payments, and stay in touch with customers to make sure they&rsquo;re happy
-            with the results.
+            I split the hands-on work with my co-founder and manage scheduling, job assignments,
+            and payments. I also keep customers updated and follow up after each job to make sure
+            they&rsquo;re satisfied with our work.
           </p>
 
           <div className="mt-6 grid gap-4 sm:grid-cols-3">

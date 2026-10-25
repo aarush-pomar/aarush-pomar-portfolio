@@ -71,7 +71,7 @@ export default function EntrepreneurshipPage() {
             cutting hair and collecting payments.
           </p>
           <p>
-            I donate all profits from pomar.blendz to{' '}
+            Donations from pomar.blendz support{' '}
             <a
               href="https://borgenproject.org/"
               target="_blank"

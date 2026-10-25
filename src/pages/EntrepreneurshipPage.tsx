@@ -65,7 +65,7 @@ export default function EntrepreneurshipPage() {
           actions={<PillLink href="https://www.instagram.com/pomar.blendz/">Instagram</PillLink>}
         >
           <p>
-            I started cutting hair for friends. Since then, I&rsquo;ve given 500+ haircuts and
+            I started cutting hair for friends. Since then, I&rsquo;ve given 550+ haircuts and
             built a client base of 150+ people, mostly local high school and college students. I
             run every part of the business, from booking appointments and buying supplies to
             cutting hair and collecting payments.

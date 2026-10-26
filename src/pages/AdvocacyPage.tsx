@@ -396,7 +396,7 @@ export default function AdvocacyPage() {
         </FeatureCard>
 
         <FeatureCard
-          category="Student Ambassador"
+          category="Student Advocate"
           title="Equality Labs"
           imageLabel="Equality Labs photo"
           imageSrc={equalityLabsCasteEquity}
@@ -407,7 +407,7 @@ export default function AdvocacyPage() {
         >
           <p>
             Equality Labs is a South Asian Dalit civil rights organization working to end caste
-            discrimination in the United States. I&rsquo;m a Student Ambassador, and its work
+            discrimination in the United States. I&rsquo;m a Student Advocate, and its work
             connects closely with my research on how different generations of South Asian
             families in Minnesota understand and discuss caste.
           </p>

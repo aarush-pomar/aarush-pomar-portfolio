@@ -486,7 +486,7 @@ export default function ResumePage() {
             <p className="mt-0.5 text-sm text-[#0C0C0C]/70">
               <RLink href="mailto:pomaraarush@gmail.com">pomaraarush@gmail.com</RLink> |{' '}
               <RLink href="tel:+19525000822">(952) 500-0822</RLink> |{' '}
-              <RLink href="https://www.aarushpomar.com">https://www.aarushpomar.com</RLink>
+              <RLink href="https://www.aarushpomar.com">aarushpomar.com</RLink>
             </p>
           </div>
           <button

@@ -37,7 +37,7 @@ interface MarqueePhoto {
 const ROW1: MarqueePhoto[] = [
   { src: econClubFirstMeeting, label: 'First Econ Club meeting ever' },
   { src: familyGraduation, label: "Family at my sister's graduation" },
-  { src: minnetonkaForumGroup, label: 'Minnetonka Forum team' },
+  { src: friendsConcertSunglasses, label: 'Summer concert' },
   { src: conferenceGroupSuits, label: 'DECA State' },
   { src: friendsNightLights, label: 'VANTAGE Health Sciences crew' },
   { src: santaMonicaSunset, label: 'Sunset at Santa Monica Pier', objectPosition: '20% center' },
@@ -56,7 +56,7 @@ const ROW2: MarqueePhoto[] = [
   { src: footballPlayerOveralls, label: 'Friday night lights, Minnetonka football' },
   { src: friendsHifiLake, label: 'HiFi on the Lake' },
   { src: minnsectShowStage, label: 'The Great Minnsect Show' },
-  { src: friendsConcertSunglasses, label: 'Summer concert' },
+  { src: minnetonkaForumGroup, label: 'Minnetonka Forum team' },
   { src: friendsSuitsWindowView, label: 'Suits with the guys' },
   { src: haircutBackTaper, label: 'Fresh taper' },
 ]

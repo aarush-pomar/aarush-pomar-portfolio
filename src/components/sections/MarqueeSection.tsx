@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import awardUmtympMom from '../../assets/photos/award-umtymp-mom.jpg'
 import familyGraduation from '../../assets/photos/family-graduation.jpg'
-import sisterGraduation from '../../assets/photos/sister-graduation.jpg'
+import footballPlayerOveralls from '../../assets/photos/football-player-overalls.jpg'
 import econClubFirstMeeting from '../../assets/photos/econ-club-first-meeting.jpg'
 import minnetonkaForumGroup from '../../assets/photos/minnetonka-forum-group.jpg'
 import friendsSuitsLake from '../../assets/photos/friends-suits-lake.jpg'
@@ -19,6 +19,7 @@ import friendsCarouselFair from '../../assets/photos/friends-carousel-fair.jpg'
 import friendsHifiLake from '../../assets/photos/friends-hifi-lake.jpg'
 import friendsConcertSunglasses from '../../assets/photos/friends-concert-sunglasses.jpg'
 import santaMonicaSunset from '../../assets/photos/santa-monica-sunset.jpg'
+import friendsSuitsWindowView from '../../assets/photos/friends-suits-window-view.jpg'
 
 interface MarqueePhoto {
   src: string
@@ -30,7 +31,7 @@ interface MarqueePhoto {
   objectPosition?: string
 }
 
-// 20 distinct photos now (11 + 9, tripled below for the seamless scroll
+// 21 distinct photos now (11 + 10, tripled below for the seamless scroll
 // loop) -- no repeats needed. Deliberately interleaved so the same category
 // (haircuts, prom, friends/concerts, family, academics) never appears twice
 // in a row within either row.
@@ -43,7 +44,7 @@ const ROW1: MarqueePhoto[] = [
   { src: santaMonicaSunset, label: 'Sunset at Santa Monica Pier', objectPosition: '20% center' },
   { src: borgenCheck, label: '$1,000 check for The Borgen Project' },
   { src: awardUmtympMom, label: 'UMTYMP graduation, with my mom' },
-  { src: sisterGraduation, label: 'With my sister, U of M graduation' },
+  { src: footballPlayerOveralls, label: 'Friday night lights, Minnetonka football' },
   { src: tennisBTeamSingles, label: 'Minnetonka B Team singles champion' },
   { src: friendsSuitsField, label: 'Prom dance at Veterans Field' },
 ]
@@ -57,6 +58,7 @@ const ROW2: MarqueePhoto[] = [
   { src: friendsHifiLake, label: 'HiFi on the Lake' },
   { src: minnsectShowStage, label: 'The Great Minnsect Show' },
   { src: friendsConcertSunglasses, label: 'Summer concert' },
+  { src: friendsSuitsWindowView, label: 'Suits with the guys' },
   { src: haircutBackTaper, label: 'Fresh taper' },
 ]
 

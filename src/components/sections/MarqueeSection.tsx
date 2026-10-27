@@ -17,7 +17,6 @@ import haircutBackTaper from '../../assets/photos/haircut-back-taper.jpg'
 import formalCoupleBackyard from '../../assets/photos/formal-couple-backyard.jpg'
 import friendsCarouselFair from '../../assets/photos/friends-carousel-fair.jpg'
 import friendsHifiLake from '../../assets/photos/friends-hifi-lake.jpg'
-import dadGhirardelli from '../../assets/photos/dad-ghirardelli.jpg'
 import friendsConcertSunglasses from '../../assets/photos/friends-concert-sunglasses.jpg'
 import santaMonicaSunset from '../../assets/photos/santa-monica-sunset.jpg'
 
@@ -31,7 +30,7 @@ interface MarqueePhoto {
   objectPosition?: string
 }
 
-// 21 distinct photos now (11 + 10, tripled below for the seamless scroll
+// 20 distinct photos now (11 + 9, tripled below for the seamless scroll
 // loop) -- no repeats needed. Deliberately interleaved so the same category
 // (haircuts, prom, friends/concerts, family, academics) never appears twice
 // in a row within either row.
@@ -52,12 +51,11 @@ const ROW1: MarqueePhoto[] = [
 const ROW2: MarqueePhoto[] = [
   { src: friendsCarouselFair, label: 'Friends at the fair' },
   { src: conferenceGroupSuits, label: 'DECA State' },
-  { src: dadGhirardelli, label: 'With my dad, San Francisco' },
+  { src: hosaSlcGroup, label: 'HOSA State Leadership Conference' },
   { src: haircutStudioChair, label: 'Between classes, haircut' },
   { src: formalCoupleBackyard, label: 'Formal night' },
   { src: friendsHifiLake, label: 'HiFi on the Lake' },
   { src: minnsectShowStage, label: 'The Great Minnsect Show' },
-  { src: hosaSlcGroup, label: 'HOSA State Leadership Conference' },
   { src: friendsConcertSunglasses, label: 'Summer concert' },
   { src: haircutBackTaper, label: 'Fresh taper' },
 ]

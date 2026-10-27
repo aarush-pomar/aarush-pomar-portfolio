@@ -14,7 +14,6 @@ import conferenceGroupSuits from '../../assets/photos/conference-group-suits.jpg
 import hosaSlcGroup from '../../assets/photos/hosa-slc-group.webp'
 import minnsectShowStage from '../../assets/photos/minnsect-show-stage.jpg'
 import haircutBackTaper from '../../assets/photos/haircut-back-taper.jpg'
-import formalCoupleBackyard from '../../assets/photos/formal-couple-backyard.jpg'
 import friendsCarouselFair from '../../assets/photos/friends-carousel-fair.jpg'
 import friendsHifiLake from '../../assets/photos/friends-hifi-lake.jpg'
 import friendsConcertSunglasses from '../../assets/photos/friends-concert-sunglasses.jpg'
@@ -31,15 +30,15 @@ interface MarqueePhoto {
   objectPosition?: string
 }
 
-// 21 distinct photos now (11 + 10, tripled below for the seamless scroll
-// loop) -- no repeats needed. Deliberately interleaved so the same category
-// (haircuts, prom, friends/concerts, family, academics) never appears twice
-// in a row within either row.
+// 21 slots (11 + 10, tripled below for the seamless scroll loop); the
+// football photo appears in both rows by request. Deliberately interleaved
+// so the same category (haircuts, prom, friends/concerts, family, academics)
+// never appears twice in a row within either row.
 const ROW1: MarqueePhoto[] = [
   { src: econClubFirstMeeting, label: 'First Econ Club meeting ever' },
   { src: familyGraduation, label: "Family at my sister's graduation" },
   { src: minnetonkaForumGroup, label: 'Minnetonka Forum team' },
-  { src: friendsSuitsLake, label: 'Prom night at Excelsior Commons' },
+  { src: conferenceGroupSuits, label: 'DECA State' },
   { src: friendsNightLights, label: 'VANTAGE Health Sciences crew' },
   { src: santaMonicaSunset, label: 'Sunset at Santa Monica Pier', objectPosition: '20% center' },
   { src: borgenCheck, label: '$1,000 check for The Borgen Project' },
@@ -51,10 +50,10 @@ const ROW1: MarqueePhoto[] = [
 
 const ROW2: MarqueePhoto[] = [
   { src: friendsCarouselFair, label: 'Friends at the fair' },
-  { src: conferenceGroupSuits, label: 'DECA State' },
+  { src: friendsSuitsLake, label: 'Prom night at Excelsior Commons' },
   { src: hosaSlcGroup, label: 'HOSA State Leadership Conference' },
   { src: haircutStudioChair, label: 'Between classes, haircut' },
-  { src: formalCoupleBackyard, label: 'Formal night' },
+  { src: footballPlayerOveralls, label: 'Friday night lights, Minnetonka football' },
   { src: friendsHifiLake, label: 'HiFi on the Lake' },
   { src: minnsectShowStage, label: 'The Great Minnsect Show' },
   { src: friendsConcertSunglasses, label: 'Summer concert' },

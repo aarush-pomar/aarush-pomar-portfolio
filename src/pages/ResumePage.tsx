@@ -256,6 +256,15 @@ const PAGES: { label: string; content: ReactNode }[] = [
                 title: <RLink href="https://www.instagram.com/mtkadsu/">Desi Student Union</RLink>,
                 org: 'Officer',
                 dates: '09/2023 -- Present',
+                bullets: [
+                  <>
+                    Support{' '}
+                    <RLink href="https://www.congress.gov/bill/119th-congress/house-resolution/819">H.Res. 819 (119th Congress)</RLink>,
+                    &ldquo;Recognizing the contributions made to the United States by the Indian American diaspora and condemning
+                    recent acts of racism against Indian Americans,&rdquo; introduced by{' '}
+                    <RLink href="https://suozzi.house.gov/">Rep. Tom Suozzi</RLink>
+                  </>,
+                ],
               },
             ]}
           />
@@ -489,13 +498,14 @@ export default function ResumePage() {
               <RLink href="https://www.aarushpomar.com">aarushpomar.com</RLink>
             </p>
           </div>
-          <button
-            type="button"
-            onClick={() => window.print()}
+          <a
+            href="/Aarush-Pomar-Resume.pdf"
+            target="_blank"
+            rel="noreferrer"
             className="print:hidden rounded-full border-2 border-[#0C0C0C] px-5 py-2 text-xs font-medium uppercase tracking-widest text-[#0C0C0C] transition-colors hover:bg-[#0C0C0C]/5"
           >
             Print / Save as PDF
-          </button>
+          </a>
         </header>
 
         <div className="print:hidden mb-10 mt-5 flex flex-wrap items-center gap-4">

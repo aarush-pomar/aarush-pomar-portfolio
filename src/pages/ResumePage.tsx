@@ -87,24 +87,6 @@ const PAGES: { label: string; content: ReactNode }[] = [
 
             <div>
               <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-0.5">
-                <p className="font-semibold text-[#0C0C0C]">University of Minnesota</p>
-                <p className="whitespace-nowrap text-sm text-[#0C0C0C]/60">09/2021 -- 06/2026</p>
-              </div>
-              <p className="mt-1">
-                <RLink href="https://cse.umn.edu/mathcep/university-minnesota-talented-youth-mathematics-program-umtymp">
-                  Talented Youth Mathematics Program (UMTYMP)
-                </RLink>
-              </p>
-              <ul className="mt-0.5 list-disc space-y-0.5 pl-5">
-                <li>
-                  Completed UMTYMP <RLink href="https://cse.umn.edu/mathcep/course-listing">Calculus I&ndash;III</RLink>; earned 12 university
-                  credits
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-0.5">
                 <p className="font-semibold text-[#0C0C0C]">Cornell University</p>
                 <p className="whitespace-nowrap text-sm text-[#0C0C0C]/60">07/2026</p>
               </div>
@@ -121,6 +103,24 @@ const PAGES: { label: string; content: ReactNode }[] = [
                 </li>
               </ul>
             </div>
+
+            <div>
+              <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-0.5">
+                <p className="font-semibold text-[#0C0C0C]">University of Minnesota</p>
+                <p className="whitespace-nowrap text-sm text-[#0C0C0C]/60">09/2021 -- 06/2026</p>
+              </div>
+              <p className="mt-1">
+                <RLink href="https://cse.umn.edu/mathcep/university-minnesota-talented-youth-mathematics-program-umtymp">
+                  Talented Youth Mathematics Program (UMTYMP)
+                </RLink>
+              </p>
+              <ul className="mt-0.5 list-disc space-y-0.5 pl-5">
+                <li>
+                  Completed UMTYMP <RLink href="https://cse.umn.edu/mathcep/course-listing">Calculus I&ndash;III</RLink>; earned 12 university
+                  credits
+                </li>
+              </ul>
+            </div>
           </div>
         </Section>
 
@@ -133,7 +133,7 @@ const PAGES: { label: string; content: ReactNode }[] = [
                   &ldquo;Economic Fallout and Financial Adaptation in the Wake of ICE Activity in Minnesota&rdquo;
                 </span>{' '}
                 (In Process). Mentor:{' '}
-                <RLink href="https://fsos.umn.edu/people/graduates/miguel-quinones">Professor Miguel Qui&ntilde;ones</RLink>, University
+                <RLink href="https://fsos.umn.edu/people/graduates/miguel-quinones">Miguel Qui&ntilde;ones</RLink>, University
                 of Minnesota Twin Cities.
               </p>
               <p className="mt-1">
@@ -249,11 +249,7 @@ const PAGES: { label: string; content: ReactNode }[] = [
                 org: 'Co-President',
                 dates: '11/2024 -- Present',
                 bullets: [
-                  'Co-lead an annual themed forum connecting 100+ students with CEOs',
-                  <>
-                    Work with the <RLink href="https://www.linkedin.com/in/jeffrey-erickson-13452b1b/">MHS principal</RLink>, our faculty
-                    advisor, on event approval and scheduling
-                  </>,
+                  'Co-lead an annual themed forum connecting 100+ students with 7 CEOs',
                 ],
               },
               {
@@ -340,7 +336,7 @@ const PAGES: { label: string; content: ReactNode }[] = [
               },
               {
                 title: <RLink href="https://www.si.edu/">Smithsonian</RLink>,
-                org: 'Digital Transcriptor',
+                org: 'Digital Transcriber',
                 dates: '06/2023 -- Present',
                 bullets: [
                   <>
@@ -387,7 +383,7 @@ const PAGES: { label: string; content: ReactNode }[] = [
               <p className="text-xs font-semibold uppercase tracking-wide text-[#0C0C0C]/60">Academic</p>
               <ul className="mt-1 list-disc space-y-1 pl-5 text-sm leading-relaxed text-[#0C0C0C]/85">
                 <li>
-                  <RLink href="https://kommodo.ai/i/fPmu8QeZrkREZMSCWR4q">National Merit Commended Scholar</RLink>, PSAT/NMSQT{' '}
+                  <RLink href="https://kommodo.ai/i/fPmu8QeZrkREZMSCWR4q">National Merit Commended Scholar</RLink> (34K/1.2M), PSAT/NMSQT{' '}
                   <span className="text-[#0C0C0C]/60">(09/2026)</span>
                 </li>
                 <li>
@@ -489,17 +485,17 @@ export default function ResumePage() {
             <p className="mt-1 text-sm text-[#0C0C0C]/70">Chanhassen, MN</p>
             <p className="mt-0.5 text-sm text-[#0C0C0C]/70">
               <RLink href="mailto:pomaraarush@gmail.com">pomaraarush@gmail.com</RLink> |{' '}
-              <RLink href="tel:+19525000822">(952) 500-0822</RLink>
+              <RLink href="tel:+19525000822">(952) 500-0822</RLink> |{' '}
+              <RLink href="https://www.aarushpomar.com">https://www.aarushpomar.com</RLink>
             </p>
           </div>
-          <a
-            href="/Aarush-Pomar-Resume.pdf"
-            target="_blank"
-            rel="noreferrer"
+          <button
+            type="button"
+            onClick={() => window.print()}
             className="print:hidden rounded-full border-2 border-[#0C0C0C] px-5 py-2 text-xs font-medium uppercase tracking-widest text-[#0C0C0C] transition-colors hover:bg-[#0C0C0C]/5"
           >
             Print / Save as PDF
-          </a>
+          </button>
         </header>
 
         <div className="print:hidden mb-10 mt-5 flex flex-wrap items-center gap-4">

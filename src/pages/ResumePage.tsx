@@ -481,29 +481,21 @@ const PAGES: { label: string; content: ReactNode }[] = [
 // sheet 1 vs. sheet 2), not a navigation device -- so the on-screen version
 // shows every page in normal vertical document flow, each one framed as its
 // own sheet, rather than gating page 2 behind a click.
-// Only Page 1 carries the name/contact/download header -- it's part of that
-// sheet's own content (like the letterhead at the top of an actual printed
-// page 1), not a separate card floating above the two sheets.
+// Only Page 1 carries the name/contact header -- it's part of that sheet's
+// own content (like the letterhead at the top of an actual printed page 1),
+// not a separate card floating above the two sheets. The download link is
+// NOT part of this -- it's a site control, not resume content, so it lives
+// outside the sheet entirely (see the small bar above the pages below).
 function ResumeHeader() {
   return (
-    <header className="flex flex-wrap items-start justify-between gap-4 border-b-2 border-[#0C0C0C] pb-4">
-      <div>
-        <h1 className="text-3xl font-bold uppercase tracking-tight">Aarush Pomar</h1>
-        <p className="mt-1 text-sm text-[#0C0C0C]/70">Chanhassen, MN</p>
-        <p className="mt-0.5 text-sm text-[#0C0C0C]/70">
-          <RLink href="mailto:pomaraarush@gmail.com">pomaraarush@gmail.com</RLink> |{' '}
-          <RLink href="tel:+19525000822">(952) 500-0822</RLink> |{' '}
-          <RLink href="https://www.aarushpomar.com">aarushpomar.com</RLink>
-        </p>
-      </div>
-      <a
-        href="/Aarush-Pomar-Resume.pdf"
-        target="_blank"
-        rel="noreferrer"
-        className="print:hidden rounded-full border-2 border-[#0C0C0C] px-5 py-2 text-xs font-medium uppercase tracking-widest text-[#0C0C0C] transition-colors hover:bg-[#0C0C0C]/5"
-      >
-        Download R&eacute;sum&eacute; (PDF)
-      </a>
+    <header className="border-b-2 border-[#0C0C0C] pb-4">
+      <h1 className="text-3xl font-bold uppercase tracking-tight">Aarush Pomar</h1>
+      <p className="mt-1 text-sm text-[#0C0C0C]/70">Chanhassen, MN</p>
+      <p className="mt-0.5 text-sm text-[#0C0C0C]/70">
+        <RLink href="mailto:pomaraarush@gmail.com">pomaraarush@gmail.com</RLink> |{' '}
+        <RLink href="tel:+19525000822">(952) 500-0822</RLink> |{' '}
+        <RLink href="https://www.aarushpomar.com">aarushpomar.com</RLink>
+      </p>
     </header>
   )
 }
@@ -530,6 +522,17 @@ export default function ResumePage() {
       </div>
 
       <main className="mx-auto max-w-3xl px-4 py-6 print:max-w-none print:px-0 print:py-0 sm:px-6 sm:py-8">
+        <div className="print:hidden mb-4 flex justify-end">
+          <a
+            href="/Aarush-Pomar-Resume.pdf"
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-full border-2 border-[#0C0C0C] px-5 py-2 text-xs font-medium uppercase tracking-widest text-[#0C0C0C] transition-colors hover:bg-[#0C0C0C]/5"
+          >
+            Download R&eacute;sum&eacute; (PDF)
+          </a>
+        </div>
+
         <div className="flex flex-col gap-8 print:gap-0">
           {PAGES.map((p, i) => (
             <ResumeSheet key={p.label} page={p} index={i} />

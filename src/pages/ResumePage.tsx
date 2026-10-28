@@ -481,12 +481,40 @@ const PAGES: { label: string; content: ReactNode }[] = [
 // sheet 1 vs. sheet 2), not a navigation device -- so the on-screen version
 // shows every page in normal vertical document flow, each one framed as its
 // own sheet, rather than gating page 2 behind a click.
+// Only Page 1 carries the name/contact/download header -- it's part of that
+// sheet's own content (like the letterhead at the top of an actual printed
+// page 1), not a separate card floating above the two sheets.
+function ResumeHeader() {
+  return (
+    <header className="flex flex-wrap items-start justify-between gap-4 border-b-2 border-[#0C0C0C] pb-4">
+      <div>
+        <h1 className="text-3xl font-bold uppercase tracking-tight">Aarush Pomar</h1>
+        <p className="mt-1 text-sm text-[#0C0C0C]/70">Chanhassen, MN</p>
+        <p className="mt-0.5 text-sm text-[#0C0C0C]/70">
+          <RLink href="mailto:pomaraarush@gmail.com">pomaraarush@gmail.com</RLink> |{' '}
+          <RLink href="tel:+19525000822">(952) 500-0822</RLink> |{' '}
+          <RLink href="https://www.aarushpomar.com">aarushpomar.com</RLink>
+        </p>
+      </div>
+      <a
+        href="/Aarush-Pomar-Resume.pdf"
+        target="_blank"
+        rel="noreferrer"
+        className="print:hidden rounded-full border-2 border-[#0C0C0C] px-5 py-2 text-xs font-medium uppercase tracking-widest text-[#0C0C0C] transition-colors hover:bg-[#0C0C0C]/5"
+      >
+        Download R&eacute;sum&eacute; (PDF)
+      </a>
+    </header>
+  )
+}
+
 function ResumeSheet({ page, index }: { page: { label: string; content: ReactNode }; index: number }) {
   return (
     <div
       className="relative rounded-sm border border-[#0C0C0C]/25 bg-white px-6 py-10 shadow-[0_1px_3px_rgba(12,12,12,0.06),0_12px_32px_-16px_rgba(12,12,12,0.22)] sm:px-10 sm:py-12 md:px-14 print:rounded-none print:border-0 print:px-0 print:py-0 print:shadow-none print:[break-after:page] print:last:[break-after:auto]"
     >
-      {page.content}
+      {index === 0 && <ResumeHeader />}
+      <div className={index === 0 ? 'mt-8' : undefined}>{page.content}</div>
       <p className="print:hidden mt-10 text-center text-[11px] font-medium uppercase tracking-widest text-[#0C0C0C]/70">
         Page {index + 1} of {PAGES.length}
       </p>
@@ -501,28 +529,8 @@ export default function ResumePage() {
         <SiteNav />
       </div>
 
-      <main className="mx-auto max-w-3xl px-4 py-10 print:max-w-none print:px-0 print:py-0 sm:px-6 sm:py-12">
-        <header className="flex flex-wrap items-start justify-between gap-4 rounded-sm border border-[#0C0C0C]/25 bg-white px-6 py-6 shadow-[0_1px_3px_rgba(12,12,12,0.06)] print:rounded-none print:border-0 print:border-b-2 print:border-b-[#0C0C0C] print:px-0 print:pb-4 print:pt-0 print:shadow-none sm:px-10 md:px-14">
-          <div>
-            <h1 className="text-3xl font-bold uppercase tracking-tight">Aarush Pomar</h1>
-            <p className="mt-1 text-sm text-[#0C0C0C]/70">Chanhassen, MN</p>
-            <p className="mt-0.5 text-sm text-[#0C0C0C]/70">
-              <RLink href="mailto:pomaraarush@gmail.com">pomaraarush@gmail.com</RLink> |{' '}
-              <RLink href="tel:+19525000822">(952) 500-0822</RLink> |{' '}
-              <RLink href="https://www.aarushpomar.com">aarushpomar.com</RLink>
-            </p>
-          </div>
-          <a
-            href="/Aarush-Pomar-Resume.pdf"
-            target="_blank"
-            rel="noreferrer"
-            className="print:hidden rounded-full border-2 border-[#0C0C0C] px-5 py-2 text-xs font-medium uppercase tracking-widest text-[#0C0C0C] transition-colors hover:bg-[#0C0C0C]/5"
-          >
-            Download R&eacute;sum&eacute; (PDF)
-          </a>
-        </header>
-
-        <div className="mt-10 flex flex-col gap-8 print:mt-0 print:gap-0">
+      <main className="mx-auto max-w-3xl px-4 py-6 print:max-w-none print:px-0 print:py-0 sm:px-6 sm:py-8">
+        <div className="flex flex-col gap-8 print:gap-0">
           {PAGES.map((p, i) => (
             <ResumeSheet key={p.label} page={p} index={i} />
           ))}

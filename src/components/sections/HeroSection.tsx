@@ -20,7 +20,7 @@ export default function HeroSection({ navRef }: HeroSectionProps) {
     <section ref={sectionRef} className="relative flex h-screen flex-col" style={{ overflowX: 'clip' }}>
       <div className="overflow-hidden px-6 pt-14 md:px-10 md:pt-20">
         <FadeIn delay={0.15} y={40}>
-          <h1 className="mt-6 w-full select-none font-black uppercase leading-[0.95] tracking-tighter text-[#0C0C0C] sm:mt-4 md:-mt-2">
+          <h1 className="hero-heading mt-6 w-full select-none font-black uppercase leading-[0.95] tracking-tighter sm:mt-4 md:-mt-2">
             <FitText text="Hello, I am" className="block whitespace-nowrap" />
             <FitText text="Aarush Pomar" className="block whitespace-nowrap" />
           </h1>
@@ -44,7 +44,7 @@ export default function HeroSection({ navRef }: HeroSectionProps) {
       <div className="flex items-end justify-between px-6 pb-7 sm:px-8 sm:pb-8 md:px-10 md:pb-10">
         <FadeIn delay={0.35} y={20}>
           <p
-            className="max-w-[160px] font-light uppercase leading-snug tracking-wide text-[#0C0C0C] sm:max-w-[220px] md:max-w-[260px]"
+            className="max-w-[160px] font-light uppercase leading-snug tracking-wide text-[#D7E2EA] sm:max-w-[220px] md:max-w-[260px]"
             style={{ fontSize: 'clamp(0.75rem, 1.4vw, 1.5rem)' }}
           >
             a student, social entrepreneur, and advocate turning everyday skills into impact
@@ -60,7 +60,7 @@ export default function HeroSection({ navRef }: HeroSectionProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.2, duration: 0.6 }}
         >
-          <div className="flex flex-col items-center gap-2 text-[#0C0C0C]/60">
+          <div className="flex flex-col items-center gap-2 text-[#D7E2EA]/60">
             <span className="text-xs font-medium uppercase tracking-widest">Scroll</span>
             <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5, ease: 'easeInOut' }}>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">

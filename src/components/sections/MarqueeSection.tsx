@@ -61,7 +61,7 @@ const ROW2: MarqueePhoto[] = [
   { src: haircutBackTaper, label: 'Fresh taper' },
 ]
 
-const TILE_CLASS = 'h-[340px] w-[255px] shrink-0 overflow-hidden rounded-2xl bg-[#0C0C0C]/[0.06]'
+const TILE_CLASS = 'h-[340px] w-[255px] shrink-0 overflow-hidden rounded-2xl bg-black'
 
 function tripled(row: MarqueePhoto[]) {
   return [...row, ...row, ...row]
@@ -137,7 +137,7 @@ export default function MarqueeSection() {
   const row2TranslateX = wrap(-(offset - 200), row2Width) - row2Width
 
   return (
-    <section ref={sectionRef} className="overflow-hidden pb-10 pt-24 sm:pt-32 md:pt-40">
+    <section ref={sectionRef} className="overflow-hidden bg-[#0C0C0C] pb-10 pt-24 sm:pt-32 md:pt-40">
       <div className="flex flex-col gap-3">
         <div
           ref={row1Ref}

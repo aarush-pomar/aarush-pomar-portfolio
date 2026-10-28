@@ -142,7 +142,11 @@ export default function HomeIntroSection() {
   }, [])
 
   return (
-    <section className="px-5 py-5 sm:px-8 sm:py-6 md:px-10 md:py-7">
+    // Explicit light background: the rest of the home page (Hero, the photo
+    // marquee) is dark, inherited from the page/body default -- this letter
+    // section is the one deliberate exception, so it needs its own bg rather
+    // than relying on that shared default.
+    <section className="bg-[#F2F1EE] px-5 py-5 sm:px-8 sm:py-6 md:px-10 md:py-7">
       <div
         ref={containerRef}
         className="mx-auto grid max-w-7xl gap-6 md:grid-cols-[var(--photo-w)_var(--text-w)] md:items-start md:justify-center md:gap-12"

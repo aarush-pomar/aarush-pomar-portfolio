@@ -522,11 +522,7 @@ export default function ResumePage() {
           </a>
         </header>
 
-        <p className="print:hidden mb-6 mt-4 text-center text-xs uppercase tracking-widest text-[#0C0C0C]/60">
-          Scroll to keep reading &mdash; {PAGES.length} pages
-        </p>
-
-        <div className="flex flex-col gap-8 print:gap-0">
+        <div className="mt-10 flex flex-col gap-8 print:mt-0 print:gap-0">
           {PAGES.map((p, i) => (
             <ResumeSheet key={p.label} page={p} index={i} />
           ))}

@@ -429,6 +429,7 @@ export default function AdvocacyPage() {
           title="The Remedy Project"
           imageLabel="Remedy Project photo"
           imageSrc={remedyProjectLogo}
+          imageFit="contain"
           actions={<PillLink href="https://www.theremedyproj.org/">Website</PillLink>}
           stretchPhoto
           maxPhotoColumnWidth={300}

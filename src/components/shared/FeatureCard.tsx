@@ -13,6 +13,13 @@ interface FeatureCardProps {
   imageCaption?: string
   /** Width / height of the main photo -- shows it uncropped instead of forcing a square. */
   imageAspectRatio?: number
+  /**
+   * 'cover' (default): fills its box, cropping overflow. 'contain': shows the
+   * whole image letterboxed instead -- use this for a logo/graphic with its
+   * own border or edge detail, where `stretchPhoto`'s taller box would
+   * otherwise crop that edge away on one or both sides.
+   */
+  imageFit?: 'cover' | 'contain'
   /** More photos beside/under the main one, each with the same click-to-enlarge. */
   extraImages?: { src: string; label: string; caption?: string; objectPosition?: string; fullSrc?: string; aspectRatio?: number }[]
   /**
@@ -74,6 +81,7 @@ function CardPhoto({
   alwaysSquare,
   aspectRatio,
   stretchHeight,
+  fit = 'cover',
 }: {
   src?: string
   label: string
@@ -92,6 +100,8 @@ function CardPhoto({
   // `stretchPhoto` prop. null/undefined means "no measurement yet, or below
   // md" -- falls back to aspect-square so it still has SOME size.
   stretchHeight?: number | null
+  // See FeatureCard's `imageFit`.
+  fit?: 'cover' | 'contain'
 }) {
   const [lightboxOpen, setLightboxOpen] = useState(false)
   const hasStretchHeight = stretchHeight != null
@@ -109,9 +119,9 @@ function CardPhoto({
           <img
             src={src}
             alt={label}
-            className={`w-full object-cover transition-transform duration-500 group-hover:scale-105 ${
-              hasStretchHeight ? 'h-full' : `aspect-square ${alwaysSquare ? '' : 'sm:aspect-[4/3] md:aspect-square'}`
-            }`}
+            className={`w-full transition-transform duration-500 group-hover:scale-105 ${
+              fit === 'contain' ? 'object-contain' : 'object-cover'
+            } ${hasStretchHeight ? 'h-full' : `aspect-square ${alwaysSquare ? '' : 'sm:aspect-[4/3] md:aspect-square'}`}`}
             style={objectPosition || aspectRatio ? { objectPosition, aspectRatio } : undefined}
             loading="lazy"
           />
@@ -135,6 +145,7 @@ export default function FeatureCard({
   imageSrc,
   imageCaption,
   imageAspectRatio,
+  imageFit,
   extraImages,
   photoLayout = 'side',
   photoColumnWidth = 230,
@@ -285,6 +296,7 @@ export default function FeatureCard({
               aspectRatio={imageAspectRatio}
               alwaysSquare={photoRow}
               stretchHeight={stretchEnabled ? stretchHeight : undefined}
+              fit={imageFit}
             />
             {extraImages?.map((extra) => (
               <CardPhoto

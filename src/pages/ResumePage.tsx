@@ -487,7 +487,7 @@ function ResumeSheet({ page, index }: { page: { label: string; content: ReactNod
       className="relative rounded-sm border border-[#0C0C0C]/25 bg-white px-6 py-10 shadow-[0_1px_3px_rgba(12,12,12,0.06),0_12px_32px_-16px_rgba(12,12,12,0.22)] sm:px-10 sm:py-12 md:px-14 print:rounded-none print:border-0 print:px-0 print:py-0 print:shadow-none print:[break-after:page] print:last:[break-after:auto]"
     >
       {page.content}
-      <p className="print:hidden mt-10 text-center text-[11px] uppercase tracking-widest text-[#0C0C0C]/55">
+      <p className="print:hidden mt-10 text-center text-[11px] font-medium uppercase tracking-widest text-[#0C0C0C]/70">
         Page {index + 1} of {PAGES.length}
       </p>
     </div>

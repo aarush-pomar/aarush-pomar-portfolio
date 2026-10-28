@@ -113,7 +113,13 @@ function CardPhoto({
           type="button"
           onClick={() => setLightboxOpen(true)}
           aria-label={`Enlarge photo: ${label}`}
-          className="group relative block w-full cursor-zoom-in overflow-hidden rounded-2xl"
+          // 'contain' images (logos/graphics with their own edge detail, e.g.
+          // a border baked into the artwork) aren't cropped, so their actual
+          // rendered edges sit right at the box's edges -- rounding the box
+          // itself would clip the corners of that artwork. Only 'cover'
+          // images (which always overflow and get cropped anyway) get the
+          // rounded corners.
+          className={`group relative block w-full cursor-zoom-in overflow-hidden ${fit === 'contain' ? '' : 'rounded-2xl'}`}
           style={hasStretchHeight ? { height: stretchHeight } : undefined}
         >
           <img

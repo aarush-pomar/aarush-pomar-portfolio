@@ -3,7 +3,8 @@ import type { ReactNode } from 'react'
 
 interface ResearchEntry {
   id?: string
-  citation: ReactNode
+  title: ReactNode
+  meta: ReactNode
   abstract: ReactNode[]
 }
 
@@ -12,8 +13,14 @@ function ResearchEntry({ entry, isFirst }: { entry: ResearchEntry; isFirst: bool
     <div id={entry.id} className="scroll-mt-24">
       {!isFirst && <hr className="border-t border-[#1a1a1a]/15" />}
       <div className={`${isFirst ? '' : 'pt-10'} pb-10`}>
-        <p className="font-bitter text-base font-normal leading-loose text-[#1a1a1a] sm:text-lg">
-          {entry.citation}
+        <p className="font-bitter text-xs font-semibold uppercase tracking-[0.2em] text-[#1a1a1a]/55">
+          Pomar, A.
+        </p>
+        <h2 className="font-bitter mt-2 text-2xl font-black italic leading-tight text-[#1a1a1a] sm:text-3xl md:text-4xl">
+          &ldquo;{entry.title}&rdquo;
+        </h2>
+        <p className="font-bitter mt-3 text-sm leading-relaxed text-[#1a1a1a]/70 sm:text-base">
+          {entry.meta}
         </p>
       </div>
 
@@ -35,13 +42,9 @@ function ResearchEntry({ entry, isFirst }: { entry: ResearchEntry; isFirst: bool
 
 const ENTRIES: ResearchEntry[] = [
   {
-    citation: (
+    title: 'Economic Fallout and Financial Adaptation in the Wake of ICE Activity in Minnesota',
+    meta: (
       <>
-        Pomar, A.{' '}
-        <span className="font-semibold italic">
-          &ldquo;Economic Fallout and Financial Adaptation in the Wake of ICE Activity in
-          Minnesota&rdquo;
-        </span>{' '}
         (In Process). Mentor: Professor Miguel Qui&ntilde;ones, University of Minnesota Twin
         Cities.
       </>
@@ -65,13 +68,9 @@ const ENTRIES: ResearchEntry[] = [
   },
   {
     id: 'caste-research',
-    citation: (
+    title: 'Caste Awareness and Identity Across Generations in Minnesota’s South Asian Diaspora',
+    meta: (
       <>
-        Pomar, A.{' '}
-        <span className="font-semibold italic">
-          &ldquo;Caste Awareness and Identity Across Generations in Minnesota&rsquo;s South Asian
-          Diaspora&rdquo;
-        </span>{' '}
         (In Process). Mentor: Dr. Zubin DeVitre,
         University of Wisconsin&ndash;Madison.
       </>

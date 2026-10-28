@@ -175,12 +175,7 @@ const PAGES: { label: string; content: ReactNode }[] = [
                 title: <RLink href="https://minne-sortanice.com/">Minne-Sorta-Nice</RLink>,
                 org: 'MHS Virtual Enterprise -- Chief Financial Officer',
                 dates: '09/2026 -- Present',
-                bullets: [
-                  <>
-                    Unpaid leadership position in a student-run company through MHS{' '}
-                    <RLink href="https://veinternational.org/for-schools/">Virtual Enterprise</RLink> course.
-                  </>,
-                ],
+                bullets: ['Run payroll and manage a $1.33M virtual bank account for a 20-student firm'],
               },
               {
                 title: <RLink href="https://borgenproject.org/">The Borgen Project</RLink>,
@@ -209,7 +204,7 @@ const PAGES: { label: string; content: ReactNode }[] = [
                 org: 'President',
                 dates: '10/2025 -- Present',
                 bullets: [
-                  'Lead monthly chapter meetings for 250+ members',
+                  "Lead 250+ member chapter; plan induction ceremony (650+), Minnetonka's only 100% student-led event",
                   <>
                     Proposed MHS NHS&rsquo;s first blood drive; plan with officers and the{' '}
                     <RLink href="https://www.redcrossblood.org/">American Red Cross</RLink>
@@ -220,7 +215,7 @@ const PAGES: { label: string; content: ReactNode }[] = [
                 title: <RLink href="https://bpa.org/">Business Professionals of America (BPA)</RLink>,
                 org: 'Vice President',
                 dates: '09/2025 -- Present',
-                bullets: ['Help lead chapter meetings and activities for 110+ members'],
+                bullets: ['Help lead chapter meetings and activities; grew membership 175%, from 40 to 110+ members'],
               },
               {
                 title: (
@@ -256,6 +251,7 @@ const PAGES: { label: string; content: ReactNode }[] = [
                 org: 'Officer',
                 dates: '09/2023 -- Present',
                 bullets: [
+                  'Plan joint events uniting 150 students across Desi, Hispanic, and Asian Student Union',
                   <>
                     Support{' '}
                     <RLink href="https://www.congress.gov/bill/119th-congress/house-resolution/819">H.Res. 819 (119th Congress)</RLink>,
@@ -283,13 +279,13 @@ const PAGES: { label: string; content: ReactNode }[] = [
                 org: 'Founder & Freelance Barber',
                 dates: '10/2024 -- Present',
                 bullets: [
-                  'Provide haircutting services to a recurring clientele of 150+ people',
+                  'Barbering social enterprise: 550+ cuts for 150+ recurring clients; ~$10K revenue',
                   <>
                     Create <RLink href="https://www.instagram.com/pomar.blendz/">Instagram</RLink> content averaging{' '}
                     <RLink href="https://www.instagram.com/pomar.blendz/reels/">7.5K views per reel</RLink>
                   </>,
                   <>
-                    Donate all profits to <RLink href="https://borgenproject.org/">The Borgen Project</RLink> and{' '}
+                    Donations support <RLink href="https://borgenproject.org/">The Borgen Project</RLink> and{' '}
                     <RLink href="https://www.theremedyproj.org/">The Remedy Project</RLink>
                   </>,
                 ],
@@ -298,10 +294,7 @@ const PAGES: { label: string; content: ReactNode }[] = [
                 title: <RLink href="/entrepreneurship">Seasonal Services</RLink>,
                 org: 'Co-Founder',
                 dates: '06/2023 -- Present',
-                bullets: [
-                  'Provide lawn mowing, dog sitting, and other yard and household services',
-                  'Partner with one co-founder to organize and complete jobs for local residents',
-                ],
+                bullets: ['Provide lawn mowing, dog sitting, and other yard and household services to 45+ clients'],
               },
             ]}
           />
@@ -315,8 +308,9 @@ const PAGES: { label: string; content: ReactNode }[] = [
                 org: 'Student Ambassador',
                 dates: '09/2025 -- Present',
                 bullets: [
+                  'Champion court access for 1.9M incarcerated people',
                   <>
-                    Advocate for repeal of the <RLink href="https://www.congress.gov/bill/104th-congress/senate-bill/866">Prison Litigation Reform Act</RLink>
+                    Advocate for repeal of the <RLink href="https://www.congress.gov/bill/104th-congress/senate-bill/866">Prison Litigation Reform Act</RLink>, including its 150% attorney-fee cap
                   </>,
                 ],
               },
@@ -348,8 +342,7 @@ const PAGES: { label: string; content: ReactNode }[] = [
                 dates: '06/2023 -- Present',
                 bullets: [
                   <>
-                    <RLink href="https://transcription.si.edu/">Transcribe historical documents</RLink> to support public accessibility
-                    and digital archiving
+                    <RLink href="https://transcription.si.edu/">Transcribed</RLink> 733 pages and reviewed 262 across 77 projects for public access
                   </>,
                 ],
               },
@@ -357,7 +350,7 @@ const PAGES: { label: string; content: ReactNode }[] = [
                 title: <RLink href="https://borgenproject.org/feed-my-starving-children/">Feed My Starving Children</RLink>,
                 org: 'Food Packager',
                 dates: '06/2023 -- Present',
-                bullets: ['Pack nutritious meals for distribution to children facing hunger worldwide'],
+                bullets: ['Hand-packed ~2,520 MannaPack meals for distribution to children facing hunger worldwide'],
               },
             ]}
           />

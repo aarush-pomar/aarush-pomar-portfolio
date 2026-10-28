@@ -15,11 +15,11 @@ export default function PageHeader({ title, subtitle }: PageHeaderProps) {
           heading) measures the real rendered width and solves for the
           font-size that exactly fills it, so every title fits regardless
           of word length. */}
-      <h1 className="hero-heading font-black uppercase leading-none tracking-tight">
+      <h1 className="font-black uppercase leading-none tracking-tight text-[#0C0C0C]">
         <FitText text={title} className="block" maxFontSize={96} />
       </h1>
       {subtitle && (
-        <p className="mx-auto mt-4 max-w-2xl text-sm font-light uppercase tracking-wide text-[#D7E2EA]/70 sm:text-base">
+        <p className="mx-auto mt-4 max-w-2xl text-sm font-light uppercase tracking-wide text-[#0C0C0C]/60 sm:text-base">
           {subtitle}
         </p>
       )}

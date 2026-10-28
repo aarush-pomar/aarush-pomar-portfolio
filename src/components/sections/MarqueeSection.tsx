@@ -71,12 +71,16 @@ function MarqueeTile({ photo }: { photo: MarqueePhoto }) {
   const fit = photo.fit ?? 'cover'
   return (
     <div className={`flex items-center justify-center ${TILE_CLASS}`}>
+      {/* No `loading="lazy"` here, for the same reason as PhotoCarousel: this
+          row is positioned with a continuously-updated `translateX` rather
+          than normal scroll, and native lazy loading's "how close is this to
+          the viewport" check doesn't reliably track a transform like that --
+          in production builds most tiles simply never loaded. */}
       <img
         src={photo.src}
         alt={photo.label}
         className={fit === 'cover' ? 'h-full w-full object-cover' : 'h-full w-full object-contain'}
         style={photo.objectPosition ? { objectPosition: photo.objectPosition } : undefined}
-        loading="lazy"
       />
     </div>
   )

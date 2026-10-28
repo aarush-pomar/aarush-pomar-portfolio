@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import SiteNav from '../components/shared/SiteNav'
 import type { ReactNode } from 'react'
 
@@ -478,17 +477,32 @@ const PAGES: { label: string; content: ReactNode }[] = [
   },
 ]
 
-export default function ResumePage() {
-  const [activePage, setActivePage] = useState(0)
-
+// A printed resume's page breaks are a fact about the content (what fits on
+// sheet 1 vs. sheet 2), not a navigation device -- so the on-screen version
+// shows every page in normal vertical document flow, each one framed as its
+// own sheet, rather than gating page 2 behind a click.
+function ResumeSheet({ page, index }: { page: { label: string; content: ReactNode }; index: number }) {
   return (
-    <div className="min-h-screen bg-white text-[#0C0C0C]">
+    <div
+      className="relative rounded-sm border border-[#0C0C0C]/12 bg-white px-6 py-10 shadow-[0_1px_3px_rgba(12,12,12,0.06),0_12px_32px_-16px_rgba(12,12,12,0.18)] sm:px-10 sm:py-12 md:px-14 print:rounded-none print:border-0 print:px-0 print:py-0 print:shadow-none print:[break-after:page] print:last:[break-after:auto]"
+    >
+      {page.content}
+      <p className="print:hidden mt-10 text-center text-[11px] uppercase tracking-widest text-[#0C0C0C]/55">
+        Page {index + 1} of {PAGES.length}
+      </p>
+    </div>
+  )
+}
+
+export default function ResumePage() {
+  return (
+    <div className="min-h-screen bg-[#F2F1EE] text-[#0C0C0C] print:bg-white">
       <div className="print:hidden">
         <SiteNav />
       </div>
 
-      <main className="mx-auto max-w-3xl px-6 py-12 print:max-w-none print:px-0 print:py-0">
-        <header className="flex flex-wrap items-start justify-between gap-4 border-b-2 border-[#0C0C0C] pb-4">
+      <main className="mx-auto max-w-3xl px-4 py-10 print:max-w-none print:px-0 print:py-0 sm:px-6 sm:py-12">
+        <header className="flex flex-wrap items-start justify-between gap-4 rounded-sm border border-[#0C0C0C]/12 bg-white px-6 py-6 shadow-[0_1px_3px_rgba(12,12,12,0.06)] print:rounded-none print:border-0 print:border-b-2 print:border-b-[#0C0C0C] print:px-0 print:pb-4 print:pt-0 print:shadow-none sm:px-10 md:px-14">
           <div>
             <h1 className="text-3xl font-bold uppercase tracking-tight">Aarush Pomar</h1>
             <p className="mt-1 text-sm text-[#0C0C0C]/70">Chanhassen, MN</p>
@@ -504,61 +518,18 @@ export default function ResumePage() {
             rel="noreferrer"
             className="print:hidden rounded-full border-2 border-[#0C0C0C] px-5 py-2 text-xs font-medium uppercase tracking-widest text-[#0C0C0C] transition-colors hover:bg-[#0C0C0C]/5"
           >
-            Print / Save as PDF
+            Download R&eacute;sum&eacute; (PDF)
           </a>
         </header>
 
-        <div className="print:hidden mb-10 mt-5 flex flex-wrap items-center gap-4">
-          <div className="inline-flex gap-1 rounded-full border-2 border-[#0C0C0C]/12 bg-[#0C0C0C]/[0.03] p-1">
-            {PAGES.map((p, i) => (
-              <button
-                key={p.label}
-                type="button"
-                onClick={() => setActivePage(i)}
-                className={`rounded-full px-5 py-2 text-xs font-semibold uppercase tracking-widest transition-colors ${
-                  i === activePage
-                    ? 'bg-[#0C0C0C] text-white shadow-sm'
-                    : 'text-[#0C0C0C]/55 hover:text-[#0C0C0C]'
-                }`}
-              >
-                {p.label}
-              </button>
-            ))}
-          </div>
-          <span className="text-xs uppercase tracking-widest text-[#0C0C0C]/40">
-            Page {activePage + 1} of {PAGES.length}
-          </span>
-        </div>
+        <p className="print:hidden mb-6 mt-4 text-center text-xs uppercase tracking-widest text-[#0C0C0C]/60">
+          Scroll to keep reading &mdash; {PAGES.length} pages
+        </p>
 
-        {PAGES.map((p, i) => (
-          <div
-            key={p.label}
-            className={`${i === activePage ? '' : 'hidden'} print:block print:[break-after:page] print:last:[break-after:auto]`}
-          >
-            {p.content}
-          </div>
-        ))}
-
-        <div className="print:hidden mt-10 flex items-center justify-between border-t-2 border-[#0C0C0C]/15 pt-6">
-          <button
-            type="button"
-            disabled={activePage === 0}
-            onClick={() => setActivePage((n) => Math.max(0, n - 1))}
-            className="rounded-full border-2 border-[#0C0C0C] px-5 py-2.5 text-sm font-semibold uppercase tracking-widest text-[#0C0C0C] transition-colors hover:bg-[#0C0C0C] hover:text-white disabled:cursor-not-allowed disabled:border-[#0C0C0C]/25 disabled:text-[#0C0C0C]/35 disabled:hover:bg-transparent disabled:hover:text-[#0C0C0C]/35"
-          >
-            &larr; Previous
-          </button>
-          <span className="text-sm font-semibold uppercase tracking-widest text-[#0C0C0C]">
-            {activePage + 1} <span className="text-[#0C0C0C]/50">of {PAGES.length}</span>
-          </span>
-          <button
-            type="button"
-            disabled={activePage === PAGES.length - 1}
-            onClick={() => setActivePage((n) => Math.min(PAGES.length - 1, n + 1))}
-            className="rounded-full border-2 border-[#0C0C0C] bg-[#0C0C0C] px-5 py-2.5 text-sm font-semibold uppercase tracking-widest text-white transition-colors hover:bg-[#0C0C0C]/85 disabled:cursor-not-allowed disabled:border-[#0C0C0C]/25 disabled:bg-transparent disabled:text-[#0C0C0C]/35"
-          >
-            Next &rarr;
-          </button>
+        <div className="flex flex-col gap-8 print:gap-0">
+          {PAGES.map((p, i) => (
+            <ResumeSheet key={p.label} page={p} index={i} />
+          ))}
         </div>
       </main>
     </div>

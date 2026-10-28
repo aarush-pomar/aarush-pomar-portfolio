@@ -36,7 +36,7 @@ export default function MorePage() {
 
       <div className="flex flex-col gap-8 pb-10 pt-4 sm:gap-10">
         <div>
-          <h2 className="hero-heading pb-4 text-xl font-black uppercase tracking-tight sm:text-2xl md:text-3xl">
+          <h2 className="pb-4 text-xl font-black uppercase tracking-tight text-[#0C0C0C] sm:text-2xl md:text-3xl">
             Photo Album
           </h2>
           <PhotoCarousel photos={PHOTOS} />
@@ -44,11 +44,11 @@ export default function MorePage() {
 
         <FavoriteReadsSection books={FAVORITE_READS} />
 
-        <div className="rounded-[32px] border-2 border-[#D7E2EA]/18 bg-[#131313] p-5 sm:rounded-[40px] sm:p-7 md:rounded-[48px] md:p-8">
-          <h2 className="hero-heading pb-6 text-xl font-black uppercase tracking-tight sm:text-2xl md:text-3xl">
+        <div className="rounded-[32px] border-2 border-[#0C0C0C]/12 bg-white p-5 shadow-[0_1px_3px_rgba(12,12,12,0.05),0_12px_28px_-18px_rgba(12,12,12,0.22)] sm:rounded-[40px] sm:p-7 md:rounded-[48px] md:p-8">
+          <h2 className="pb-6 text-xl font-black uppercase tracking-tight text-[#0C0C0C] sm:text-2xl md:text-3xl">
             Interests
           </h2>
-          <ul className="list-disc space-y-1 pl-5 text-base text-[#D7E2EA] sm:text-lg">
+          <ul className="list-disc space-y-1 pl-5 text-base text-[#0C0C0C]/85 sm:text-lg">
             <li>Tennis</li>
             <li>Pickleball</li>
             <li>PC building and hardware</li>

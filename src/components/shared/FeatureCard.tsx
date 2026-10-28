@@ -120,7 +120,7 @@ function CardPhoto({
       ) : (
         <PlaceholderImage label={label} className={`aspect-square w-full ${alwaysSquare ? '' : 'sm:aspect-[4/3] md:aspect-square'}`} />
       )}
-      {caption && <p className="text-xs italic text-[#D7E2EA]/50">{caption}</p>}
+      {caption && <p className="text-xs italic text-[#0C0C0C]/60">{caption}</p>}
       {lightboxOpen && src && <Lightbox src={fullSrc ?? src} alt={label} caption={caption} onClose={() => setLightboxOpen(false)} />}
     </div>
   )
@@ -244,19 +244,19 @@ export default function FeatureCard({
   return (
     <div
       id={id}
-      className={`scroll-mt-24 rounded-[20px] border-2 border-[#D7E2EA]/18 bg-[#131313] p-3.5 sm:rounded-[24px] sm:p-5 md:rounded-[28px] md:p-6 ${className ?? ''}`}
+      className={`scroll-mt-24 rounded-[20px] border-2 border-[#0C0C0C]/12 bg-white p-3.5 shadow-[0_1px_3px_rgba(12,12,12,0.05),0_12px_28px_-18px_rgba(12,12,12,0.22)] sm:rounded-[24px] sm:p-5 md:rounded-[28px] md:p-6 ${className ?? ''}`}
     >
       <div className="flex flex-wrap items-center gap-3 pb-3.5 sm:gap-4 sm:pb-4">
         {number && (
-          <span className="font-black text-[#D7E2EA]" style={{ fontSize: 'clamp(2rem, 6vw, 4.75rem)' }}>
+          <span className="font-black text-[#0C0C0C]" style={{ fontSize: 'clamp(2rem, 6vw, 4.75rem)' }}>
             {number}
           </span>
         )}
         <div className="flex flex-1 flex-col gap-1">
-          <span className="text-xs font-medium uppercase tracking-widest text-[#D7E2EA] opacity-70">
+          <span className="text-xs font-medium uppercase tracking-widest text-[#0C0C0C]/60">
             {category}
           </span>
-          <h3 className="hero-heading text-base font-black uppercase tracking-tight sm:text-lg md:text-xl">
+          <h3 className="text-base font-black uppercase tracking-tight text-[#0C0C0C] sm:text-lg md:text-xl">
             {title}
           </h3>
         </div>
@@ -271,7 +271,7 @@ export default function FeatureCard({
           } as React.CSSProperties
         }
       >
-        <div className="text-sm leading-relaxed text-[#D7E2EA]">
+        <div className="text-sm leading-relaxed text-[#0C0C0C]/85">
           <div ref={textRef} className="space-y-3">
             {children}
           </div>

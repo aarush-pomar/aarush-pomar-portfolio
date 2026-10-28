@@ -10,7 +10,7 @@ interface PlaceholderImageProps {
 export default function PlaceholderImage({ label = 'Image goes here', className, style }: PlaceholderImageProps) {
   return (
     <div
-      className={`flex flex-col items-center justify-center gap-2 rounded-2xl border border-dashed border-[#D7E2EA]/30 bg-[#141414] text-[#D7E2EA]/40 ${className ?? 'aspect-[4/3] w-full'}`}
+      className={`flex flex-col items-center justify-center gap-2 rounded-2xl border border-dashed border-[#0C0C0C]/25 bg-[#0C0C0C]/[0.03] text-[#0C0C0C]/55 ${className ?? 'aspect-[4/3] w-full'}`}
       style={style}
     >
       <ImageOff className="h-8 w-8" strokeWidth={1.5} />

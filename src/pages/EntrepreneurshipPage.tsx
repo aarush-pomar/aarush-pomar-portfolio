@@ -76,7 +76,7 @@ export default function EntrepreneurshipPage() {
               href="https://borgenproject.org/"
               target="_blank"
               rel="noreferrer"
-              className="text-[#D7E2EA] underline decoration-[#D7E2EA]/30 underline-offset-4 transition-colors hover:text-[#BBCCD7]"
+              className="text-[#0C0C0C]/85 underline decoration-[#0C0C0C]/30 underline-offset-4 transition-colors hover:text-[#230cd1]"
             >
               The Borgen Project
             </a>{' '}
@@ -85,7 +85,7 @@ export default function EntrepreneurshipPage() {
               href="https://www.theremedyproj.org/"
               target="_blank"
               rel="noreferrer"
-              className="text-[#D7E2EA] underline decoration-[#D7E2EA]/30 underline-offset-4 transition-colors hover:text-[#BBCCD7]"
+              className="text-[#0C0C0C]/85 underline decoration-[#0C0C0C]/30 underline-offset-4 transition-colors hover:text-[#230cd1]"
             >
               The Remedy Project
             </a>
@@ -93,7 +93,7 @@ export default function EntrepreneurshipPage() {
             Learn more on my{' '}
             <Link
               to="/advocacy"
-              className="text-[#D7E2EA] underline decoration-[#D7E2EA]/30 underline-offset-4 transition-colors hover:text-[#BBCCD7]"
+              className="text-[#0C0C0C]/85 underline decoration-[#0C0C0C]/30 underline-offset-4 transition-colors hover:text-[#230cd1]"
             >
               Advocacy page
             </Link>

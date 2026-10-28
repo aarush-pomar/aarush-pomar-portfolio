@@ -155,9 +155,9 @@ export default function HomeIntroSection() {
           <p>Hi, I&rsquo;m Aarush.</p>
 
           <p>
-            I&rsquo;m a senior at Minnetonka High School with an interest in economics and
-            mathematics. I want to understand why financial security is so uneven, and how the
-            decisions made by governments and businesses affect people&rsquo;s everyday lives.
+            I&rsquo;m a senior at Minnetonka High School with an interest in economics. I want to
+            understand why financial security is so uneven, and how the decisions made by
+            governments and businesses affect people&rsquo;s everyday lives.
           </p>
 
           <p>
@@ -170,10 +170,18 @@ export default function HomeIntroSection() {
             >
               The Borgen Project
             </a>
-            , I help build support for legislation addressing global poverty. I&rsquo;ve also used
-            proceeds from my own business to support that work. Running a business has given me a
-            lot of opportunities to listen -- to clients, friends, and people whose experiences
-            are different from mine.
+            , I organize fundraising and outreach in my community to build support for legislation
+            that reduces global poverty. I&rsquo;ve raised $1,475 for the organization and helped
+            get more than 50 people to contact Congress, including messages urging
+            Minnesota&rsquo;s senators and our representative to support the Global Fragility
+            Reauthorization Act. It&rsquo;s one more way I&rsquo;ve tried to act on the questions
+            about economic security that first got me interested in this work.
+          </p>
+
+          <p>
+            I&rsquo;ve also used proceeds from my own business to support that work. Running a
+            business has given me a lot of opportunities to listen -- to clients, friends, and
+            people whose experiences are different from mine.
           </p>
 
           <p>

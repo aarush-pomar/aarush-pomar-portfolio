@@ -8,7 +8,7 @@ interface PillLinkProps {
 }
 
 const baseClasses =
-  'inline-flex items-center justify-center rounded-full border-2 border-[#0C0C0C] px-6 py-2.5 text-xs sm:text-sm font-medium uppercase tracking-widest text-[#0C0C0C] transition-colors hover:bg-[#0C0C0C]/5'
+  'inline-flex items-center justify-center rounded-full border-2 border-[#230cd1] px-6 py-2.5 text-xs sm:text-sm font-medium uppercase tracking-widest text-[#230cd1] transition-colors hover:bg-[#230cd1]/8'
 
 export default function PillLink({ children, href, onClick, className }: PillLinkProps) {
   if (href) {

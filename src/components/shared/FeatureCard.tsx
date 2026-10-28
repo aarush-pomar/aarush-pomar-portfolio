@@ -244,7 +244,7 @@ export default function FeatureCard({
   return (
     <div
       id={id}
-      className={`scroll-mt-24 rounded-[20px] border-2 border-[#0C0C0C]/12 bg-white p-3.5 shadow-[0_1px_3px_rgba(12,12,12,0.05),0_12px_28px_-18px_rgba(12,12,12,0.22)] sm:rounded-[24px] sm:p-5 md:rounded-[28px] md:p-6 ${className ?? ''}`}
+      className={`scroll-mt-24 rounded-[20px] border-2 border-[#0C0C0C]/25 bg-white p-3.5 shadow-[0_1px_3px_rgba(12,12,12,0.06),0_12px_28px_-18px_rgba(12,12,12,0.28)] sm:rounded-[24px] sm:p-5 md:rounded-[28px] md:p-6 ${className ?? ''}`}
     >
       <div className="flex flex-wrap items-center gap-3 pb-3.5 sm:gap-4 sm:pb-4">
         {number && (
@@ -271,7 +271,7 @@ export default function FeatureCard({
           } as React.CSSProperties
         }
       >
-        <div className="text-sm leading-relaxed text-[#0C0C0C]/85">
+        <div className="text-sm leading-relaxed text-[#0C0C0C]">
           <div ref={textRef} className="space-y-3">
             {children}
           </div>

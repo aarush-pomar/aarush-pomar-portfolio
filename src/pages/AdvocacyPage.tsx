@@ -79,9 +79,9 @@ export default function AdvocacyPage() {
             improves living conditions for people facing poverty.
           </p>
 
-          <div className="mt-6 rounded-2xl border border-[#0C0C0C]/10 bg-[#0C0C0C]/[0.03] p-5">
-            <p className="text-xs font-semibold uppercase tracking-widest text-[#0C0C0C]/60">Take Action</p>
-            <p className="mt-2 text-base text-[#0C0C0C]/85">
+          <div className="mt-6 rounded-2xl border border-[#230cd1]/25 bg-[#230cd1]/[0.04] p-5">
+            <p className="text-xs font-semibold uppercase tracking-widest text-[#230cd1]">Take Action</p>
+            <p className="mt-2 text-base text-[#0C0C0C]">
               You can get involved by emailing or calling your members of Congress, or by
               volunteering with The Borgen Project. The links below will help you get started.
             </p>
@@ -322,12 +322,12 @@ export default function AdvocacyPage() {
 
           <Link
             to="/entrepreneurship"
-            className="inline-flex w-fit items-center gap-1 text-sm text-[#0C0C0C]/70 underline decoration-[#0C0C0C]/30 underline-offset-4 transition-colors hover:text-[#230cd1]"
+            className="inline-flex w-fit items-center gap-1 text-sm text-[#0C0C0C]/80 underline decoration-[#0C0C0C]/40 underline-offset-4 transition-colors hover:text-[#230cd1]"
           >
             Explore my business <span aria-hidden="true">&rarr;</span>
           </Link>
 
-          <div className="rounded-2xl border border-[#0C0C0C]/10 bg-[#0C0C0C]/[0.03] p-5">
+          <div className="rounded-2xl border border-[#0C0C0C]/20 bg-[#0C0C0C]/[0.03] p-5">
             <div className="flex items-baseline justify-between gap-2">
               <p className="text-sm font-semibold text-[#0C0C0C]">
                 ${FUNDRAISER_STATS.raised.toLocaleString()} raised of ${FUNDRAISER_STATS.goal.toLocaleString()}{' '}
@@ -352,7 +352,7 @@ export default function AdvocacyPage() {
             </div>
             <div className="relative mt-2 h-5">
               <span
-                className="absolute -translate-x-1/2 whitespace-nowrap rounded-full border border-[#0C0C0C]/15 px-2 py-0.5 text-[10px] uppercase tracking-wide text-[#0C0C0C]/55"
+                className="absolute -translate-x-1/2 whitespace-nowrap rounded-full border border-[#0C0C0C]/25 px-2 py-0.5 text-[10px] uppercase tracking-wide text-[#0C0C0C]/65"
                 // Capped so this badge can never drift into the Raised badge
                 // pinned at the right edge, even on narrow columns where the
                 // goal's proportional position (its usual left offset) would
@@ -366,9 +366,9 @@ export default function AdvocacyPage() {
               </span>
             </div>
 
-            <ul className="mt-4 space-y-1.5 border-t border-[#0C0C0C]/10 pt-4 text-sm">
+            <ul className="mt-4 space-y-1.5 border-t border-[#0C0C0C]/20 pt-4 text-sm">
               {visibleDonors.map((donor) => (
-                <li key={donor.name} className="flex items-center justify-between text-base text-[#0C0C0C]/85">
+                <li key={donor.name} className="flex items-center justify-between text-base text-[#0C0C0C]">
                   <span>{donor.name}</span>
                   <span className="font-medium text-[#0C0C0C]">${donor.amount.toLocaleString()}</span>
                 </li>
@@ -387,7 +387,7 @@ export default function AdvocacyPage() {
               <button
                 type="button"
                 onClick={() => setShowAllDonors((prev) => !prev)}
-                className="mt-3 rounded-full border border-[#0C0C0C]/15 px-3 py-1 text-xs font-medium uppercase tracking-widest text-[#0C0C0C]/55 transition-colors hover:border-[#230cd1]/40 hover:text-[#230cd1]"
+                className="mt-3 rounded-full border border-[#0C0C0C]/25 px-3 py-1 text-xs font-medium uppercase tracking-widest text-[#0C0C0C]/65 transition-colors hover:border-[#230cd1]/40 hover:text-[#230cd1]"
               >
                 {showAllDonors ? 'Show fewer donors' : 'View all donors'}
               </button>
@@ -412,9 +412,9 @@ export default function AdvocacyPage() {
             families in Minnesota understand and discuss caste.
           </p>
 
-          <div className="mt-6 rounded-2xl border border-[#0C0C0C]/10 bg-[#0C0C0C]/[0.03] p-5">
-            <p className="text-xs font-semibold uppercase tracking-widest text-[#0C0C0C]/60">Take Action</p>
-            <p className="mt-2 text-base text-[#0C0C0C]/85">
+          <div className="mt-6 rounded-2xl border border-[#230cd1]/25 bg-[#230cd1]/[0.04] p-5">
+            <p className="text-xs font-semibold uppercase tracking-widest text-[#230cd1]">Take Action</p>
+            <p className="mt-2 text-base text-[#0C0C0C]">
               Learn about the campaign to include caste in anti-discrimination protections and
               how you can support it.
             </p>
@@ -441,9 +441,9 @@ export default function AdvocacyPage() {
             and received the Ally of the Incarcerated Award.
           </p>
 
-          <div className="mt-6 rounded-2xl border border-[#0C0C0C]/10 bg-[#0C0C0C]/[0.03] p-5">
-            <p className="text-xs font-semibold uppercase tracking-widest text-[#0C0C0C]/60">Take Action</p>
-            <p className="mt-2 text-base text-[#0C0C0C]/85">
+          <div className="mt-6 rounded-2xl border border-[#230cd1]/25 bg-[#230cd1]/[0.04] p-5">
+            <p className="text-xs font-semibold uppercase tracking-widest text-[#230cd1]">Take Action</p>
+            <p className="mt-2 text-base text-[#0C0C0C]">
               Explore The Remedy Project&rsquo;s campaigns and find ways to support the rights of
               incarcerated people.
             </p>

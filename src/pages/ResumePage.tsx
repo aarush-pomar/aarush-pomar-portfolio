@@ -484,7 +484,7 @@ const PAGES: { label: string; content: ReactNode }[] = [
 function ResumeSheet({ page, index }: { page: { label: string; content: ReactNode }; index: number }) {
   return (
     <div
-      className="relative rounded-sm border border-[#0C0C0C]/12 bg-white px-6 py-10 shadow-[0_1px_3px_rgba(12,12,12,0.06),0_12px_32px_-16px_rgba(12,12,12,0.18)] sm:px-10 sm:py-12 md:px-14 print:rounded-none print:border-0 print:px-0 print:py-0 print:shadow-none print:[break-after:page] print:last:[break-after:auto]"
+      className="relative rounded-sm border border-[#0C0C0C]/25 bg-white px-6 py-10 shadow-[0_1px_3px_rgba(12,12,12,0.06),0_12px_32px_-16px_rgba(12,12,12,0.22)] sm:px-10 sm:py-12 md:px-14 print:rounded-none print:border-0 print:px-0 print:py-0 print:shadow-none print:[break-after:page] print:last:[break-after:auto]"
     >
       {page.content}
       <p className="print:hidden mt-10 text-center text-[11px] uppercase tracking-widest text-[#0C0C0C]/55">
@@ -502,7 +502,7 @@ export default function ResumePage() {
       </div>
 
       <main className="mx-auto max-w-3xl px-4 py-10 print:max-w-none print:px-0 print:py-0 sm:px-6 sm:py-12">
-        <header className="flex flex-wrap items-start justify-between gap-4 rounded-sm border border-[#0C0C0C]/12 bg-white px-6 py-6 shadow-[0_1px_3px_rgba(12,12,12,0.06)] print:rounded-none print:border-0 print:border-b-2 print:border-b-[#0C0C0C] print:px-0 print:pb-4 print:pt-0 print:shadow-none sm:px-10 md:px-14">
+        <header className="flex flex-wrap items-start justify-between gap-4 rounded-sm border border-[#0C0C0C]/25 bg-white px-6 py-6 shadow-[0_1px_3px_rgba(12,12,12,0.06)] print:rounded-none print:border-0 print:border-b-2 print:border-b-[#0C0C0C] print:px-0 print:pb-4 print:pt-0 print:shadow-none sm:px-10 md:px-14">
           <div>
             <h1 className="text-3xl font-bold uppercase tracking-tight">Aarush Pomar</h1>
             <p className="mt-1 text-sm text-[#0C0C0C]/70">Chanhassen, MN</p>

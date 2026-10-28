@@ -9,7 +9,7 @@ import MorePage from './pages/MorePage'
 
 function App() {
   return (
-    <div className="bg-[#0C0C0C]" style={{ overflowX: 'clip' }}>
+    <div className="bg-[#F2F1EE]" style={{ overflowX: 'clip' }}>
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<HomePage />} />

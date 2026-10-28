@@ -159,7 +159,7 @@ export default function HomeIntroSection() {
         <FadeIn
           ref={textRef}
           delay={0.1}
-          className="flex flex-col gap-2 text-sm leading-normal text-[#D7E2EA] md:w-[var(--text-w)] md:text-base"
+          className="flex flex-col gap-2 text-sm leading-normal text-[#0C0C0C] md:w-[var(--text-w)] md:text-base"
         >
           <p>Hi, I&rsquo;m Aarush.</p>
 
@@ -175,7 +175,7 @@ export default function HomeIntroSection() {
               href="https://borgenproject.org/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#D7E2EA] underline decoration-[#D7E2EA]/30 underline-offset-4 transition-colors hover:text-[#BBCCD7]"
+              className="text-[#230cd1] underline decoration-[#230cd1]/40 underline-offset-4 transition-colors hover:text-[#160884]"
             >
               The Borgen Project
             </a>
@@ -207,21 +207,24 @@ export default function HomeIntroSection() {
 
           <p>Thanks for stopping by. If something here interests you, I&rsquo;d love to hear from you.</p>
 
-          {/* The source image is white strokes on a solid black square. A
-              plain mix-blend-mode on the <img> doesn't reliably knock out
-              that black here -- framer-motion's inline `transform` on the
-              FadeIn wrapper creates its own stacking context, so the blend
-              has no real page background behind it to blend against and
-              falls back to showing the raw black box. Filling this wrapper
-              with the exact same page background color gives the blend a
+          {/* The source image is white strokes on a solid black square --
+              there's no black-ink version of this asset. `invert(1)` flips
+              it to black strokes on a solid white square first, then the
+              same knock-out trick as before (now `multiply` instead of
+              `screen`, since the field to cancel out is now white instead
+              of black) drops that white square against the page. The
+              `FadeIn` wrapper's inline `transform` from framer-motion
+              creates its own stacking context, so the blend has no real
+              page background behind it to blend against -- filling this
+              wrapper with the exact page background color gives it a
               same-colored backdrop to cancel against regardless of that
               isolation, so it reads as seamless either way. */}
-          <div className="-ml-2 w-36 bg-[#0C0C0C] sm:w-40">
+          <div className="-ml-2 w-36 bg-[#F2F1EE] sm:w-40">
             <img
               src={signatureWhite}
               alt="Aarush Pomar&rsquo;s signature"
               className="block w-full"
-              style={{ mixBlendMode: 'screen' }}
+              style={{ filter: 'invert(1)', mixBlendMode: 'multiply' }}
             />
           </div>
         </FadeIn>

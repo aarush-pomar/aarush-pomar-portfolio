@@ -382,7 +382,7 @@ const PAGES: { label: string; content: ReactNode }[] = [
           <div className="space-y-4">
             <div>
               <p className="text-xs font-semibold uppercase tracking-wide text-[#0C0C0C]/60">Academic</p>
-              <ul className="mt-1 list-disc space-y-1 pl-5 text-sm leading-relaxed text-[#0C0C0C]/85">
+              <ul className="mt-1 list-none space-y-1 text-sm leading-relaxed text-[#0C0C0C]/85">
                 <li>
                   <RLink href="https://kommodo.ai/i/fPmu8QeZrkREZMSCWR4q">National Merit Commended Scholar</RLink> (34K/1.2M), PSAT/NMSQT{' '}
                   <span className="text-[#0C0C0C]/60">(09/2026)</span>
@@ -428,7 +428,7 @@ const PAGES: { label: string; content: ReactNode }[] = [
 
             <div>
               <p className="text-xs font-semibold uppercase tracking-wide text-[#0C0C0C]/60">Community Service</p>
-              <ul className="mt-1 list-disc space-y-1 pl-5 text-sm leading-relaxed text-[#0C0C0C]/85">
+              <ul className="mt-1 list-none space-y-1 text-sm leading-relaxed text-[#0C0C0C]/85">
                 <li>
                   The Remedy Project --{' '}
                   <RLink href="https://drive.google.com/file/d/1pt4jLtxbXIal8hQqp4gfO1fApBAnd_SP/view">Ally of the Incarcerated Award</RLink>{' '}

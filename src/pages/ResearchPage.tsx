@@ -20,7 +20,7 @@ function ResearchEntry({ entry, isFirst }: { entry: ResearchEntry; isFirst: bool
       <hr className="border-t border-[#1a1a1a]/15" />
 
       <div className="space-y-6 pb-2 pt-10">
-        <h2 className="font-bitter text-xs font-bold uppercase tracking-[0.2em] text-[#1a1a1a]/55">
+        <h2 className="font-bitter text-2xl font-black uppercase tracking-wide text-[#1a1a1a] sm:text-3xl">
           Abstract
         </h2>
         {entry.abstract.map((paragraph, i) => (

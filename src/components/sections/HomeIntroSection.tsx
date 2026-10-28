@@ -14,13 +14,15 @@ const MIN_TEXT_WIDTH = 280
 // having to shrink the font small enough to hurt readability.
 const MAX_TEXT_WIDTH = 860
 const MIN_PHOTO_WIDTH = 200
-// Lowered from 680 -- the photo no longer needs to be as large now that the
-// text column is allowed to run wider; keeping it smaller also keeps its
-// (height-matched) height down, which is what this is all tuned around.
-const MAX_PHOTO_WIDTH = 360
+// This cap had been lowered to 360 alongside the text-column widening below,
+// but that undershot the actual height-matching target -- the text column
+// (even at MAX_TEXT_WIDTH) is still taller than a 360px-wide photo, which
+// left blank space under the photo instead of the two columns' bottoms
+// lining up. Raised back up so the solve below can actually reach parity.
+const MAX_PHOTO_WIDTH = 460
 const COLUMN_GAP = 48 // matches md:gap-12
 
-const DEFAULT_SIZES = { photoWidth: 320, textWidth: 420 }
+const DEFAULT_SIZES = { photoWidth: 360, textWidth: 420 }
 
 export default function HomeIntroSection() {
   const containerRef = useRef<HTMLDivElement>(null)

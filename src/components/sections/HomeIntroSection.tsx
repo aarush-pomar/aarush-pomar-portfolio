@@ -8,12 +8,19 @@ import signatureWhite from '../../assets/signature-white.jpg'
 // without ever cropping or stretching the photo itself.
 const PHOTO_ASPECT = 2 / 3
 const MIN_TEXT_WIDTH = 280
-const MAX_TEXT_WIDTH = 680
-const MIN_PHOTO_WIDTH = 260
-const MAX_PHOTO_WIDTH = 680
-const COLUMN_GAP = 64 // matches md:gap-16
+// Raised from 680 -- a wider text column wraps each paragraph into fewer
+// lines, which is the single biggest lever for fitting this much copy
+// (6 paragraphs) into roughly one screen's height without scrolling, without
+// having to shrink the font small enough to hurt readability.
+const MAX_TEXT_WIDTH = 860
+const MIN_PHOTO_WIDTH = 200
+// Lowered from 680 -- the photo no longer needs to be as large now that the
+// text column is allowed to run wider; keeping it smaller also keeps its
+// (height-matched) height down, which is what this is all tuned around.
+const MAX_PHOTO_WIDTH = 360
+const COLUMN_GAP = 48 // matches md:gap-12
 
-const DEFAULT_SIZES = { photoWidth: 420, textWidth: 480 }
+const DEFAULT_SIZES = { photoWidth: 320, textWidth: 420 }
 
 export default function HomeIntroSection() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -133,13 +140,13 @@ export default function HomeIntroSection() {
   }, [])
 
   return (
-    <section className="px-5 py-8 sm:px-8 md:px-10 md:py-9">
+    <section className="px-5 py-5 sm:px-8 sm:py-6 md:px-10 md:py-7">
       <div
         ref={containerRef}
-        className="mx-auto grid max-w-7xl gap-10 md:grid-cols-[var(--photo-w)_var(--text-w)] md:items-start md:justify-center md:gap-16"
+        className="mx-auto grid max-w-7xl gap-6 md:grid-cols-[var(--photo-w)_var(--text-w)] md:items-start md:justify-center md:gap-12"
         style={{ '--photo-w': `${sizes.photoWidth}px`, '--text-w': `${sizes.textWidth}px` } as React.CSSProperties}
       >
-        <FadeIn x={-30} y={0} className="mx-auto w-full max-w-md md:mx-0 md:w-full md:max-w-none">
+        <FadeIn x={-30} y={0} className="mx-auto w-full max-w-xs md:mx-0 md:w-full md:max-w-none">
           <img
             src={seniorHeadshot}
             alt="Aarush Pomar"
@@ -150,7 +157,7 @@ export default function HomeIntroSection() {
         <FadeIn
           ref={textRef}
           delay={0.1}
-          className="flex flex-col gap-3 text-base leading-relaxed text-[#D7E2EA] md:w-[var(--text-w)] md:text-lg"
+          className="flex flex-col gap-2 text-sm leading-normal text-[#D7E2EA] md:w-[var(--text-w)] md:text-base"
         >
           <p>Hi, I&rsquo;m Aarush.</p>
 
@@ -207,7 +214,7 @@ export default function HomeIntroSection() {
               with the exact same page background color gives the blend a
               same-colored backdrop to cancel against regardless of that
               isolation, so it reads as seamless either way. */}
-          <div className="-ml-2 w-48 bg-[#0C0C0C] sm:w-56">
+          <div className="-ml-2 w-36 bg-[#0C0C0C] sm:w-40">
             <img
               src={signatureWhite}
               alt="Aarush Pomar&rsquo;s signature"

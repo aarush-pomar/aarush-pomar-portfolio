@@ -1,23 +1,26 @@
 import { useEffect, useRef, useState } from 'react'
 import awardUmtympMom from '../../assets/photos/award-umtymp-mom.jpg'
-import familyGraduation from '../../assets/photos/family-graduation.jpg'
 import footballPlayerOveralls from '../../assets/photos/football-player-overalls.jpg'
-import econClubFirstMeeting from '../../assets/photos/econ-club-first-meeting.jpg'
-import minnetonkaForumGroup from '../../assets/photos/minnetonka-forum-group.jpg'
-import friendsSuitsLake from '../../assets/photos/friends-suits-lake.jpg'
-import friendsSuitsField from '../../assets/photos/friends-suits-field.jpg'
 import tennisBTeamSingles from '../../assets/photos/tennis-b-team-singles-champion.jpg'
 import borgenCheck from '../../assets/photos/borgen-check.jpg'
 import friendsNightLights from '../../assets/photos/friends-night-lights.jpg'
 import haircutStudioChair from '../../assets/photos/haircut-studio-chair.jpg'
-import conferenceGroupSuits from '../../assets/photos/conference-group-suits.jpg'
-import hosaSlcGroup from '../../assets/photos/hosa-slc-group.webp'
 import minnsectShowStage from '../../assets/photos/minnsect-show-stage.jpg'
 import haircutBackTaper from '../../assets/photos/haircut-back-taper.jpg'
 import friendsCarouselFair from '../../assets/photos/friends-carousel-fair.jpg'
 import friendsHifiLake from '../../assets/photos/friends-hifi-lake.jpg'
 import friendsConcertSunglasses from '../../assets/photos/friends-concert-sunglasses.jpg'
-import friendsSuitsWindowView from '../../assets/photos/friends-suits-window-view.jpg'
+// Group shots below use Aarush's own Canva-annotated exports (red arrow
+// drawn in by hand) -- see the matching note in MorePage.tsx. Originals are
+// untouched on disk as `<name>.jpg`/`.webp`.
+import familyGraduation from '../../assets/photos/family-graduation-annotated.webp'
+import econClubFirstMeeting from '../../assets/photos/econ-club-first-meeting-annotated.webp'
+import minnetonkaForumGroup from '../../assets/photos/minnetonka-forum-group-annotated.webp'
+import friendsSuitsLake from '../../assets/photos/friends-suits-lake-annotated.png'
+import friendsSuitsField from '../../assets/photos/friends-suits-field-annotated.png'
+import conferenceGroupSuits from '../../assets/photos/conference-group-suits-annotated.png'
+import hosaSlcGroup from '../../assets/photos/hosa-slc-group-annotated.webp'
+import friendsSuitsWindowView from '../../assets/photos/friends-suits-window-view-annotated.webp'
 
 interface MarqueePhoto {
   src: string

@@ -4,32 +4,33 @@ import PhotoCarousel from '../components/shared/PhotoCarousel'
 import FavoriteReadsSection from '../components/sections/FavoriteReadsSection'
 import { FAVORITE_READS } from '../data/favoriteReads'
 import umtympMom from '../assets/photos/award-umtymp-mom.jpg'
-import familyGraduation from '../assets/photos/family-graduation.jpg'
-import friendsSuitsLake from '../assets/photos/friends-suits-lake.jpg'
-import friendsSuitsField from '../assets/photos/friends-suits-field.jpg'
 import tennisBTeamSingles from '../assets/photos/tennis-b-team-singles-champion.jpg'
-import conferenceGroupSuits from '../assets/photos/conference-group-suits.jpg'
-import conferenceGroupWinter from '../assets/photos/conference-group-winter.jpg'
-import econClubFirstMeeting from '../assets/photos/econ-club-first-meeting.jpg'
-import minnetonkaForumGroup from '../assets/photos/minnetonka-forum-group.jpg'
+import conferenceGroupSuits from '../assets/photos/conference-group-suits-annotated.png'
+import conferenceGroupWinter from '../assets/photos/conference-group-winter-annotated.png'
+import friendsSuitsLake from '../assets/photos/friends-suits-lake-annotated.png'
+import friendsSuitsField from '../assets/photos/friends-suits-field-annotated.png'
+import minnetonkaForumGroup from '../assets/photos/minnetonka-forum-group-annotated.webp'
+import familyGraduation from '../assets/photos/family-graduation-annotated.webp'
+import econClubFirstMeeting from '../assets/photos/econ-club-first-meeting-annotated.webp'
 
 // Verified events/accomplishments only -- a curated selection (not every
 // photo from the full album), each captioned with what it documents.
 // Order is deliberately interleaved (not grouped by type) so the carousel
 // doesn't run a stretch of all-formal-group-photos or all-prom-photos.
+// Group-shot photos below use Aarush's own Canva-annotated exports (red
+// arrow drawn in by hand, baked into the image) rather than the dynamic
+// AnnotatedPhoto overlay -- he preferred drawing them himself. Originals
+// are untouched on disk as `<name>.jpg`/`.webp`; these are saved alongside
+// as `<name>-annotated.<ext>`.
 const PHOTOS = [
   { caption: 'UMTYMP graduation, with my mom', src: umtympMom },
-  { caption: 'DECA State competition', src: conferenceGroupSuits, arrow: { xPercent: 57, yPercent: 40 } },
-  { caption: 'Prom night at Excelsior Commons', src: friendsSuitsLake, arrow: { xPercent: 48, yPercent: 29 } },
-  { caption: 'Minnetonka Forum team', src: minnetonkaForumGroup, arrow: { xPercent: 36, yPercent: 23 } },
-  {
-    caption: "Whole family at my sister's Carlson commencement",
-    src: familyGraduation,
-    arrow: { xPercent: 41, yPercent: 34 },
-  },
-  { caption: 'Our BPA chapter', src: conferenceGroupWinter, arrow: { xPercent: 57, yPercent: 42 } },
-  { caption: 'Prom dance at Veterans Field', src: friendsSuitsField, arrow: { xPercent: 70, yPercent: 23 } },
-  { caption: 'First Econ Club meeting ever', src: econClubFirstMeeting, arrow: { xPercent: 55, yPercent: 36 } },
+  { caption: 'DECA State competition', src: conferenceGroupSuits },
+  { caption: 'Prom night at Excelsior Commons', src: friendsSuitsLake },
+  { caption: 'Minnetonka Forum team', src: minnetonkaForumGroup },
+  { caption: "Whole family at my sister's Carlson commencement", src: familyGraduation },
+  { caption: 'Our BPA chapter', src: conferenceGroupWinter },
+  { caption: 'Prom dance at Veterans Field', src: friendsSuitsField },
+  { caption: 'First Econ Club meeting ever', src: econClubFirstMeeting },
   { caption: 'Minnetonka B Team singles champion', src: tennisBTeamSingles },
 ]
 

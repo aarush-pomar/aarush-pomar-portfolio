@@ -19,13 +19,17 @@ import minnetonkaForumGroup from '../assets/photos/minnetonka-forum-group.jpg'
 // doesn't run a stretch of all-formal-group-photos or all-prom-photos.
 const PHOTOS = [
   { caption: 'UMTYMP graduation, with my mom', src: umtympMom },
-  { caption: 'DECA State competition', src: conferenceGroupSuits },
-  { caption: 'Prom night at Excelsior Commons', src: friendsSuitsLake },
-  { caption: 'Minnetonka Forum team', src: minnetonkaForumGroup },
-  { caption: "Whole family at my sister's Carlson commencement", src: familyGraduation },
-  { caption: 'Our BPA chapter', src: conferenceGroupWinter },
-  { caption: 'Prom dance at Veterans Field', src: friendsSuitsField },
-  { caption: 'First Econ Club meeting ever', src: econClubFirstMeeting },
+  { caption: 'DECA State competition', src: conferenceGroupSuits, arrow: { xPercent: 57, yPercent: 40 } },
+  { caption: 'Prom night at Excelsior Commons', src: friendsSuitsLake, arrow: { xPercent: 48, yPercent: 29 } },
+  { caption: 'Minnetonka Forum team', src: minnetonkaForumGroup, arrow: { xPercent: 36, yPercent: 23 } },
+  {
+    caption: "Whole family at my sister's Carlson commencement",
+    src: familyGraduation,
+    arrow: { xPercent: 41, yPercent: 34 },
+  },
+  { caption: 'Our BPA chapter', src: conferenceGroupWinter, arrow: { xPercent: 57, yPercent: 42 } },
+  { caption: 'Prom dance at Veterans Field', src: friendsSuitsField, arrow: { xPercent: 70, yPercent: 23 } },
+  { caption: 'First Econ Club meeting ever', src: econClubFirstMeeting, arrow: { xPercent: 55, yPercent: 36 } },
   { caption: 'Minnetonka B Team singles champion', src: tennisBTeamSingles },
 ]
 

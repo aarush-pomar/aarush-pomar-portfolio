@@ -9,10 +9,13 @@ import 'swiper/css/effect-coverflow'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import Lightbox from './Lightbox'
+import AnnotatedPhoto, { type ArrowPoint } from './AnnotatedPhoto'
 
 interface CarouselPhoto {
   src: string
   caption: string
+  /** Points a small red arrow at Aarush when he isn't the obvious sole subject. */
+  arrow?: ArrowPoint
 }
 
 const css = `
@@ -76,7 +79,13 @@ export default function PhotoCarousel({ photos }: { photos: CarouselPhoto[] }) {
                   all ~9 photos up front is cheap enough that this is the
                   simpler fix, rather than teaching Swiper's own lazy module
                   to coordinate with the transform. */}
-              <img src={photo.src} alt={photo.caption} className="h-full w-full object-cover" />
+              <AnnotatedPhoto
+                src={photo.src}
+                alt={photo.caption}
+                arrow={photo.arrow}
+                className="h-full w-full"
+                imgClassName="h-full w-full object-cover"
+              />
             </button>
           </SwiperSlide>
         ))}
@@ -117,6 +126,7 @@ export default function PhotoCarousel({ photos }: { photos: CarouselPhoto[] }) {
           src={photos[openIndex].src}
           alt={photos[openIndex].caption}
           caption={photos[openIndex].caption}
+          arrow={photos[openIndex].arrow}
           onClose={() => setOpenIndex(null)}
         />
       )}

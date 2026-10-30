@@ -2,17 +2,19 @@ import { useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import { Maximize2, X } from 'lucide-react'
+import AnnotatedPhoto, { type ArrowPoint } from './AnnotatedPhoto'
 
 interface LightboxProps {
   src: string
   alt: string
   caption?: string
+  arrow?: ArrowPoint
   onClose: () => void
 }
 
 // Shows a photo in full (uncropped). Rendered in a portal so no ancestor's
 // transform can turn `fixed` into something relative to the card it came from.
-export default function Lightbox({ src, alt, caption, onClose }: LightboxProps) {
+export default function Lightbox({ src, alt, caption, arrow, onClose }: LightboxProps) {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose()
@@ -45,15 +47,22 @@ export default function Lightbox({ src, alt, caption, onClose }: LightboxProps) 
       >
         <X size={20} strokeWidth={2} />
       </button>
-      <motion.img
-        src={src}
-        alt={alt}
-        className="max-h-[80vh] max-w-full rounded-2xl object-contain"
+      <motion.div
+        className="inline-block"
         initial={{ scale: 0.92, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ type: 'spring', stiffness: 260, damping: 26 }}
         onClick={(e) => e.stopPropagation()}
-      />
+      >
+        <AnnotatedPhoto
+          src={src}
+          alt={alt}
+          fit="contain"
+          arrow={arrow}
+          className="inline-block"
+          imgClassName="max-h-[80vh] max-w-full rounded-2xl object-contain"
+        />
+      </motion.div>
       {caption && <p className="max-w-xl text-center text-sm italic text-[#D7E2EA]/70">{caption}</p>}
     </motion.div>,
     document.body,

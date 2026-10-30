@@ -17,7 +17,6 @@ import haircutBackTaper from '../../assets/photos/haircut-back-taper.jpg'
 import friendsCarouselFair from '../../assets/photos/friends-carousel-fair.jpg'
 import friendsHifiLake from '../../assets/photos/friends-hifi-lake.jpg'
 import friendsConcertSunglasses from '../../assets/photos/friends-concert-sunglasses.jpg'
-import santaMonicaSunset from '../../assets/photos/santa-monica-sunset.jpg'
 import friendsSuitsWindowView from '../../assets/photos/friends-suits-window-view.jpg'
 
 interface MarqueePhoto {
@@ -30,7 +29,7 @@ interface MarqueePhoto {
   objectPosition?: string
 }
 
-// 21 slots (11 + 10, tripled below for the seamless scroll loop); the
+// 20 slots (10 + 10, tripled below for the seamless scroll loop); the
 // football photo appears in both rows by request. Deliberately interleaved
 // so the same category (haircuts, prom, friends/concerts, family, academics)
 // never appears twice in a row within either row.
@@ -40,7 +39,6 @@ const ROW1: MarqueePhoto[] = [
   { src: friendsConcertSunglasses, label: 'Summer concert' },
   { src: conferenceGroupSuits, label: 'DECA State' },
   { src: friendsNightLights, label: 'VANTAGE Health Sciences crew' },
-  { src: santaMonicaSunset, label: 'Sunset at Santa Monica Pier', objectPosition: '20% center' },
   { src: borgenCheck, label: '$1,000 check for The Borgen Project' },
   { src: awardUmtympMom, label: 'UMTYMP graduation, with my mom' },
   { src: footballPlayerOveralls, label: 'Friday night lights, Minnetonka football' },

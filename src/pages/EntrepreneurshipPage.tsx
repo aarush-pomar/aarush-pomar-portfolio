@@ -28,8 +28,6 @@ function GalleryPhoto({ src, caption }: { src: string; caption: string }) {
   const [open, setOpen] = useState(false)
 
   return (
-    // `caption` still drives the img alt text and the enlarge button's
-    // aria-label for screen readers -- just not shown visibly anymore.
     <div>
       <button
         type="button"
@@ -45,7 +43,8 @@ function GalleryPhoto({ src, caption }: { src: string; caption: string }) {
         />
         <EnlargeHint />
       </button>
-      {open && <Lightbox src={src} alt={caption} onClose={() => setOpen(false)} />}
+      <p className="mt-1.5 text-xs text-[#0C0C0C]/60">{caption}</p>
+      {open && <Lightbox src={src} alt={caption} caption={caption} onClose={() => setOpen(false)} />}
     </div>
   )
 }

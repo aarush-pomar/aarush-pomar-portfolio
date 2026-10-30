@@ -304,6 +304,7 @@ export default function AdvocacyPage() {
           title="My Borgen Fundraiser"
           imageLabel="$1,000 check photo"
           imageSrc={borgenCheck}
+          imageCaption="The $1,000 check from pomar.blendz donations, presented to The Borgen Project"
           stretchPhoto
           stretchFrozen={showAllDonors}
           maxPhotoColumnWidth={280}
